@@ -19,16 +19,38 @@ function displayResults(json) {
     playerIcon.src = player.equippedAvatarURL;
     updateRankedStats(player);
     updateMedals(player);
+    updateRankHistory(player);
   };
 
 function updateRankedStats(player) {
   for (const key in player.rankedStats) {
-    console.log(key);
-    console.log(player.rankedStats[key]);
+    // console.log(key);
+    // console.log(player.rankedStats[key]);
     let keyRow = document.querySelector(`[data-key = ${key.toString()}]`);
     let dataOutput = document.querySelector(`[data-key = ${key.toString()}]>td:last-child`);
-    console.log(keyRow);
+    // console.log(keyRow);
     dataOutput.textContent = player.rankedStats[key];
+  }
+}
+
+function updateRankHistory(player) {
+  fetch(player.homs)
+    .then((response) => response.json())
+    .then((json) => displayRankHistory(json))
+    .catch((error) => console.error(`Error fetching data: ${error.message}`));
+  function  displayRankHistory(json) {
+    seasons = json.body;
+    console.log(seasons);
+    currentRank = seasons[0].rank;
+    previousRank = seasons[1].rank;
+    let currentRankNum = document.createElement('p');
+    currentRankNum.textContent = currentRank;
+    let currentRankDisplay = document.querySelector('.currentRank');
+    currentRankDisplay.appendChild(currentRankNum);
+    let previousRankNum = document.createElement('p');
+    previousRankNum.textContent = previousRank;
+    let previousRankDisplay = document.querySelector('.previousRank');
+    previousRankDisplay.appendChild(previousRankNum);
   }
 }
 
