@@ -20,18 +20,15 @@ function updateAll(json) {
 function updateLeaderboardInfo(url) {
     fetch(url)
         .then((response) => response.json())
-        .then((json) => updateLeaderboard(json))
+        .then((json) => createLeaderboard(json))
 }
 
-function updateLeaderboard(json) {
+function createLeaderboard(json) {
     let i = 1;
-    document.querySelector('.leaderboardName').textContent = json.body[0].displayName;
-    document.querySelector('.leaderboardScore').textContent = json.body[0].score;
-    document.querySelector('.leaderboardPlace').textContent = i.toString();
 }
 
 function updateText(json) {
-    console.log(json);
+    // console.log(json);
     seasonTitle.textContent = json.body[0].name
     timeLeft = getTimeLeft(json);
     seasonTimeLeft.textContent = `Time Left: ${timeLeft.days} Days, ${timeLeft.hours} Hours, ${timeLeft.minutes} Minutes`
@@ -42,9 +39,9 @@ function updateText(json) {
 
 function getTimeLeft(json) {
     const todayDate = new Date()
-    console.log(todayDate.toLocaleDateString());
+    // console.log(todayDate.toLocaleDateString());
     let endDate = new Date(json.body[0].end);
-    console.log(endDate.toLocaleDateString());
+    // console.log(endDate.toLocaleDateString());
     let timeToEnd = (endDate - todayDate) /1000
     timeToEnd/=60 //seconds to minutes
     timeToEnd/=60 //minutes to hours
@@ -54,7 +51,7 @@ function getTimeLeft(json) {
     minutesLeft = (hoursLeft*60)%60;
     minutesLeft = Math.floor(minutesLeft)
     hoursLeft = Math.floor(hoursLeft)
-    console.log(daysLeft, hoursLeft, minutesLeft);
+    // console.log(daysLeft, hoursLeft, minutesLeft);
     return {days : daysLeft, hours : hoursLeft, minutes : minutesLeft}
 }
 updateSeasonInfo();
