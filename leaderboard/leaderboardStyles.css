@@ -1,0 +1,5 @@
+.playerRow:hover {
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+  }
