@@ -3,7 +3,7 @@ const playerName = document.querySelector('.playerName');
 const playerIcon = document.querySelector('.playerIcon');
 
 
-function fetchResults(e) {
+function fetchResults() {
 
   // Assemble the full URL
   let url = window.location.toString().replace(/^[^?]*/, '').replace(/^\?/, '');
@@ -18,6 +18,7 @@ function displayResults(json) {
     playerName.textContent = `${player.displayName}`;
     playerIcon.src = player.equippedAvatarURL;
     updateRankedStats(player);
+    updateMedals(player);
   };
 
 function updateRankedStats(player) {
@@ -28,6 +29,15 @@ function updateRankedStats(player) {
     let dataOutput = document.querySelector(`[data-key = ${key.toString()}]>td:last-child`);
     console.log(keyRow);
     dataOutput.textContent = player.rankedStats[key];
+  }
+}
+
+function updateMedals(player) {
+  for (badge in player.badges_all) {
+    badgeImage = document.createElement('img');
+    badgeImage.src = player.badges_all[badge].iconURL;
+    let badgeDisplay = document.querySelector('.badgeDisplay');
+    badgeDisplay.appendChild(badgeImage);
   }
 }
 
