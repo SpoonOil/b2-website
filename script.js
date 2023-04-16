@@ -9,7 +9,25 @@ const playerCount = document.querySelector('.playerCount');
 function updateSeasonInfo() {
     fetch('https://data.ninjakiwi.com/battles2/homs')
         .then((response) => response.json())
-        .then((json) => updateText(json))
+        .then((json) => updateAll(json))
+}
+
+function updateAll(json) {
+    updateLeaderboardInfo(json.body[0].leaderboard);
+    updateText(json);
+}
+
+function updateLeaderboardInfo(url) {
+    fetch(url)
+        .then((response) => response.json())
+        .then((json) => updateLeaderboard(json))
+}
+
+function updateLeaderboard(json) {
+    let i = 1;
+    document.querySelector('.leaderboardName').textContent = json.body[0].displayName;
+    document.querySelector('.leaderboardScore').textContent = json.body[0].score;
+    document.querySelector('.leaderboardPlace').textContent = i.toString();
 }
 
 function updateText(json) {
