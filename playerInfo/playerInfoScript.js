@@ -1,18 +1,11 @@
 const submit = document.querySelector('.submit');
 const playerName = document.querySelector('.playerName');
+const playerIcon = document.querySelector('.playerIcon');
 
-submit.addEventListener("click", submitSearch);
-
-function submitSearch(e) {
-  fetchResults(e);
-}
 
 function fetchResults(e) {
 
   // Assemble the full URL
-  console.log(window.location);
-  console.log(window.location.toString());
-  console.log(window.location.toString().replace(/^[^?]*/, ''));
   let url = window.location.toString().replace(/^[^?]*/, '').replace(/^\?/, '');
   // Use fetch() to make the request to the API
   fetch(url)
@@ -22,7 +15,26 @@ function fetchResults(e) {
 }
 function displayResults(json) {
     player = json.body;
-    playerName.textContent = `Name: ${player.displayName}`;
+    playerName.textContent = `${player.displayName}`;
+    playerIcon.src = player.equippedAvatarURL;
+    updateRankedStats(player);
   };
 
+function updateRankedStats(player) {
+  for (const key in player.rankedStats) {
+    console.log(key);
+    console.log(player.rankedStats[key]);
+    let keyRow = document.querySelector(`[data-key = ${key.toString()}]`);
+    let dataOutput = document.querySelector(`[data-key = ${key.toString()}]>td:last-child`);
+    console.log(keyRow);
+    dataOutput.textContent = player.rankedStats[key];
+  }
+}
+
+window.onload = function () {
+  // Call the fetchResults() function when the page loads
+  // This will make the API call and display the results.
+  // This function is defined at the bottom of this file.
+  // 
   fetchResults();
+}
