@@ -24,7 +24,24 @@ function updateLeaderboardInfo(url) {
 }
 
 function createLeaderboard(json) {
-    let i = 1;
+    for (let i = 0; i < json.body.length; i++) {
+        let player = json.body[i];
+        let playerRow = document.createElement('tr');
+        let playerName = document.createElement('td');
+        let playerScore = document.createElement('td');
+        let playerPlace = document.createElement('td');
+        playerPlace.textContent = i+1;
+        playerScore.textContent = player.score;
+        playerName.textContent = player.displayName;
+        playerRow.appendChild(playerName);
+        playerRow.appendChild(playerScore);
+        playerRow.appendChild(playerPlace);
+        playerRow.dataset.profile = player.profile;
+        playerRow.addEventListener('click', () => {
+            window.open(playerRow.dataset.profile + "?pretty=true", '_blank');
+        });
+        document.querySelector('.leaderboard').appendChild(playerRow);
+    }  
 }
 
 function updateText(json) {
