@@ -28,13 +28,13 @@ updateSeasonInfo();
 
 function createLeaderboardPage(json) {
     for (let i = 0; i < json.body.length; i++) {
-        place++;
         let player = json.body[i];
         let playerRow = document.createElement('tr');
         let playerName = document.createElement('td');
         let playerScore = document.createElement('td');
         let playerPlace = document.createElement('td');
-        playerPlace.textContent = place + 1;
+        playerPlace.textContent = place;
+        place++;
         playerScore.textContent = player.score;
         playerName.textContent = player.displayName;
         playerRow.appendChild(playerName);
