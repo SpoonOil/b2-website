@@ -20,6 +20,12 @@ html {
     grid-area: header;
   }
   
+  .playerRow:hover {
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+  }
+
   main {
     grid-area: main;
   }

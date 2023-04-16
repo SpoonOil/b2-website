@@ -37,6 +37,7 @@ function createLeaderboard(json) {
         playerRow.appendChild(playerScore);
         playerRow.appendChild(playerPlace);
         playerRow.dataset.profile = player.profile;
+        playerRow.classList.add('playerRow');
         playerRow.addEventListener('click', () => {
             window.open(playerRow.dataset.profile + "?pretty=true", '_blank');
         });
