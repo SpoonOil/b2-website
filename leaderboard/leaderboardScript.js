@@ -43,7 +43,7 @@ function createLeaderboardPage(json) {
         playerRow.dataset.profile = player.profile;
         playerRow.classList.add('playerRow');
         playerRow.addEventListener('click', () => {
-            window.open(playerRow.dataset.profile + "?pretty=true", '_blank');
+            window.open('playerInfo/playerInfo.html?' + playerRow.dataset.profileURL, '_blank');
         });
         document.querySelector('.leaderboard').appendChild(playerRow);
     }
