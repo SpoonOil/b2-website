@@ -24,7 +24,7 @@ function getLeaderboardInfo(url) {
 }
 
 function createLeaderboard(json) {
-    for (let i = 0; i < json.body.length; i++) {
+    for (let i = 0; i < 10; i++) {
         let player = json.body[i];
         let playerRow = document.createElement('tr');
         let playerName = document.createElement('td');
