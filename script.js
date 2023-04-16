@@ -13,11 +13,11 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-    updateLeaderboardInfo(json.body[0].leaderboard);
+    getLeaderboardInfo(json.body[0].leaderboard);
     updateText(json);
 }
 
-function updateLeaderboardInfo(url) {
+function getLeaderboardInfo(url) {
     fetch(url)
         .then((response) => response.json())
         .then((json) => createLeaderboard(json))
