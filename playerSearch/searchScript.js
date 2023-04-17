@@ -6,6 +6,7 @@ function searchPlayers(e) {
     e.preventDefault();
     const searchInput = document.querySelector('#searchBar');
     const searchValue = searchInput.value;
+    clearChildren(document.querySelector('.resultsOutput'))
     searchAPI(searchValue);
 }
 
@@ -42,7 +43,7 @@ function generatePlayerCard(player) {
     <a class="playerCardLink" href="../playerInfo/playerInfo.html?${player.profile}">Profile</a>
     </div>
     `;
-    document.querySelector('.resultsSection').appendChild(playerCard);
+    document.querySelector('.resultsOutput').appendChild(playerCard);
     const playerImage = playerCard.querySelector('.playerCardImage');
     updatePlayerImage(player, playerImage)
 }
@@ -51,4 +52,10 @@ async function updatePlayerImage(player, playerImage) {
     const response = await fetch(player.profile);
     const json = await response.json();
     playerImage.src = json.body.equippedAvatarURL;
+}
+
+function clearChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
