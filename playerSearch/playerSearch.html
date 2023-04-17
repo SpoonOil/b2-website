@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Search - Battles 2 Stats</title>
+    <link rel="stylesheet" href="searchStyles.css">
+    <script defer src="searchScript.js"></script>
+</head>
+<body>
+    <a href="../index.html">Go Back</a>
+    <h2 class="pageHeader">Player Search</h2>
+    <form action="">
+        <input title="player search" placeholder="Player" required="true" type="search" name="searchValue" id="searchBar">
+        <input title="search mode" type="radio" name="searchMode" checked="true" value="name" id="modeRadioName">
+        <label for="modeRadioName">Name</label>
+        <input title="search mode" type="radio" name="searchMode" value = "place" id="modeRadioPlace">
+        <label for="modeRadioPlace">Place</label>
+        <input title="search mode" type="radio" name="searchMode" value = "score" id="modeRadioScore">
+        <label for="modeRadioScore">Score</label>
+        <button type="submit" class="searchSubmit">Search</button>
+    </form>
+    <section class="resultsSection">
+        <h3 class="resultsHeader" hidden>Results</h3>
+    </section>
+</body>
+</html>

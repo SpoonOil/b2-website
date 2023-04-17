@@ -2,3 +2,8 @@ button {
     font-size: 1.5em;
     padding: 10px;
 }
+
+img.playerIcon {
+    height: 100px;
+    width: 100px;
+}
