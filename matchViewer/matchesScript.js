@@ -18,9 +18,11 @@ function generateMatchTable(matchHistory) {
         let row2 = table.insertRow();
         row1.classList.add("playerHeaderRow");
         let playerLeftHeader = document.createElement("th");
+        playerLeftHeader.classList.add("playerHeaderRow");
         row1.appendChild(playerLeftHeader);
         playerLeftHeader.colSpan = 4;
         let playerRightHeader = document.createElement("th");
+        playerRightHeader.classList.add("playerHeaderRow");
         row1.appendChild(playerRightHeader);
         playerRightHeader.colSpan = 4;
         if (matchHistory[i].playerLeft.result == "win") {
@@ -65,6 +67,9 @@ function updatePlayerName(player, slot) {
         const response = await fetch(url);
         const json = await response.json();
         slot.textContent = json.body.displayName;
+        slot.addEventListener("click", () => {
+            window.open('../playerInfo/playerInfo.html?' + url, '_blank');
+        })
     }
 
     nameFetch(url);
