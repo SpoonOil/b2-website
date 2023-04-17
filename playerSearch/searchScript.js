@@ -1,4 +1,5 @@
 const searchButton = document.querySelector('.searchSubmit');
+let resultFound = false;
 
 searchButton.addEventListener('click', (e) => searchPlayers(e));
 
@@ -6,7 +7,9 @@ function searchPlayers(e) {
     e.preventDefault();
     const searchInput = document.querySelector('#searchBar');
     const searchValue = searchInput.value;
+    const searchMode = document.querySelector('input[name="searchMode"]:checked').value
     clearChildren(document.querySelector('.resultsOutput'))
+    resultFound = false;
     searchAPI(searchValue);
 }
 
@@ -22,11 +25,14 @@ function processData(json, searchValue) {
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
         if (player.displayName.toLowerCase().includes(searchValue.toLowerCase())) {
+            resultFound = true;
             generatePlayerCard(player);
         }
     }
     if (json.next) {
         searchAPI(searchValue, json.next)
+    } else if (!resultFound) {
+        document.querySelector('.resultsOutput').innerHTML = 'No results found';
     }
 }
 
