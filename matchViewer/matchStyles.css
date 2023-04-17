@@ -1,0 +1,13 @@
+table * {
+    border : solid 1px black
+}
+
+.win {
+    background-color: green;
+    color : white;
+}
+
+.lose {
+    background-color: red;
+    color: white;
+}

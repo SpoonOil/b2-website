@@ -1,6 +1,9 @@
 const submit = document.querySelector('.submit');
 const playerName = document.querySelector('.playerName');
 const playerIcon = document.querySelector('.playerIcon');
+const matchHistoryButton = document.querySelector('.matchHistory');
+
+
 
 
 function fetchResults() {
@@ -20,6 +23,9 @@ function displayResults(json) {
     updateRankedStats(player);
     updateMedals(player);
     updateRankHistory(player);
+    matchHistoryButton.addEventListener('click', () => {
+      window.location.href = '../matchViewer/matches.html?' + player.matches;
+    })
   };
 
 function updateRankedStats(player) {
@@ -43,11 +49,11 @@ function updateRankHistory(player) {
     console.log(seasons);
     currentRank = seasons[0].rank;
     previousRank = seasons[1].rank;
-    let currentRankNum = document.createElement('p');
+    let currentRankNum = document.createElement('span');
     currentRankNum.textContent = currentRank;
     let currentRankDisplay = document.querySelector('.currentRank');
     currentRankDisplay.appendChild(currentRankNum);
-    let previousRankNum = document.createElement('p');
+    let previousRankNum = document.createElement('span');
     previousRankNum.textContent = previousRank;
     let previousRankDisplay = document.querySelector('.previousRank');
     previousRankDisplay.appendChild(previousRankNum);
