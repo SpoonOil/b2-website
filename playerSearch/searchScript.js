@@ -26,7 +26,7 @@ function processData(json, searchMode, searchValue) {
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
         if (searchMode == "name") {
-            if (player.displayName.toLowerCase() == searchValue.toLowerCase()) {
+            if (player.displayName.toLowerCase().includes(searchValue.toLowerCase())) {
                 resultFound = true;
                 generatePlayerCard(player, rankIndex);
             }
