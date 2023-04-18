@@ -10,53 +10,74 @@ function searchPlayers(e) {
     const searchMode = document.querySelector('input[name="searchMode"]:checked').value
     clearChildren(document.querySelector('.resultsOutput'))
     resultFound = false;
-    searchAPI(searchValue);
+    rankIndex = 1;
+    searchAPI(searchValue, searchMode);
 }
 
-function searchAPI(searchValue, url = 'https://data.ninjakiwi.com/battles2/homs/season_10/leaderboard') {
+function searchAPI(searchValue, searchMode, url = 'https://data.ninjakiwi.com/battles2/homs/season_10/leaderboard') {
     fetch(url)
         .then(response => response.json())
-        .then((json) => {processData(json, searchValue)})
+        .then((json) => {processData(json, searchMode, searchValue)})
         .catch(error => console.log(error))
 }
 
-function processData(json, searchValue) {
+function processData(json, searchMode, searchValue) {
     const players = json.body;
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
-        if (player.displayName.toLowerCase().includes(searchValue.toLowerCase())) {
-            resultFound = true;
-            generatePlayerCard(player);
+        if (searchMode == "name") {
+            if (player.displayName.toLowerCase() == searchValue.toLowerCase()) {
+                resultFound = true;
+                generatePlayerCard(player, rankIndex);
+            }
+        }  else if (searchMode == "score") {
+            if (player.score.toString().includes(searchValue)) {
+                resultFound = true;
+                generatePlayerCard(player, rankIndex);
+            }
+        } else if (searchMode == "place") {
+            if (rankIndex == searchValue) {
+                resultFound = true;
+                generatePlayerCard(player, rankIndex);
+            }
         }
+        rankIndex++;
     }
     if (json.next) {
-        searchAPI(searchValue, json.next)
+        searchAPI(searchValue, searchMode, json.next)
     } else if (!resultFound) {
         document.querySelector('.resultsOutput').innerHTML = 'No results found';
     }
 }
 
-function generatePlayerCard(player) {
+function generatePlayerCard(player, rankIndex) {
     const playerCard = document.createElement('div');
     playerCard.classList.add('playerCard');
     playerCard.innerHTML = `
-    <div class="playerCardImageHolder">
+    <div class="playerImageContainer">
     <img src="https://placehold.it/20" class="playerCardImage" alt="${player.displayName} Avatar">
     </div>
     <div class="playerCardInfo">
     <h3 class="playerCardName">${player.displayName}</h3>
     <p class="playerCardScore">Score: ${player.score}</p>
+    <p class="playerCardPlace">Place: ${rankIndex}</p>
     <a class="playerCardLink" href="../playerInfo/playerInfo.html?${player.profile}">Profile</a>
     </div>
     `;
     document.querySelector('.resultsOutput').appendChild(playerCard);
     const playerImage = playerCard.querySelector('.playerCardImage');
-    updatePlayerImage(player, playerImage)
+    updatePlayerImages(player, playerImage)
 }
 
-async function updatePlayerImage(player, playerImage) {
+async function updatePlayerImages(player, playerImage) {
     const response = await fetch(player.profile);
     const json = await response.json();
+    for (badge in json.body.badges_equipped) {
+        badgeImage = document.createElement('img');
+        badgeImage.src = json.body.badges_equipped[badge].iconURL;
+        imageContainer = playerImage.parentElement;
+        imageContainer.appendChild(badgeImage);
+    }
     playerImage.src = json.body.equippedAvatarURL;
 }
 

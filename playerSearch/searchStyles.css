@@ -5,7 +5,14 @@
 
 img {
     width: 50px;
-    height: 50px;
+    height: 60px;
+}
+
+.playerCardImage {
+    width:80px;
+    height:80px;
+    border: 2px solid rgb(124, 124, 124);
+    border-radius: 15px;
 }
 
 .playerCard {
