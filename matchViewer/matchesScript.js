@@ -32,10 +32,12 @@ function generateMatchTable(matchHistory) {
         row1.classList.add("playerHeaderRow");
         let playerLeftHeader = document.createElement("th");
         playerLeftHeader.classList.add("playerHeaderCell");
+        playerLeftHeader.classList.add('playerLeft')
         row1.appendChild(playerLeftHeader);
         playerLeftHeader.colSpan = 4;
         let playerRightHeader = document.createElement("th");
         playerRightHeader.classList.add("playerHeaderCell");
+        playerRightHeader.classList.add('playerRight')
         row1.appendChild(playerRightHeader);
         playerRightHeader.colSpan = 4;
         if (matchHistory[i].playerLeft.result == "win") {
@@ -49,11 +51,6 @@ function generateMatchTable(matchHistory) {
             playerRightHeader.classList.add("draw");
         }
 
-        if (matchHistory[i].playerLeft.currentUser) {
-            playerLeftHeader.classList.add("currentUser");
-        } else {
-            playerRightHeader.classList.add("currentUser");
-        }
         updatePlayerName(matchHistory[i].playerLeft, playerLeftHeader);
         updatePlayerName(matchHistory[i].playerRight, playerRightHeader);
         
@@ -66,7 +63,9 @@ function generateMatchTable(matchHistory) {
             let cellLeft = row2.insertCell();
             cellLeft.textContent = matchHistory[i].playerLeft[key];
             cellLeft.classList.add("playerDataLeft");
-
+            if (matchHistory[i].playerLeft.currentUser) {
+                cellLeft.classList.add("currentUser");
+            }
         }
         for (key in matchHistory[i].playerRight) {
             if (key == "profileURL" || key == "currentUser" || key == "result") {
@@ -75,7 +74,14 @@ function generateMatchTable(matchHistory) {
             let cellRight = row2.insertCell();
             cellRight.textContent = matchHistory[i].playerRight[key];
             cellRight.classList.add("playerDataRight");
-
+            if (matchHistory[i].playerRight.currentUser) {
+                cellRight.classList.add("currentUser");
+            }
+        }
+        if (matchHistory[i].playerLeft.currentUser) {
+            playerLeftHeader.classList.add("currentUser");
+        } else {
+            playerRightHeader.classList.add("currentUser");
         }
     }
 
@@ -100,18 +106,13 @@ playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
 
 function togglePlayerSide() {
     currentPlayers = document.getElementsByClassName("currentUser");
+    
     for(i = 0; i < currentPlayers.length; i++) {
-        if (currentPlayers[i].classList.contains('forceLeft')) {
-            currentPlayers[i].classList.remove('forceLeft');
-            playerData = document.getElementsByClassName("playerDataRight");
-            for (j = 0; j < playerData.length; j++) {
-                playerData[j].classList.remove('forceLeft');
-            }
-        } else {
-            currentPlayers[i].classList.add('forceLeft');
-            playerData = document.getElementsByClassName("playerDataRight");
-            for (j = 0; j < playerData.length; j++) {
-                playerData[j].classList.add('forceLeft');
+        if (currentPlayers[i].classList.contains('playerLeft') === false) {
+            if (currentPlayers[i].classList.contains('forceLeft')) {
+                currentPlayers[i].classList.remove('forceLeft');
+            } else {
+                currentPlayers[i].classList.add('forceLeft');
             }
         }
     }
