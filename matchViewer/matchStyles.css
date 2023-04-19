@@ -31,6 +31,7 @@ table {
 
 .playerHeaderCell:hover {
     text-decoration: none;
+    filter: brightness(80%);
 }
 
 tr.playerDataRow {
@@ -79,10 +80,17 @@ tr.playerDataRow {
 }
 
 .match {
+    min-width: -moz-fit-content;
+    min-width: -webkit-fill-available;
     min-width: fit-content;
     border: 1px solid black;
     border-radius: 5px;
     margin:5px;
     padding: 10px;
+}
+.matchTableContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
