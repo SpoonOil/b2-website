@@ -40,8 +40,6 @@ function processData(json, searchMode, searchValue) {
                 let evalValue = searchValue;
                 evalValue = evalValue.replace('\|\|', '\|\| player.score.toString() ')
                 evalValue = evalValue.replace(/&&/, '&& player.score.toString()')
-                console.log(searchValue);
-                console.log(evalValue)
                 // evalValue = evalValue.replace('<=', '<= player.score.toString()')
                 // evalValue = evalValue.replace('>=', '>= player.score.toString()');
                 // evalValue = evalValue.replace('==', '== player.score.toString()')
@@ -62,8 +60,6 @@ function processData(json, searchMode, searchValue) {
                 let evalValue = searchValue;
                 evalValue = evalValue.replace('\|\|', '\|\| rankIndex')
                 evalValue = evalValue.replace(/&&/, '&& rankIndex')
-                console.log(searchValue);
-                console.log(evalValue)
                 // evalValue = evalValue.replace('<=', '<= player.score.toString()')
                 // evalValue = evalValue.replace('>=', '>= player.score.toString()');
                 // evalValue = evalValue.replace('==', '== player.score.toString()')
