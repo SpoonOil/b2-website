@@ -11,18 +11,31 @@ function processMatchInfo(json) {
     generateMatchTable(matchHistory);
 }
 function generateMatchTable(matchHistory) {
-    let table = document.querySelector(".matchTable");
+    let tableContainer = document.querySelector(".matchTableContainer");
     for (let i = 0; i < matchHistory.length; i++) {
+        let table = document.createElement("table");
+        table.classList.add("matchTable");
+        tableContainer.appendChild(table);
         //generate headers
         let row1 = table.insertRow();
         let row2 = table.insertRow();
+        let expanderRow = table.insertRow();
+        expanderRow.classList.add("expanderRow");
+        let expanderCell = expanderRow.insertCell()
+        expanderCell.classList.add("expanderCell");
+        expanderCell.colSpan = 8;
+        let expanderButton = document.createElement("button");
+        expanderButton.classList.add("expanderButton");
+        expanderButton.textContent = "Expand";
+        expanderCell.appendChild(expanderButton);
+        expanderButton.addEventListener("click", (table) => expandTable(table));
         row1.classList.add("playerHeaderRow");
         let playerLeftHeader = document.createElement("th");
-        playerLeftHeader.classList.add("playerHeaderRow");
+        playerLeftHeader.classList.add("playerHeaderCell");
         row1.appendChild(playerLeftHeader);
         playerLeftHeader.colSpan = 4;
         let playerRightHeader = document.createElement("th");
-        playerRightHeader.classList.add("playerHeaderRow");
+        playerRightHeader.classList.add("playerHeaderCell");
         row1.appendChild(playerRightHeader);
         playerRightHeader.colSpan = 4;
         if (matchHistory[i].playerLeft.result == "win") {
@@ -39,6 +52,7 @@ function generateMatchTable(matchHistory) {
         updatePlayerName(matchHistory[i].playerRight, playerRightHeader);
         
         //generate dataRows
+        row2.classList.add("playerDataRow");
         for (key in matchHistory[i].playerLeft) {
             if (key == "profileURL" || key == "currentUser" || key == "result") {
                 continue;

@@ -1,5 +1,11 @@
 table * {
-    border : solid 1px black
+    border : solid 1px black;
+}
+
+table {
+    border-collapse: separate; 
+    margin:10px;
+    width:100%
 }
 
 .win {
@@ -14,4 +20,44 @@ table * {
 
 .playerHeaderRow {
     cursor: pointer;
+    padding: 5px;
+    display:flex;
+    padding: 0;
+}
+
+.playerHeaderCell{
+    text-decoration: underline;
+    padding: 10px;
+    flex: 1;
+    font-weight: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.playerHeaderCell:hover {
+    text-decoration: none;
+}
+
+tr.playerDataRow {
+    display:flex;
+}
+
+.playerDataRow td {
+    flex: 1;
+    text-align: center;
+}
+
+.expanderRow {
+    height: 20px;
+}
+
+.expanderCell {
+    background-color: rgb(133, 133, 133);
+    border: none;
+    width:20%;
+    display: none;
+}
+
+.expanderButton {
+    flex: 1;
 }
