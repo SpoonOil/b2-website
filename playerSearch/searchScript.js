@@ -31,14 +31,48 @@ function processData(json, searchMode, searchValue) {
                 generatePlayerCard(player, rankIndex);
             }
         }  else if (searchMode == "score") {
-            if (player.score.toString().includes(searchValue)) {
-                resultFound = true;
-                generatePlayerCard(player, rankIndex);
+            if (searchValue.match(/^\d+$/) ) {//match numbers)
+                if (player.score.toString().includes(searchValue)) {
+                    resultFound = true;
+                    generatePlayerCard(player, rankIndex);
+                }
+            } else {
+                let evalValue = searchValue;
+                evalValue = evalValue.replace('\|\|', '\|\| player.score.toString() ')
+                evalValue = evalValue.replace(/&&/, '&& player.score.toString()')
+                console.log(searchValue);
+                console.log(evalValue)
+                // evalValue = evalValue.replace('<=', '<= player.score.toString()')
+                // evalValue = evalValue.replace('>=', '>= player.score.toString()');
+                // evalValue = evalValue.replace('==', '== player.score.toString()')
+                // evalValue = evalValue.replace('!=', '!= player.score.toString()')
+                if (eval(player.score.toString() + evalValue)) {
+                    resultFound = true;
+                    generatePlayerCard(player, rankIndex);
+                
+                }
             }
         } else if (searchMode == "place") {
-            if (rankIndex == searchValue) {
-                resultFound = true;
-                generatePlayerCard(player, rankIndex);
+            if (searchValue.match(/^\d+$/) ) {//match numbers)
+                if (rankIndex == searchValue) {
+                    resultFound = true;
+                    generatePlayerCard(player, rankIndex);
+                }
+            } else {
+                let evalValue = searchValue;
+                evalValue = evalValue.replace('\|\|', '\|\| rankIndex')
+                evalValue = evalValue.replace(/&&/, '&& rankIndex')
+                console.log(searchValue);
+                console.log(evalValue)
+                // evalValue = evalValue.replace('<=', '<= player.score.toString()')
+                // evalValue = evalValue.replace('>=', '>= player.score.toString()');
+                // evalValue = evalValue.replace('==', '== player.score.toString()')
+                // evalValue = evalValue.replace('!=', '!= player.score.toString()')
+                if (eval(rankIndex + evalValue)) {
+                    resultFound = true;
+                    generatePlayerCard(player, rankIndex);
+                
+                }
             }
         }
         rankIndex++;
