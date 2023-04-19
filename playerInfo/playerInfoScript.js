@@ -49,17 +49,25 @@ function updateRankHistory(player) {
     console.log(seasons);
     if (seasons[0].rank) {
         let currentRank = seasons[0].rank;
+        let currentScore = seasons[0].score;
         let currentRankDisplay = document.querySelector('.currentRank');
         let currentRankNum = document.createElement('span');
+        let currentScoreNum = document.createElement('p');
+        currentScoreNum.textContent = `Score: ${currentScore}`;
         currentRankNum.textContent = currentRank;
         currentRankDisplay.appendChild(currentRankNum);
+        currentRankDisplay.appendChild(currentScoreNum);
     }
     if (seasons[1].rank) {
           let previousRank = seasons[1].rank;
+          let previousScore = seasons[1].score;
           let previousRankDisplay = document.querySelector('.previousRank');
           let previousRankNum = document.createElement('span');
+          let previousScoreNum = document.createElement('p');
+          previousScoreNum.textContent = `Score: ${previousScore}`;
           previousRankNum.textContent = previousRank;
           previousRankDisplay.appendChild(previousRankNum);
+          previousRankDisplay.appendChild(previousScoreNum);
     }
   }
 }
