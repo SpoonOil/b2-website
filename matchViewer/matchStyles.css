@@ -49,15 +49,25 @@ tr.playerDataRow {
 
 .expanderRow {
     height: 20px;
+    display: none;
 }
 
 .expanderCell {
     background-color: rgb(133, 133, 133);
     border: none;
     width:20%;
-    display: none;
+    display: flex;
 }
 
 .expanderButton {
     flex: 1;
+}
+
+.forceLeft {
+    order: -1;
+}
+
+#playerSideToggle {
+    width:20px;
+    height:20px;
 }

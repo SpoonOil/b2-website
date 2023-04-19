@@ -48,6 +48,12 @@ function generateMatchTable(matchHistory) {
             playerLeftHeader.classList.add("draw");
             playerRightHeader.classList.add("draw");
         }
+
+        if (matchHistory[i].playerLeft.currentUser) {
+            playerLeftHeader.classList.add("currentUser");
+        } else {
+            playerRightHeader.classList.add("currentUser");
+        }
         updatePlayerName(matchHistory[i].playerLeft, playerLeftHeader);
         updatePlayerName(matchHistory[i].playerRight, playerRightHeader);
         
@@ -87,5 +93,19 @@ function updatePlayerName(player, slot) {
     }
 
     nameFetch(url);
+}
+
+let playerSideToggle = document.querySelector("#playerSideToggle");
+playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
+
+function togglePlayerSide() {
+    currentPlayers = document.getElementsByClassName("currentUser");
+    for(i = 0; i < currentPlayers.length; i++) {
+        if (currentPlayers[i].classList.contains('forceLeft')) {
+            currentPlayers[i].classList.remove('forceLeft');
+        } else {
+            currentPlayers[i].classList.add('forceLeft');
+        }
+    }
 }
 getMatchInfo();
