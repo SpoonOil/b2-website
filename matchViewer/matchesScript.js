@@ -26,7 +26,7 @@ function generateMatchTable(matchHistory) {
         expanderCell.colSpan = 8;
         let expanderButton = document.createElement("button");
         expanderButton.classList.add("expanderButton");
-        expanderButton.textContent = "Expand";
+        expanderButton.textContent = "More Info";
         expanderCell.appendChild(expanderButton);
         expanderButton.addEventListener("click", (table) => expandTable(table));
         row1.classList.add("playerHeaderRow");
@@ -68,7 +68,7 @@ function generateMatchTable(matchHistory) {
             cellLeft.classList.add("playerDataLeft");
 
         }
-        for (key in matchHistory[i].playerLeft) {
+        for (key in matchHistory[i].playerRight) {
             if (key == "profileURL" || key == "currentUser" || key == "result") {
                 continue;
             }
@@ -103,8 +103,16 @@ function togglePlayerSide() {
     for(i = 0; i < currentPlayers.length; i++) {
         if (currentPlayers[i].classList.contains('forceLeft')) {
             currentPlayers[i].classList.remove('forceLeft');
+            playerData = document.getElementsByClassName("playerDataRight");
+            for (j = 0; j < playerData.length; j++) {
+                playerData[j].classList.remove('forceLeft');
+            }
         } else {
             currentPlayers[i].classList.add('forceLeft');
+            playerData = document.getElementsByClassName("playerDataRight");
+            for (j = 0; j < playerData.length; j++) {
+                playerData[j].classList.add('forceLeft');
+            }
         }
     }
 }
