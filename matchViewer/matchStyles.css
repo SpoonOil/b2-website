@@ -1,6 +1,5 @@
 table {
     border-collapse: separate; 
-    margin:10px;
     width:100%
 }
 
@@ -72,8 +71,17 @@ tr.playerDataRow {
 }
 .extraInfoContainer {
     display:flex;
+    padding: 10px;
 }
 
 .extraInfo {
     flex: 1;
 }
+
+.match {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin:5px;
+    padding: 10px;
+}
+
