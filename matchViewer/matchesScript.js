@@ -13,22 +13,22 @@ function processMatchInfo(json) {
 function generateMatchTable(matchHistory) {
     let tableContainer = document.querySelector(".matchTableContainer");
     for (let i = 0; i < matchHistory.length; i++) {
+        let currentMatchContainer = document.createElement('div')
+        currentMatchContainer.classList.add("match");
         let table = document.createElement("table");
         table.classList.add("matchTable");
-        tableContainer.appendChild(table);
+        currentMatchContainer.appendChild(table);
+        tableContainer.appendChild(currentMatchContainer);
         //generate headers
         let row1 = table.insertRow();
         let row2 = table.insertRow();
-        let expanderRow = table.insertRow();
-        expanderRow.classList.add("expanderRow");
-        let expanderCell = expanderRow.insertCell()
-        expanderCell.classList.add("expanderCell");
-        expanderCell.colSpan = 8;
         let expanderButton = document.createElement("button");
         expanderButton.classList.add("expanderButton");
         expanderButton.textContent = "More Info";
-        expanderCell.appendChild(expanderButton);
-        expanderButton.addEventListener("click", (table) => expandTable(table));
+        currentMatchContainer.appendChild(expanderButton);
+        expanderButton.addEventListener("click", function handleClick() {
+            expandTable(currentMatchContainer, matchHistory[i])
+        });
         row1.classList.add("playerHeaderRow");
         let playerLeftHeader = document.createElement("th");
         playerLeftHeader.classList.add("playerHeaderCell");
@@ -116,4 +116,44 @@ function togglePlayerSide() {
         }
     }
 }
+
+function expandTable(matchContainer, matchInfo) {
+    console.log(matchInfo);
+    toggleExpansionState(matchContainer);
+    if (matchContainer.classList.contains("expanded")) {
+        createExpansion(matchInfo, matchContainer);
+    } else {
+        matchContainer.removeChild(matchContainer.lastChild);
+    }
+}
 getMatchInfo();
+
+function createExpansion(matchInfo, matchContainer) {
+    let extraInfoContainer = document.createElement("div");
+    extraInfoContainer.classList.add("extraInfoContainer");
+    for (key in matchInfo) {
+        if (!(key == "duration" || key == "endRound" || key == "map" || key == "gametype")) {
+            continue;
+        }
+        let extraInfo = document.createElement("span");
+        extraInfo.classList.add("extraInfo");
+        extraInfo.textContent = key.toUpperCase() + ": " + matchInfo[key] + " ";
+        extraInfoContainer.appendChild(extraInfo);
+    }
+    matchContainer.appendChild(extraInfoContainer);
+}
+
+function toggleExpansionState(matchContainer) {
+    let expanderButton = matchContainer.querySelector(".expanderButton");
+    if (matchContainer.classList.contains("expanded")) {
+        setExpansionStateToExpanded(matchContainer, expanderButton);
+    } else {
+        matchContainer.classList.add("expanded");
+        expanderButton.textContent = "Less Info";
+    }
+}
+function setExpansionStateToExpanded(matchContainer, expanderButton) {
+    matchContainer.classList.remove("expanded");
+    expanderButton.textContent = "More Info";
+}
+
