@@ -15,12 +15,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1 class="headerText">Battles 2 Stats</h1>
-    </header>
-    <main>
         <section class = "toolsSection">
             <ul class="toolList">
                 <li><a href="playerSearch/playerSearch.html">Player Search</a></li>
@@ -29,27 +30,13 @@
                 <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
             </ul>
         </section>
-        <section class = "leaderboardDisplay">
-            <div class="leaderboardHeader">
-                <h3 class="seasonTitle">Season 11</h3>
-                <h2 class="leaderboardInfoHeader"><a href="leaderboard/leaderboard.html">Leaderboard</a></h2>
-            </div>
-            <div class="leaderboardContainer">
-                <table class = "leaderboard">
-                    <tr class="leaderboardHeaderRow">
-                        <th>Player</th>
-                        <th>Score</th>
-                        <th>Placing</th>
-                    </tr>
-                </table>
-            </div>
-            <a href="leaderboard/leaderboard.html">See full leaderboard</a>
-        </section>
+    </header>
+    <main>
         <section class="currentSeasDisplay">
             <h2 class="seasonInfoHeader">Season Info</h2>
             <div class="seasonTitleContainer">
                 <span class="seasonTitle">Season 11</span>
-                <span class="seasonTimeLeft">Time Left:</span>
+                <span class="seasonTimeLeft"><b>Time Left:</b></span>
             </div>
             <h5 class="seasonDates">
                 <span></span>
@@ -62,12 +49,47 @@
             <div class="playerCountContainer">
                 <h4 class = "playerCountText">Hall of Masters players:
                     <span class="playerCount">0</p>
-                </h4>
+                    </h4>
+                </div>
+            </section>
+        <section class = "leaderboardDisplay">
+            <div class="leaderboardHeader">
+                <h3 class="seasonTitle">Season 11</h3>
+                <h2 class="leaderboardInfoHeader"><a href="leaderboard/leaderboard.html">Leaderboard</a></h2>
             </div>
+            <div class="leaderboardContainer">
+                <div class="leaderboardSpacer"></div>
+                <table class = "leaderboard">
+                    <tr class="leaderboardHeaderRow">
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Placing</th>
+                    </tr>
+                </table>
+                <div class="leaderboardSpacer"></div>
+            </div>
+            <a href="leaderboard/leaderboard.html">
+                <div class="leaderboardButton">
+                    See full leaderboard
+                </div>
+            </a>
         </section>
     </main>
     <section class = "feedSection">
         <h2>Live Feed</h2>
     </section>
+    <footer>
+        <section class="aboutSection">
+            <div class="aboutText">
+                <p class = "aboutLeft">
+                    Made with Love by <a href="https://www.twitch.tv/spoonoil">SpoonOil </a>
+                    <div class="imageContainer"><img src="assets/images/spoonoil-logo.png" alt="SpoonOil Logo" class = "spoonoilLogo"> </div>
+                </p>
+                <p class = "aboutRight">
+                    Powered by <a href="https://data.ninjakiwi.com/">NinjaKiwi Open Data API</a>
+                </p>
+            </div>
+        </section>
+    </footer>
 </body>
 </html>

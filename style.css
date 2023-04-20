@@ -2,6 +2,8 @@ html {
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     color: #c8d0db;
+    height: 100%;
+    width: 100%
 }
 
 :root {
@@ -9,17 +11,48 @@ html {
 }
 
 body {
-  background-color: #0A2647
+  margin: 0;
+  height: 100%;
+  background-color: #0A2647;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leaderboardDisplay {
+    width: 92%
+  }
+}
+
+.feedSection {
+  display: none;
 }
 /* Header Styles */
 
+header {
+  grid-area: header;
+}
 .headerText {
+  background-color: #03162c;
   text-align: center;
   margin: 0;
+  padding: 20px 0 0 0;
   font-size: 2.5em;
   color: #ffbb00;
   font-family: 'Luckiest Guy';
   font-weight: 100;
+  text-shadow: 0px 3px 2px black;
 }
 
 .toolList {
@@ -37,10 +70,11 @@ body {
   flex: 1;
   padding: 15px;
   text-align: center;
+  box-shadow: 0 3px 0px black;
 }
 
 .toolList>li:hover {
-  filter: brightness(102%);
+  filter: brightness(105%);
   cursor: pointer;
   font-weight: 600;
   position:relative;
@@ -65,6 +99,9 @@ body {
 
 /* Season Info Styles */
 .currentSeasDisplay {
+  flex: 1;
+  align-self: flex-start;
+  grid-area: season;
   background-color: #205295;
   border-radius: 5px;
   padding: 15px;
@@ -73,7 +110,7 @@ body {
 }
 
 .seasonDates {
-  margin: 0;
+  margin: 20px 0;
 }
 
 .seasonDates span {
@@ -87,6 +124,7 @@ body {
 }
 
 .seasonTitle {
+  text-align: center;
   font-size: 1.5em;
   font-weight: bold;
   color: #f9fafc;
@@ -94,18 +132,17 @@ body {
 
 .seasonTitleContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 15px;
+  /* margin: 15px; */
 }
 
-.seasonTitleContainer *{
-  flex: 1;
-}
+/* .seasonTitleContainer *{
+} */
 
 .seasonTimeLeft {
-  flex: 2;
   font-weight: 500;
+  text-align: right;
 }
 
 .playerCountContainer {
@@ -125,6 +162,9 @@ body {
 /* Leaderboard Styles */
 
 .leaderboardDisplay {
+  flex: 3;
+  align-self: flex-start;
+  grid-area: leaderboard;
   background-color: #205295;
   border-radius: 5px;
   padding: 15px;
@@ -167,8 +207,8 @@ body {
 }
 
 .leaderboard {
-  border-spacing: 1;
-  /* border-collapse: collapse; */
+  flex: 1 1 50%;
+  min-width: 400px;
   background-color: #ffcc66;
   color: black;
   border: 1px solid  #ffaa00;
@@ -176,12 +216,26 @@ body {
   width: 80%;
 }
 
-.leaderboard tr td{
-  border-top: 1px solid  #ffaa00;
+.leaderboardSpacer {
+  flex: 3;
+}
+
+
+.leaderboard tr:nth-child(even) td {
+  background-color: #ecba54;
+}
+.leaderboard>tbody>tr:hover {
+  filter: brightness(90%);
+  background-color: #ecba54;
+  cursor: pointer;
 }
 
 .leaderboard td {
   text-align: center;
+}
+
+.leaderboard th {
+  font-size: 1.3em;
 }
 
 .playerName{
@@ -189,6 +243,94 @@ body {
   text-transform: uppercase;
 }
 
-.leaderboard tbody.playerPlace:nth-child(n+3) {
-  color: green;
+.place1 {
+  color: rgb(224, 161, 0);
+  font-family: 'Luckiest Guy';
+  font-size: 1.5em;
+  text-shadow: 0 0 3px black;
+  height: 50px;
+}
+
+.place2 {
+  color: rgb(139, 140, 151);
+  font-family: 'Luckiest Guy';
+  font-size: 1.3em;
+  text-shadow: 0 0 3px rgb(143, 143, 150);
+  height: 30px;
+}
+
+.place3 {
+  color: rgb(136, 77, 0);
+  font-family: 'Luckiest Guy';
+  font-size: 1.3em;
+  text-shadow: 0 0 3px rgb(161, 76, 6);
+}
+
+.playerScore {
+  font-family: 'Chivo Mono', monospace;
+}
+
+.leaderboardButton {
+  background-color: #144272;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid #0e3763;
+  box-shadow: 0px 5px 3px #0A2647;
+}
+
+.leaderboardButton:active {
+  position: relative;
+  top:3px;
+  box-shadow: 0px 2px 3px #0A2647;
+}
+
+.leaderboardButton:hover {
+  filter: brightness(105%);
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 20px;
+  grid-area: footer;
+}
+.spoonoilLogo {
+  width: 50px;
+}
+
+.aboutSection {
+  border-top: 3px solid #0e3763;
+  background-color: #144272;
+  display: flex;
+  height: 100%;
+  justify-content: space-evenly;
+}
+.aboutText {
+  font-size: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.aboutLeft, .aboutRight {
+  flex: 1;
+}
+
+.aboutLeft {
+  text-align: right;
+}
+
+.aboutRight {
+  text-align: left;
+}
+
+.aboutText a {
+  color: inherit;
+}
+
+.aboutText a:hover {
+  text-decoration: none;
 }
