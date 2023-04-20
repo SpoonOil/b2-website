@@ -29,9 +29,16 @@ function createLeaderboardPage(json) {
     for (let i = 0; i < json.body.length; i++) {
         let player = json.body[i];
         let playerRow = document.createElement('tr');
+        playerRow.classList.add('playerRow');
         let playerName = document.createElement('td');
+        playerName.classList.add('playerName');
         let playerScore = document.createElement('td');
+        playerScore.classList.add('playerScore');
         let playerPlace = document.createElement('td');
+        if (place < 4) {
+            playerPlace.classList.add(`place${place}`);
+            playerRow.classList.add('firstPlace');
+        }
         playerPlace.textContent = place;
         place++;
         playerScore.textContent = player.score;
@@ -44,6 +51,6 @@ function createLeaderboardPage(json) {
         playerRow.addEventListener('click', () => {
             window.open('../playerInfo/playerInfo.html?' + playerRow.dataset.profileURL, '_blank');
         });
-        document.querySelector('.leaderboard').appendChild(playerRow);
+        document.querySelector('.leaderboard>tbody').appendChild(playerRow);
     }
 }

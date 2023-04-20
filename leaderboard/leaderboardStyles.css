@@ -1,5 +1,179 @@
-.playerRow:hover {
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-  }
+:root {
+  font-size: 20px;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: #c8d0db;
+  height: 100%;
+  width: 100%
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #0A2647;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Header styles */
+eader {
+  grid-area: header;
+}
+.headerText {
+  background-color: #03162c;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0 0 0;
+  font-size: 2.5em;
+  color: #ffbb00;
+  font-family: 'Luckiest Guy';
+  font-weight: 100;
+  text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+  margin: 0;
+  display:flex;
+  list-style-type: none;
+  padding: 0;
+  justify-content: space-around;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.toolList>li {
+  background-color: #144272;
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 3px 0px black;
+}
+
+.toolList>li:hover {
+  filter: brightness(105%);
+  cursor: pointer;
+  font-weight: 600;
+  position:relative;
+  bottom: 1px;
+}
+
+.toolList>li:active {
+  filter: brightness(95%);
+  position:relative;
+  top: 1px;
+}
+
+.toolList a {
+  text-decoration: none;
+  color: #c8d0db;
+}
+
+.toolList a:visited {
+  text-decoration: inherit;
+  color: #c8d0db;
+  cursor: auto;
+}
+
+
+/* leaderboard Styles */
+.leaderboardDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leaderboardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  background-color: #205295;
+  border-radius: 15px;
+  border: 3px solid #2C74B3;
+  padding: 15px;
+}
+
+.leaderboard {
+  flex: 1 1 50%;
+  min-width: 400px;
+  background-color: #ffcc66;
+  color: black;
+  border: 1px solid  #ffaa00;
+  border-radius: 10px;
+  width: 90%;
+}
+
+.leaderboard>tbody>tr:hover {
+  filter: brightness(90%);
+  background-color: #ecba54;
+  cursor: pointer;
+}
+
+.leaderboard tr:nth-child(odd) td {
+  background-color: #ecba54;
+}
+
+.leaderboard td {
+  text-align: center;
+}
+
+.leaderboard th {
+  font-size: 1.3em;
+}
+
+
+.playerName{
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.place1 {
+  color: rgb(224, 161, 0);
+  font-family: 'Luckiest Guy';
+  font-size: 1.5em;
+  text-shadow: 0 0 3px black;
+  height: 50px;
+}
+
+.place2 {
+  color: rgb(139, 140, 151);
+  font-family: 'Luckiest Guy';
+  font-size: 1.3em;
+  text-shadow: 0 0 3px rgb(143, 143, 150);
+  height: 30px;
+}
+
+.place3 {
+  color: rgb(136, 77, 0);
+  font-family: 'Luckiest Guy';
+  font-size: 1.3em;
+  text-shadow: 0 0 3px rgb(161, 76, 6);
+}
+
+.playerScore {
+  font-family: 'Chivo Mono', monospace;
+}
+
+.backHomeButton {
+  padding: 15px;
+  background-color: #205295;
+  border-radius: 0 0 15px 15px;
+  border: 3px solid #2C74B3;
+  padding: 15px;
+  border-top: none;
+}
+
+.backHomeButton, .leaderboardDisplay a, li {
+  text-decoration: none;
+  color: #c8d0db;
+  font-weight: 600;
+}
+
+.backHomeButton:hover {
+  filter: brightness(120%);
+}
+

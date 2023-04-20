@@ -7,19 +7,48 @@
     <title>Leaderboard</title>
     <script src="leaderboardScript.js"></script>
     <link rel="stylesheet" href="leaderboardStyles.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <h1 class="headerText">Battles 2 Stats</h1>
+        <section class = "toolsSection">
+            <ul class="toolList">
+                <li><a href="playerSearch/playerSearch.html">Player Search</a></li>
+                <li>Micro Practice Tool</li>
+                <li>Eco Simulator</li>
+                <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
+            </ul>
+        </section>
+    </header>
     <section class = "leaderboardDisplay">
-        <a href="..\index.html">Back to Home</a>
+        <a href="..\index.html"><div class="backHomeButton">Back to Home</div></a>
         <h2 class="leaderboardInfoHeader">Leaderboard</h2>
-        <h3 class="seasonTitle">Season 11</h3>
-        <table class = "leaderboard">
-            <tr class="leaderboardHeaderRow">
-                <th>Player</th>
-                <th>Score</th>
-                <th>Placing</th>
-            </tr>
-        </table>
+        <div class="leaderboardContainer">
+            <h3 class="seasonTitle">Season 11</h3>
+            <table class = "leaderboard">
+                <thead>
+                    <tr class="leaderboardHeaderRow">
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Placing</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
     </section>
 </body>
 </html>
