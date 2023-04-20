@@ -1,61 +1,194 @@
-/* styles.css */
-
-/* Reset some default browser styles */
 html {
     box-sizing: border-box;
-  }
-  /* Holy Grail Layout */
-  body {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-      "header header header"
-      "left main right"
-      "footer footer footer";
-    gap: 2rem;
-    min-height: 100vh;
-  }
-  header {
-    grid-area: header;
-  }
-  
-  .playerRow:hover {
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-  }
+    font-family: 'Montserrat', sans-serif;
+    color: #c8d0db;
+}
 
-  main {
-    grid-area: main;
-  }
-  
-  aside.toolsAside {
-    grid-area: left;
-  }
-  
-  aside.feedAside {
-    grid-area: right;
-  }
-  
-  footer {
-    grid-area: footer;
-    background-color: #4caf50;
-    padding: 1.5rem 0;
-    text-align: center;
-    color: #fff;
-  }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 768px) {
-    body {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr auto auto auto;
-      grid-template-areas:
-        "header"
-        "main"
-        "left"
-        "right"
-        "footer";
-    }
-  }
+:root {
+  font-size: 20px;
+}
+
+body {
+  background-color: #0A2647
+}
+/* Header Styles */
+
+.headerText {
+  text-align: center;
+  margin: 0;
+  font-size: 2.5em;
+  color: #ffbb00;
+  font-family: 'Luckiest Guy';
+  font-weight: 100;
+}
+
+.toolList {
+  margin: 0 0 15px;
+  display:flex;
+  list-style-type: none;
+  padding: 0;
+  justify-content: space-around;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.toolList>li {
+  background-color: #144272;
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+}
+
+.toolList>li:hover {
+  filter: brightness(102%);
+  cursor: pointer;
+  font-weight: 600;
+  position:relative;
+  bottom: 1px;
+}
+
+.toolList>li:active {
+  filter: brightness(95%);
+  position:relative;
+  top: 1px;
+}
+
+.toolList a {
+  text-decoration: none;
+}
+
+.toolList a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+/* Season Info Styles */
+.currentSeasDisplay {
+  background-color: #205295;
+  border-radius: 5px;
+  padding: 15px;
+  border: 3px solid #2C74B3;
+  margin: 10px;
+}
+
+.seasonDates {
+  margin: 0;
+}
+
+.seasonDates span {
+  font-size: 0.8em;
+  color: #a6b4c7;
+  margin: 0px;
+}
+
+.seasonInfoHeader {
+  text-align: center;
+}
+
+.seasonTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #f9fafc;
+}
+
+.seasonTitleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+
+.seasonTitleContainer *{
+  flex: 1;
+}
+
+.seasonTimeLeft {
+  flex: 2;
+  font-weight: 500;
+}
+
+.playerCountContainer {
+  display: flex;
+  justify-items: center;
+}
+
+.playerCountContainer>*{
+  flex: 1;
+}
+
+.playerCountText {
+  text-align: center;
+  color: #ffbb00;
+}
+
+/* Leaderboard Styles */
+
+.leaderboardDisplay {
+  background-color: #205295;
+  border-radius: 5px;
+  padding: 15px;
+  border: 3px solid #2C74B3;
+  margin: 10px;
+}
+
+.leaderboardInfoHeader {
+  text-align: center;
+}
+
+.leaderboardInfoHeader a {
+  text-decoration: none;
+}
+
+.leaderboardInfoHeader a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+.leaderboardDisplay .seasonTitle {
+  font-size: 1.2em;
+}
+
+.leaderboardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leaderboardContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.leaderboardHeader * {
+  margin: 0 0 0 15px;
+}
+
+.leaderboard {
+  border-spacing: 1;
+  /* border-collapse: collapse; */
+  background-color: #ffcc66;
+  color: black;
+  border: 1px solid  #ffaa00;
+  border-radius: 10px;
+  width: 80%;
+}
+
+.leaderboard tr td{
+  border-top: 1px solid  #ffaa00;
+}
+
+.leaderboard td {
+  text-align: center;
+}
+
+.playerName{
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.leaderboard tbody.playerPlace:nth-child(n+3) {
+  color: green;
+}

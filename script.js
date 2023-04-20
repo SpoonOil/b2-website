@@ -27,9 +27,13 @@ function createLeaderboard(json) {
     for (let i = 0; i < 10; i++) {
         let player = json.body[i];
         let playerRow = document.createElement('tr');
+        playerRow.classList.add('playerRow');
         let playerName = document.createElement('td');
+        playerName.classList.add('playerName');
         let playerScore = document.createElement('td');
+        playerScore.classList.add('playerScore');
         let playerPlace = document.createElement('td');
+        playerPlace.classList.add('playerPlace');
         playerPlace.textContent = i+1;
         playerScore.textContent = player.score;
         playerName.textContent = player.displayName;
@@ -41,7 +45,7 @@ function createLeaderboard(json) {
         playerRow.addEventListener('click', () => {
             window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
         });
-        document.querySelector('.leaderboard').appendChild(playerRow);
+        document.querySelector('.leaderboard>tbody').appendChild(playerRow);
     }  
 }
 
