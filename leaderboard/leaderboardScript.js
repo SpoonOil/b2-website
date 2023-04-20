@@ -7,7 +7,6 @@ function updateSeasonInfo() {
 
 function updateAll(json) {
     getLeaderboardInfo(json.body[0].leaderboard);
-    updateText(json);
 }
 
 function getLeaderboardInfo(url) {
