@@ -46,22 +46,25 @@ eader {
 }
 
 .toolList>li {
+  transition: all 0.25s ease;
   background-color: #144272;
   flex: 1;
   padding: 15px;
   text-align: center;
   box-shadow: 0 3px 0px black;
+  border-bottom: 3px solid #2C74B3;
 }
 
 .toolList>li:hover {
+  transition: all 0.25s ease;
   filter: brightness(105%);
   cursor: pointer;
   font-weight: 600;
   position:relative;
-  bottom: 1px;
 }
 
 .toolList>li:active {
+  transition: all 0.25s ease;
   filter: brightness(95%);
   position:relative;
   top: 1px;
@@ -160,20 +163,27 @@ eader {
 
 .backHomeButton {
   padding: 15px;
-  background-color: #205295;
+  background-color: #144272;
   border-radius: 0 0 15px 15px;
   border: 3px solid #2C74B3;
   padding: 15px;
   border-top: none;
 }
 
-.backHomeButton, .leaderboardDisplay a, li {
+.backHomeButton, .leaderboardDisplay a {
   text-decoration: none;
   color: #c8d0db;
   font-weight: 600;
 }
 
+.backHomeButton {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 5px  black;
+}
+
 .backHomeButton:hover {
+  transition: all 0.25s ease;
   filter: brightness(120%);
 }
 
