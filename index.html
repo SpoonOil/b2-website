@@ -7,50 +7,89 @@
     <title>b2.lol</title>
     <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1 class="headerText">Battles 2 Stats</h1>
+        <section class = "toolsSection">
+            <ul class="toolList">
+                <li><a href="playerSearch/playerSearch.html">Player Search</a></li>
+                <li>Micro Practice Tool</li>
+                <li>Eco Simulator</li>
+                <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
+            </ul>
+        </section>
     </header>
     <main>
         <section class="currentSeasDisplay">
             <h2 class="seasonInfoHeader">Season Info</h2>
-            <h3 class="seasonTitle">Season 11</h3>
+            <div class="seasonTitleContainer">
+                <span class="seasonTitle">Season 11</span>
+                <span class="seasonTimeLeft"><b>Time Left:</b></span>
+            </div>
             <h5 class="seasonDates">
-                <p>From</p>
-                <p class="startDate">0</p>
-                <p>to</p>
-                <p class="endDate">0</p>
+                <span></span>
+                <span class="startDate">0</span>
+                <span>-</span>
+                <span class="endDate">0</span>
             </h5>
             <ul>
-                <li class="seasonTimeLeft">Days Left:</li>
             </ul>
-            <h4>Hall of Masters players: <p class="playerCount">0</p></h4>
-        </section>
+            <div class="playerCountContainer">
+                <h4 class = "playerCountText">Hall of Masters players:
+                    <span class="playerCount">0</p>
+                    </h4>
+                </div>
+            </section>
         <section class = "leaderboardDisplay">
-            <h2 class="leaderboardInfoHeader"><a href="leaderboard/leaderboard.html">Leaderboard</a></h2>
-            <h3 class="seasonTitle">Season 11</h3>
-            <table class = "leaderboard">
-                <tr class="leaderboardHeaderRow">
-                    <th>Player</th>
-                    <th>Score</th>
-                    <th>Placing</th>
-                </tr>
-            </table>
-            <a href="leaderboard/leaderboard.html">See full leaderboard</a>
+            <div class="leaderboardHeader">
+                <h3 class="seasonTitle">Season 11</h3>
+                <h2 class="leaderboardInfoHeader"><a href="leaderboard/leaderboard.html">Leaderboard</a></h2>
+            </div>
+            <div class="leaderboardContainer">
+                <div class="leaderboardSpacer"></div>
+                <table class = "leaderboard">
+                    <tr class="leaderboardHeaderRow">
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Placing</th>
+                    </tr>
+                </table>
+                <div class="leaderboardSpacer"></div>
+            </div>
+            <a href="leaderboard/leaderboard.html">
+                <div class="leaderboardButton">
+                    See full leaderboard
+                </div>
+            </a>
         </section>
     </main>
-    <aside class = "toolsAside">
-        <h2>Tools</h2>
-        <ul>
-            <li><a href="playerSearch/playerSearch.html">Player Search</a></li>
-            <li>Micro Practice Tool</li>
-            <li>Eco Simulator</li>
-            <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
-        </ul>
-    </aside>
-    <aside class = "feedAside">
+    <section class = "feedSection">
         <h2>Live Feed</h2>
-    </aside>
+    </section>
+    <footer>
+        <section class="aboutSection">
+            <div class="aboutText">
+                <p class = "aboutLeft">
+                    Made with Love by <a href="https://www.twitch.tv/spoonoil">SpoonOil </a>
+                    <div class="imageContainer"><img src="assets/images/spoonoil-logo.png" alt="SpoonOil Logo" class = "spoonoilLogo"> </div>
+                </p>
+                <p class = "aboutRight">
+                    Powered by <a href="https://data.ninjakiwi.com/">NinjaKiwi Open Data API</a>
+                </p>
+            </div>
+        </section>
+    </footer>
 </body>
 </html>

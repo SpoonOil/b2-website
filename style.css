@@ -1,61 +1,336 @@
-/* styles.css */
-
-/* Reset some default browser styles */
 html {
     box-sizing: border-box;
-  }
-  /* Holy Grail Layout */
-  body {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-      "header header header"
-      "left main right"
-      "footer footer footer";
-    gap: 2rem;
-    min-height: 100vh;
-  }
-  header {
-    grid-area: header;
-  }
-  
-  .playerRow:hover {
-    background-color: teal;
-    color: white;
-    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    color: #c8d0db;
+    height: 100%;
+    width: 100%
+}
+
+:root {
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #0A2647;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
   }
 
-  main {
-    grid-area: main;
+  .leaderboardDisplay {
+    width: 92%
   }
-  
-  aside.toolsAside {
-    grid-area: left;
-  }
-  
-  aside.feedAside {
-    grid-area: right;
-  }
-  
-  footer {
-    grid-area: footer;
-    background-color: #4caf50;
-    padding: 1.5rem 0;
-    text-align: center;
-    color: #fff;
-  }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 768px) {
-    body {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr auto auto auto;
-      grid-template-areas:
-        "header"
-        "main"
-        "left"
-        "right"
-        "footer";
-    }
-  }
+}
+
+.feedSection {
+  display: none;
+}
+/* Header Styles */
+
+header {
+  grid-area: header;
+}
+.headerText {
+  background-color: #03162c;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0 0 0;
+  font-size: 2.5em;
+  color: #ffbb00;
+  font-family: 'Luckiest Guy';
+  font-weight: 100;
+  text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+  margin: 0 0 15px;
+  display:flex;
+  list-style-type: none;
+  padding: 0;
+  justify-content: space-around;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.toolList>li {
+  background-color: #144272;
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 3px 0px black;
+}
+
+.toolList>li:hover {
+  filter: brightness(105%);
+  cursor: pointer;
+  font-weight: 600;
+  position:relative;
+  bottom: 1px;
+}
+
+.toolList>li:active {
+  filter: brightness(95%);
+  position:relative;
+  top: 1px;
+}
+
+.toolList a {
+  text-decoration: none;
+}
+
+.toolList a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+/* Season Info Styles */
+.currentSeasDisplay {
+  flex: 1;
+  align-self: flex-start;
+  grid-area: season;
+  background-color: #205295;
+  border-radius: 5px;
+  padding: 15px;
+  border: 3px solid #2C74B3;
+  margin: 10px;
+}
+
+.seasonDates {
+  margin: 20px 0;
+}
+
+.seasonDates span {
+  font-size: 0.8em;
+  color: #a6b4c7;
+  margin: 0px;
+}
+
+.seasonInfoHeader {
+  text-align: center;
+}
+
+.seasonTitle {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #f9fafc;
+}
+
+.seasonTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin: 15px; */
+}
+
+/* .seasonTitleContainer *{
+} */
+
+.seasonTimeLeft {
+  font-weight: 500;
+  text-align: right;
+}
+
+.playerCountContainer {
+  display: flex;
+  justify-items: center;
+}
+
+.playerCountContainer>*{
+  flex: 1;
+}
+
+.playerCountText {
+  text-align: center;
+  color: #ffbb00;
+}
+
+/* Leaderboard Styles */
+
+.leaderboardDisplay {
+  flex: 3;
+  align-self: flex-start;
+  grid-area: leaderboard;
+  background-color: #205295;
+  border-radius: 5px;
+  padding: 15px;
+  border: 3px solid #2C74B3;
+  margin: 10px;
+}
+
+.leaderboardInfoHeader {
+  text-align: center;
+}
+
+.leaderboardInfoHeader a {
+  text-decoration: none;
+}
+
+.leaderboardInfoHeader a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+.leaderboardDisplay .seasonTitle {
+  font-size: 1.2em;
+}
+
+.leaderboardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leaderboardContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.leaderboardHeader * {
+  margin: 0 0 0 15px;
+}
+
+.leaderboard {
+  flex: 1 1 50%;
+  min-width: 400px;
+  background-color: #ffcc66;
+  color: black;
+  border: 1px solid  #ffaa00;
+  border-radius: 10px;
+  width: 80%;
+}
+
+.leaderboardSpacer {
+  flex: 3;
+}
+
+
+.leaderboard tr:nth-child(even) td {
+  background-color: #ecba54;
+}
+.leaderboard>tbody>tr:hover {
+  filter: brightness(90%);
+  background-color: #ecba54;
+  cursor: pointer;
+}
+
+.leaderboard td {
+  text-align: center;
+}
+
+.leaderboard th {
+  font-size: 1.3em;
+}
+
+.playerName{
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.place1 {
+  color: rgb(224, 161, 0);
+  font-family: 'Luckiest Guy';
+  font-size: 1.5em;
+  text-shadow: 0 0 3px black;
+  height: 50px;
+}
+
+.place2 {
+  color: rgb(139, 140, 151);
+  font-family: 'Luckiest Guy';
+  font-size: 1.3em;
+  text-shadow: 0 0 3px rgb(143, 143, 150);
+  height: 30px;
+}
+
+.place3 {
+  color: rgb(136, 77, 0);
+  font-family: 'Luckiest Guy';
+  font-size: 1.3em;
+  text-shadow: 0 0 3px rgb(161, 76, 6);
+}
+
+.playerScore {
+  font-family: 'Chivo Mono', monospace;
+}
+
+.leaderboardButton {
+  background-color: #144272;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid #0e3763;
+  box-shadow: 0px 5px 3px #0A2647;
+}
+
+.leaderboardButton:active {
+  position: relative;
+  top:3px;
+  box-shadow: 0px 2px 3px #0A2647;
+}
+
+.leaderboardButton:hover {
+  filter: brightness(105%);
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 20px;
+  grid-area: footer;
+}
+.spoonoilLogo {
+  width: 50px;
+}
+
+.aboutSection {
+  border-top: 3px solid #0e3763;
+  background-color: #144272;
+  display: flex;
+  height: 100%;
+  justify-content: space-evenly;
+}
+.aboutText {
+  font-size: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.aboutLeft, .aboutRight {
+  flex: 1;
+}
+
+.aboutLeft {
+  text-align: right;
+}
+
+.aboutRight {
+  text-align: left;
+}
+
+.aboutText a {
+  color: inherit;
+}
+
+.aboutText a:hover {
+  text-decoration: none;
+}
