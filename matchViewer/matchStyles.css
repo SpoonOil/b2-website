@@ -13,6 +13,11 @@ table {
     color: white;
 }
 
+.draw {
+    background-color: goldenrod;
+    color: white;
+}
+
 .playerHeaderRow {
     cursor: pointer;
     padding: 5px;
