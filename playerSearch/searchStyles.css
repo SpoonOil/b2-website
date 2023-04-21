@@ -1,23 +1,315 @@
+/* setup */
+
+html {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  color: #c8d0db;
+  height: 100%;
+  width: 100%;
+}
+
+:root {
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #0a2647;
+}
+
+/* header and nav */
+.headerText {
+  background-color: #03162c;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0 0 0;
+  font-size: 2.5em;
+  color: #ffbb00;
+  font-family: "Luckiest Guy";
+  font-weight: 100;
+  text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+  margin: 0;
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  justify-content: space-around;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.toolList > li {
+  font-weight: 300;
+  transition: all 0.25s ease;
+  background-color: #144272;
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 3px 0px black;
+  border-bottom: 3px solid #2c74b3;
+}
+
+.toolList > li:hover {
+  transition: all 0.25s ease;
+  filter: brightness(105%);
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+}
+
+.toolList > li:active {
+  filter: brightness(95%);
+  position: relative;
+  top: 1px;
+}
+
+.toolList a {
+  text-decoration: none;
+  color: #c8d0db;
+}
+
+.toolList a:visited {
+  text-decoration: inherit;
+  color: #c8d0db;
+  cursor: auto;
+}
+
+.toolList > li.currentPage {
+  filter: brightness(120%);
+  font-weight: 600;
+}
+
+.toolList > li.currentPage:hover {
+  cursor: initial;
+}
+
+.toolList > li.currentPage:active {
+  position: initial;
+}
+
+/* search styles */
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: inherit;
+}
+
+.searchInputSection {
+  background-color: #205295;
+  border-radius: 5px;
+  border: 3px solid #2c74b3;
+  padding: 15px;
+  margin: 20px;
+  width: max(70%, 400px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageHeader {
+  margin: 10px 0;
+}
+
+#searchBar {
+  border-radius: 8px 0 0 8px;
+  font-size: 1em;
+  padding: 8px;
+  flex: 1;
+  min-width: 100px;
+  border: none;
+}
+
 .searchSubmit {
-    font-size: 1.1em;
-    margin: 10px;
+  transition: all 0.1s ease-in;
+  margin: 0;
+  width: 50px;
+  background-color: #c0c0c0;
+  border-radius: 0 8px 8px 0;
+  border: none;
+}
+
+.searchForm {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchSubmit:hover {
+  filter: brightness(110%);
+}
+
+.searchSubmit:active {
+  filter: brightness(90%);
+}
+
+.searchSubmitContainer {
+  display: flex;
+  align-items: stretch;
+  width: max(200px, 80%);
+}
+
+input[type="radio"] {
+  visibility: hidden;
+}
+
+.segmentContainerLabel {
+  margin: 15px 0 0 0;
+}
+
+.segmentContainer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  border: 3px solid #2c74b3;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 80%;
+}
+
+.segmentLabel {
+  position: relative;
+  bottom: 5px;
+  margin: 0;
+  font-weight: 300;
+  transition: all 0.15s ease;
+  background-color: #144272;
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 5px 1px black;
+  z-index: 0;
+}
+
+.segmentLabel:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.segmentLabel:nth-child(2) {
+  border-radius: 8px 0 0 8px;
+}
+.segmentLabel:active,
+.segmentLabel.pressed {
+  position: relative;
+  bottom: 0px;
+  box-shadow: inset 0 2px 3px 0 black;
+  filter: brightness(90%);
+}
+
+.searchRadio {
+  display: none;
+}
+
+/* player card stylings */
+
+.resultsSection {
+  width: 100%;
+}
+
+.resultsOutput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 img {
-    width: 50px;
-    height: 60px;
+  width: 50px;
+  height: 60px;
 }
 
 .playerCardImage {
-    width:80px;
-    height:80px;
-    border: 2px solid rgb(124, 124, 124);
-    border-radius: 15px;
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgb(124, 124, 124);
+  border-radius: 15px;
 }
 
 .playerCard {
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
+  background-color: #205295;
+  border-radius: 5px;
+  border: 3px solid #2c74b3;
+  padding: 20px;
+  margin: 10px;
+  width: max(70%, 400px);
+}
+
+.playerImageContainer {
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.playerCard a {
+  text-decoration: none;
+}
+
+.playerCard h3 {
+  color: white;
+}
+
+.playerCardInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playerCardLabel {
+  font-weight: 700;
+}
+
+.playerCardProfileButton {
+  transition: all 0.25s ease;
+  background-color: #144272;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid #0e3763;
+  box-shadow: 0px 5px 3px #0a2647;
+}
+
+.playerCardProfileButton:active {
+  position: relative;
+  top: 3px;
+  box-shadow: 0px 2px 3px #0a2647;
+}
+
+.playerCardProfileButton:hover {
+  filter: brightness(105%);
+}
+
+/* home Button styles */
+.backHomeButton {
+  padding: 15px;
+  background-color: #144272;
+  border-radius: 0 0 15px 15px;
+  border: 3px solid #2c74b3;
+  padding: 15px;
+  border-top: none;
+}
+
+.backHomeButton,
+.backHomeContainer a {
+  text-decoration: none;
+  color: #c8d0db;
+  font-weight: 400;
+}
+
+.backHomeButton {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 5px black;
+}
+
+.backHomeButton:hover {
+  transition: all 0.25s ease;
+  filter: brightness(120%);
+  font-weight: 600;
 }

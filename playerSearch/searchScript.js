@@ -1,7 +1,24 @@
-const searchButton = document.querySelector('.searchSubmit');
 let resultFound = false;
 
+const searchButton = document.querySelector('.searchSubmit');
+const searchRadios = document.querySelectorAll('.searchRadio');
 searchButton.addEventListener('click', (e) => searchPlayers(e));
+
+searchRadios.forEach(radio => {
+    radio.addEventListener('click', (e) => updateSegmentDisplay(e));
+});
+
+function updateSegmentDisplay(e) {
+    console.log(e);
+    const segments = document.querySelectorAll('.segmentLabel');
+    for (segment of segments) {
+        segment.classList.remove('pressed');
+    }
+    e.target.classList.add('pressed')
+    segment = document.querySelector('.segmentLabel[for='+e.target.id+']');
+    segment.classList.add('pressed');
+}
+
 
 function searchPlayers(e) {
     e.preventDefault();
@@ -89,9 +106,9 @@ function generatePlayerCard(player, rankIndex) {
     </div>
     <div class="playerCardInfo">
     <h3 class="playerCardName">${player.displayName}</h3>
-    <p class="playerCardScore">Score: ${player.score}</p>
-    <p class="playerCardPlace">Place: ${rankIndex}</p>
-    <a class="playerCardLink" href="../playerInfo/playerInfo.html?${player.profile}">Profile</a>
+    <p class="playerCardScore"><span class="playerCardScoreLabel playerCardLabel">Score:</span> ${player.score}</p>
+    <p class="playerCardPlace"><span class="playerCardPlaceLabel playerCardLabel">Place:</span> ${rankIndex}</p>
+    <a class="playerCardLink" href="../playerInfo/playerInfo.html?${player.profile}"><div class="playerCardProfileButton">Profile</div></a>
     </div>
     `;
     document.querySelector('.resultsOutput').appendChild(playerCard);

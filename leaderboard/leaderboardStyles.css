@@ -170,7 +170,7 @@ eader {
   border-top: none;
 }
 
-.backHomeButton, .leaderboardDisplay a {
+.backHomeButton, .backHomeContainer a {
   text-decoration: none;
   color: #c8d0db;
   font-weight: 600;
