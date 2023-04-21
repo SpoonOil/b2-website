@@ -41,12 +41,19 @@ body {
   border-radius: 4px;
 }
 
+.toolList>li>a, .toolList>li>span {
+  box-sizing: border-box;
+  padding: 15px;
+  display:block;
+  width: 100%;
+  height: 100%;
+}
+
 .toolList > li {
   font-weight: 300;
   transition: all 0.25s ease;
   background-color: #144272;
   flex: 1;
-  padding: 15px;
   text-align: center;
   box-shadow: 0 3px 0px black;
   border-bottom: 3px solid #2c74b3;
