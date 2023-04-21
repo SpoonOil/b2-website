@@ -102,7 +102,7 @@ function generatePlayerCard(player, rankIndex) {
     playerCard.classList.add('playerCard');
     playerCard.innerHTML = `
     <div class="playerImageContainer">
-    <img src="https://placehold.it/20" class="playerCardImage" alt="${player.displayName} Avatar">
+    <img src="https://cdn.discordapp.com/attachments/921447683846180976/1098996347065090240/sauda_avatar_large.png" class="playerCardImage" alt="${player.displayName} Avatar">
     </div>
     <div class="playerCardInfo">
     <h3 class="playerCardName">${player.displayName}</h3>
