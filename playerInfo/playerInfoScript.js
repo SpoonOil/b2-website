@@ -21,6 +21,7 @@ function displayResults(json) {
     playerName.textContent = `${player.displayName}`;
     playerIcon.src = player.equippedAvatarURL;
     updateRankedStats(player);
+    updateGeneralStats(player);
     updateMedals(player);
     updateRankHistory(player);
     updateLastMatch(player)
@@ -31,14 +32,36 @@ function displayResults(json) {
 
 function updateRankedStats(player) {
   for (const key in player.rankedStats) {
-    // console.log(key);
-    // console.log(player.rankedStats[key]);
-    let keyRow = document.querySelector(`[data-key = ${key.toString()}]`);
     let dataOutput = document.querySelector(`[data-key = ${key.toString()}]>td:last-child`);
-    // console.log(keyRow);
     dataOutput.textContent = player.rankedStats[key];
   }
 }
+
+function updateGeneralStats() {
+  bloonStats = player._bloonStats;
+  bloonTable = document.querySelector('.bloonClass>tbody');
+  moabTable = document.querySelector('.moabClass>tbody');
+  bloonStats.forEach(bloon => {generateBloonRow(bloon, bloonTable, moabTable)});
+}
+
+function generateBloonRow(bloon, bloonTable, moabTable) {
+  let row = document.createElement('tr');
+  let name = document.createElement('th');
+  let sends = document.createElement('td');
+  let pops = document.createElement('td');
+  name.textContent = bloon.bloon_type;
+  sends.textContent = bloon.sends;
+  pops.textContent = bloon.pops;
+  row.appendChild(name);
+  row.appendChild(sends);
+  row.appendChild(pops);
+  if (bloon.bloon_type != bloon.bloon_type.toUpperCase()) {
+    bloonTable.appendChild(row);
+  } else {
+    moabTable.appendChild(row);
+  }
+}
+
 
 function updateRankHistory(player) {
   fetch(player.homs)
