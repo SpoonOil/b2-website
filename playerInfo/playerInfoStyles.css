@@ -7,3 +7,7 @@ img.playerIcon {
     height: 100px;
     width: 100px;
 }
+
+.badgeImage {
+    width: 80px
+}
