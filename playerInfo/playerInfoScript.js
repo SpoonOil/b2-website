@@ -1,5 +1,5 @@
 const submit = document.querySelector('.submit');
-const matchHistoryButton = document.querySelector('.matchHistory');
+const matchHistoryButton = document.querySelector('.matchHistoryButton');
 
 
 
