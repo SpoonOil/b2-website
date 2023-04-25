@@ -1,6 +1,4 @@
 const submit = document.querySelector('.submit');
-const playerName = document.querySelector('.playerName');
-const playerIcon = document.querySelector('.playerIcon');
 const matchHistoryButton = document.querySelector('.matchHistory');
 
 
@@ -17,18 +15,34 @@ function fetchResults() {
     .catch((error) => console.error(`Error fetching data: ${error.message}`));
 }
 function displayResults(json) {
-    player = json.body;
-    playerName.textContent = `${player.displayName}`;
-    playerIcon.src = player.equippedAvatarURL;
-    updateRankedStats(player);
-    updateGeneralStats(player);
-    updateMedals(player);
-    updateRankHistory(player);
-    updateLastMatch(player)
-    matchHistoryButton.addEventListener('click', () => {
-      window.location.href = '../matchViewer/matches.html?' + player.matches;
-    })
-  };
+  player = json.body;
+  generateBanner(player)
+  updateRankedStats(player);
+  updateGeneralStats(player);
+  updateMedals(player);
+  updateRankHistory(player);
+  updateLastMatch(player)
+  matchHistoryButton.addEventListener('click', () => {
+    window.location.href = '../matchViewer/matches.html?' + player.matches;
+  })
+};
+
+function generateBanner(player) {
+  const playerBannerContainer = document.querySelector('.playerBannerContainer');
+  const playerName = document.createElement('h1');
+  playerName.classList.add('playerName');
+  const playerIcon = document.createElement('img');
+  playerIcon.classList.add('playerIcon');
+  const playerBanner = document.createElement('img');
+  playerBanner.classList.add('playerBanner');
+  playerBanner.src = player.equippedBannerURL;
+  playerBanner.borderImageSource = "url(player.equippedBorderURL)";
+  playerName.textContent = `${player.displayName}`;
+  playerIcon.src = player.equippedAvatarURL;
+  playerBannerContainer.appendChild(playerBanner);
+  playerBannerContainer.appendChild(playerIcon);
+  playerBannerContainer.appendChild(playerName);
+}
 
 function updateRankedStats(player) {
   for (const key in player.rankedStats) {
@@ -129,23 +143,21 @@ function updateLastMatch(player) {
     .catch((error) => console.error(`Error fetching data: ${error.message}`));
   function displayLastMatch(json) {
     match = json.body[0];
-    console.log(match);
     players = [match.playerLeft, match.playerRight];
-    console.log(players);
     for (let i = 0; i<2; i++) {
-      console.log(players[i]);
       if (players[i].currentUser && players[i].result == 'win') {
-        document.querySelector('.lastMatchResult').textContent = 'Win';
+        matchDisplay = document.querySelector('.lastMatchResult')
+        matchDisplay.textContent = 'WIN';
+        matchDisplay.classList.add('win');
       } else if (players[i].currentUser && players[i].result == 'lose') {
-        document.querySelector('.lastMatchResult').textContent = 'Loss';
+        matchDisplay = document.querySelector('.lastMatchResult')
+        matchDisplay.textContent = 'LOSE';
+        matchDisplay.classList.add('lose');
       }
     }
   }
 }
 window.onload = function () {
   // Call the fetchResults() function when the page loads
-  // This will make the API call and display the results.
-  // This function is defined at the bottom of this file.
-  // 
   fetchResults();
 }

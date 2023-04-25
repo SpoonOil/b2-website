@@ -1,11 +1,254 @@
-button {
-    font-size: 1.5em;
-    padding: 10px;
+/* root styles */
+html {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: #c8d0db;
+    height: 100%;
+    width: 100%;
 }
 
-img.playerIcon {
-    height: 100px;
-    width: 100px;
+h3 {
+    font-size: 1.5em;
+}
+:root {
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #0A2647;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+
+/* header styles */
+header {
+    grid-area: header;
+}
+
+.headerText {
+    background-color: #03162c;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0 0 0;
+    font-size: 2.5em;
+    color: #ffbb00;
+    font-family: 'Luckiest Guy';
+    font-weight: 100;
+    text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+    margin: 0 0 15px;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: space-around;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.toolList>li {
+    font-weight: 300;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 3px 0px black;
+    border-bottom: 3px solid #2C74B3;
+}
+
+.toolList>li>* {
+    box-sizing: border-box;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.toolList>li:hover {
+
+    transition: all 0.25s ease;
+    filter: brightness(105%);
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+}
+
+.toolList>li:active {
+    filter: brightness(95%);
+    position: relative;
+    top: 1px;
+}
+
+.toolList a {
+    width: 100%;
+    text-decoration: none;
+    color: #c8d0db;
+}
+
+.toolList a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+/* main styles */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* player header styles */
+
+.playerInfo {
+    flex: 1;
+    align-self: center;
+    background-color: #205295;
+    border-radius: 5px;
+    border: 3px solid #2C74B3;
+    padding: 15px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playerHeader {
+    width:80%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 300;
+    transition: all 0.25s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.playerBannerContainer{
+    width: min(600px, 100%);
+    display: flex;
+    flex-direction: column;
+} 
+
+.playerIcon {
+    width:min(60px, 7%);
+    margin: 6px 10px;
+    border: black 2px solid;
+    border-radius: 12px
+}
+
+.playerBanner, .playerIcon {
+    position:absolute;
+}
+
+.playerName {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    z-index: 2;
+    margin: 0;
+    padding: min(100px, 4.05%) 0 min(100px, 4.05%) min(18%, 90px);
+    width:60%;
+    font-size: 2em;
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+}
+
+.playerBanner {
+    width: min(600px, 70%);
+    /* border-width: 6px 12px 19px;
+    border-style: solid;
+    border-image-source: url(../assets/images/testBorder.webp);
+    border-image-slice: 6 13 19 fill;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-width: 6px 12px 20px  */
+}
+
+/* player Rank History styles */
+
+.playerRankHistory {
+    padding: 30px;
+    font-weight: 300;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    flex: 1;
+    text-align: center;
+    border: 3px solid #2C74B3;
+}
+
+.playerRankHistory h4 {
+    display: inline;
+}
+
+.playerRankHistory .matchHistoryButton {
+    margin-left: 20px;
+    font-size: 1em;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #0e3763;
+    box-shadow: 0px 5px 3px #0A2647;
+}
+
+.playerRankHistory .matchHistoryButton:active {
+    position: relative;
+    top: 3px;
+    box-shadow: 0px 2px 3px #0A2647;
+}
+
+.playerRankHistory .matchHistoryButton:hover {
+    filter: brightness(105%);
+}
+
+.lastMatchResult.win {
+    color: rgb(5, 201, 5);
+}
+
+.lastMatchResult.lose {
+    color: rgb(219, 0, 55);
+}
+
+/* Stat styles */
+
+.statHeader {
+    font-size: 1.5em;
+    margin:10px;
+}
+
+.statHeader.rankedStats {
+    margin-top: 0;
+}
+
+.statsTable {
+    margin: 20px;
+    flex: 1 1 50%;
+    min-width: 400px;
+    background-color: #ffcc66;
+    color: black;
+    border: 1px solid #ffaa00;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.statsTable tbody tr:nth-child(odd) * {
+    background-color: #ecba54;
 }
 
 .badgeImage {

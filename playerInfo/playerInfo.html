@@ -7,20 +7,43 @@
     <title>Battles 2 Data</title>
     <script defer src="playerInfoScript.js"></script>
     <link rel="stylesheet" href="playerInfoStyles.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
   </head>
   <body>
     <header class="pageHeader">
-      <a href="../index.html">Go Back</a>
-      <h1>Battles 2 Player Data</h1>
+        <h1 class="headerText">Battles 2 Stats</h1>
+        <section class = "toolsSection">
+            <ul class="toolList">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../playerSearch/playerSearch.html">Player Search</a></li>
+                <li><span>Micro Practice Tool</span></li>
+                <li><span>Eco Simulator</span></li>
+                <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
+            </ul>
+        </section>
     </header>
     <main class="content">
       <section class="playerInfo">
-        <img src='https://cdn.discordapp.com/attachments/921447683846180976/1098996347065090240/sauda_avatar_large.png' alt="Player Icon" class="playerIcon">
         <section class="playerHeader">
-          <h3 class="playerName">Name</h3>
-        </section>
+          <div class="playerBannerContainer">
+                        
+          </div>
+          <h3 class="rankHistory">Basic Info</h3>
           <section class="playerRankHistory">
-            <h3 class="rankHistory">Rank History</h3>
             <div class="currentRank">
               <h4 class="currentRankTitle">Current Season's Rank</h2>
               </div>
@@ -28,15 +51,17 @@
                 <h4 class="previousRankTitle">Last Season's Rank</h4>
               </div>
               <section class="matchHistory">
-                <p>Last Match Result: <span class="lastMatchResult"></span></p>
+                <h4>Last Match Result: <span class="lastMatchResult"></span></h4>
                 <button type="button" class = "matchHistoryButton">View Match History</button>
               </section>
         </section>
+        </section>
         <section class="playerStats">
+          <h3 class="statHeader rankedHeader">Game Stats</h3>
           <table class="statsTable">
             <thead>
               <tr>
-                <th colspan = '2'>Ranked Stats</th>
+                <th colspan = '2'>Ranked Games</th>
               </tr>
             </thead>
             <tbody>
@@ -90,30 +115,38 @@
           <table class="heroTower"></table>
         </section>
         <section class="bloonStats">
-          <table class="bloonClass">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sent</th>
-                <th>Popped</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-            </tbody>
-          </table>
-          <table class="moabClass">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sent</th>
-                <th>Popped</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
+          <h3 class="statHeader bloonHeader">Bloon Stats</h3>
+          <section class="bloonClassStats">
+            <h4 class="bloonStatsHeader">
+              Bloons
+            </h4>
+            <table class="bloonClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sent</th>
+                  <th>Popped</th>
+                </tr>
+              </thead>
+              <tbody>
+            
+              </tbody>
+            </table>
+          </section>
+          <section class="moabClassStats">
+            <h4 class="moabStatsHeader">Blimps</h4>
+            <table class="moabClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sent</th>
+                  <th>Popped</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </section>
         </section>
         <section class="chestDisplay">
 
