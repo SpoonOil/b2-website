@@ -101,6 +101,7 @@ header {
 .toolList a {
   width:100%;
   text-decoration: none;
+  color: #c8d0db;
 }
 
 .toolList a:visited {

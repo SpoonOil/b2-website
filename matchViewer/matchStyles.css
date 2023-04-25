@@ -1,10 +1,113 @@
-table {
-    border-collapse: separate; 
-    width:100%
+/* base styles */
+html {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: #c8d0db;
+    height: 100%;
+    width: 100%;
 }
 
+:root {
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #0A2647;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* header styles */
+
+.headerText {
+    background-color: #03162c;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0 0 0;
+    font-size: 2.5em;
+    color: #ffbb00;
+    font-family: 'Luckiest Guy';
+    font-weight: 100;
+    text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+    margin: 0 0 15px;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: space-around;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.toolList>li {
+    font-weight: 300;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 3px 0px black;
+    border-bottom: 3px solid #2C74B3;
+}
+
+.toolList>li>* {
+    box-sizing: border-box;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.toolList>li:hover {
+
+    transition: all 0.25s ease;
+    filter: brightness(105%);
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+}
+
+.toolList>li:active {
+    filter: brightness(95%);
+    position: relative;
+    top: 1px;
+}
+
+.toolList a {
+    width: 100%;
+    text-decoration: none;
+    color: #c8d0db;
+}
+
+.toolList a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+/* match history styles */
+
+table {
+    border-collapse: separate; 
+    width:100%;
+    background-color: #144272;
+    border: 3px solid #2C74B3;
+    border-radius: 5px;
+}
+
+
 .win {
-    background-color: green;
+    background-color: rgb(0, 167, 0);
     color : white;
 }
 
@@ -66,18 +169,49 @@ tr.playerDataRow {
     font-size: 15px;
     padding: 5px;
 }
+.expanderButton {
+    transition: all 0.25s ease;
+    background-color: #144272;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #0e3763;
+    box-shadow: 0px 5px 3px #0A2647;
+}
 
+.expanderButton:active {
+    position: relative;
+    top: 3px;
+    box-shadow: 0px 2px 3px #0A2647;
+}
+
+.expanderButton:hover {
+    filter: brightness(105%);
+}
 .forceLeft {
     order: -1;
 }
 
+.playerToggleContainer {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #playerSideToggle {
-    width:20px;
-    height:20px;
+    height: 5vw;
+    width: 5vw;
+    margin-right: 10px;
 }
 .extraInfoContainer {
+    margin: 10px;
     display:flex;
     padding: 10px;
+    background-color: #144272;
+    border: 3px solid #2C74B3;
+    border-radius: 5px;
 }
 
 .extraInfo {
@@ -86,13 +220,11 @@ tr.playerDataRow {
 }
 
 .match {
-    min-width: -moz-fit-content;
-    min-width: -webkit-fill-available;
-    min-width: fit-content;
-    border: 1px solid black;
+    background-color: #205295;
     border-radius: 5px;
-    margin:5px;
-    padding: 10px;
+    border: 3px solid #2C74B3;
+    padding: 15px;
+    margin: 10px;
 }
 .matchTableContainer {
     display: flex;
