@@ -170,6 +170,7 @@ tr.playerDataRow {
     padding: 5px;
 }
 .expanderButton {
+    margin-top: 7px;
     transition: all 0.25s ease;
     background-color: #144272;
     color: white;
