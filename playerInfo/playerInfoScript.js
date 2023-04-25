@@ -210,7 +210,7 @@ function updateLastMatch(player) {
         matchDisplay = document.querySelector('.lastMatchResult')
         matchDisplay.textContent = 'LOSE';
         matchDisplay.classList.add('lose');
-      } else {
+      } else if (players[i].currentUser && players[i].result == 'draw') {
         matchDisplay = document.querySelector('.lastMatchResult')
         matchDisplay.textContent = 'DRAW';
         matchDisplay.classList.add('draw');
