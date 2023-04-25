@@ -64,13 +64,30 @@ function updateGeneralStats() {
   console.log(heroTable);
   bloonStats.forEach(bloon => {generateBloonRow(bloon, bloonTable, moabTable)});
   for (let i = 0; i < towerStats.length; i++) {
-    generateTowerRow(i, towerStats[i], heroTable, primaryTable, militaryTable, magicTable, supportTable);
+    generateTowerRow(towerStats[i], heroTable, primaryTable, militaryTable, magicTable, supportTable);
   }
 }
 
-function generateTowerRow(index, tower, heroTable, primaryTable, militaryTable, magicTable, supportTable) {
-  const indexToClass = ['hero', 'primary', 'primary', 'primary', 'hero', 'military', 'primary', 'magic', 'support', 'hero', 'magic', 'military', 'hero', 'support', 'hero', 'military', 'military', 'hero', 'military', 'primary', 'hero', 'support', 'military', 'military', 'hero', 'magic', 'primary', 'magic', 'magic', 'support', 'hero', 'hero', 'hero', 'hero', 'hero', 'hero', 'hero'];
-  let towerClass = indexToClass[index];
+function generateTowerRow(tower, heroTable, primaryTable, militaryTable, magicTable, supportTable) {
+  let towerClass = '';
+  const primaryTowers = ['DartMonkey', 'TackShooter', 'BombShooter', 'BoomerangMonkey', 'IceMonkey', 'GlueGunner']
+  const magicTowers = ['Alchemist', 'SuperMonkey', 'NinjaMonkey', 'Druid', 'WizardMonkey']
+  const militaryTowers = ['MonkeySub', 'MonkeyAce', 'HeliPilot', 'SniperMonkey', 'DartlingGunner', 'MonkeyBuccaneer', 'MortarMonkey']
+  const supportTowers = ['BananaFarm', 'SpikeFactory', 'MonkeyVillage', 'EngineerMonkey', 'BeastHandler']
+  const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman']
+  
+  //set tower class based on what list its in
+  if (primaryTowers.includes(tower.type)) {
+    towerClass = 'primary';
+  } else if (magicTowers.includes(tower.type)) {
+    towerClass = 'magic';
+  } else if (militaryTowers.includes(tower.type)) {
+    towerClass = 'military';
+  } else if (supportTowers.includes(tower.type)) {
+    towerClass = 'support';
+  } else if (heroTowers.includes(tower.type)) {
+    towerClass = 'hero';
+  }
   let row = document.createElement('tr');
   let name = document.createElement('th');
   let uses = document.createElement('td');
