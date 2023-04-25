@@ -251,6 +251,13 @@ header {
     background-color: #ecba54;
 }
 
+.bloonStats, .towerStats, .playerStats{
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: #144272;
+    border: 3px solid #2C74B3;
+}
+
 .badgeImage {
     width: 80px
 }

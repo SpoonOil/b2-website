@@ -53,11 +53,51 @@ function updateRankedStats(player) {
 
 function updateGeneralStats() {
   bloonStats = player._bloonStats;
+  towerStats = player._towers;
+  heroTable = document.querySelector('.heroClass>tbody');
+  primaryTable = document.querySelector('.primaryClass>tbody');
+  militaryTable = document.querySelector('.militaryClass>tbody');
+  magicTable = document.querySelector('.magicClass>tbody');
+  supportTable = document.querySelector('.supportClass>tbody');
   bloonTable = document.querySelector('.bloonClass>tbody');
   moabTable = document.querySelector('.moabClass>tbody');
+  console.log(heroTable);
   bloonStats.forEach(bloon => {generateBloonRow(bloon, bloonTable, moabTable)});
+  for (let i = 0; i < towerStats.length; i++) {
+    generateTowerRow(i, towerStats[i], heroTable, primaryTable, militaryTable, magicTable, supportTable);
+  }
 }
 
+function generateTowerRow(index, tower, heroTable, primaryTable, militaryTable, magicTable, supportTable) {
+  const indexToClass = ['hero', 'primary', 'primary', 'primary', 'hero', 'military', 'primary', 'magic', 'support', 'hero', 'magic', 'military', 'hero', 'support', 'hero', 'military', 'military', 'hero', 'military', 'primary', 'hero', 'support', 'military', 'military', 'hero', 'magic', 'primary', 'magic', 'magic', 'support', 'hero', 'hero', 'hero', 'hero', 'hero', 'hero', 'hero'];
+  let towerClass = indexToClass[index];
+  let row = document.createElement('tr');
+  let name = document.createElement('th');
+  let uses = document.createElement('td');
+  name.textContent = tower.type;
+  uses.textContent = tower.used;
+  row.appendChild(name);
+  row.appendChild(uses);
+  switch (towerClass) {
+    case 'hero':
+      heroTable.appendChild(row);
+      break;
+    case 'primary':
+      primaryTable.appendChild(row);
+      break;
+    case 'military':
+      militaryTable.appendChild(row);
+      break;
+    case 'magic':
+      magicTable.appendChild(row);
+      break;
+    case 'support':
+      supportTable.appendChild(row);
+      break;
+    default:
+      break;
+  }
+}
 function generateBloonRow(bloon, bloonTable, moabTable) {
   let row = document.createElement('tr');
   let name = document.createElement('th');
