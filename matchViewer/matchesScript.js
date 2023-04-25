@@ -94,7 +94,7 @@ function updatePlayerName(player, slot) {
         const json = await response.json();
         slot.textContent = json.body.displayName;
         slot.addEventListener("click", () => {
-            window.open('../playerInfo/playerInfo.html?' + url, '_blank');
+            window.open('../playerInfo/playerInfo.html?' + url, '_self');
         })
     }
 
