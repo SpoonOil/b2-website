@@ -225,6 +225,10 @@ header {
     color: rgb(219, 0, 55);
 }
 
+.lastMatchResult.draw {
+    color: goldenrod;
+}
+
 /* Stat styles */
 
 .statHeader {
