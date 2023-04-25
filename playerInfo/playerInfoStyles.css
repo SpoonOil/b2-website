@@ -181,7 +181,7 @@ header {
 
 .playerRankHistory {
     padding: 30px;
-    font-weight: 300;
+    font-weight: 500;
     transition: all 0.25s ease;
     background-color: #144272;
     flex: 1;
