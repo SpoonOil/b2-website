@@ -1,3 +1,32 @@
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.toolList');
+
+hamburger.addEventListener("click", mobileMenu);
+
+function mobileMenu() {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+}
+
+function tableSwap(){
+    var t= document.getElementsByTagName('tbody')[0],
+    r= t.getElementsByTagName('tr'),
+    cols= r.length, rows= r[0].getElementsByTagName('td').length,
+    cell, next, tem, i= 0, tbod= document.createElement('tbody');
+
+    while(i<rows){
+        cell= 0;
+        tem= document.createElement('tr');
+        while(cell<cols){
+            next= r[cell++].getElementsByTagName('td')[0];
+            tem.appendChild(next);
+        }
+        tbod.appendChild(tem);
+        ++i;
+    }
+    t.parentNode.replaceChild(tbod, t);
+}
+
 function getMatchInfo() {
     let url = window.location.toString().replace(/^[^?]*/, '').replace(/^\?/, '');
     fetch(url)
@@ -160,4 +189,3 @@ function setExpansionStateToExpanded(matchContainer, expanderButton) {
     matchContainer.classList.remove("expanded");
     expanderButton.textContent = "More Info";
 }
-
