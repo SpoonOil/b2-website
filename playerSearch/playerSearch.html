@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Search - Battles 2 Stats</title>
+    <title>Player Search - b2.lol</title>
     <link rel="stylesheet" href="searchStyles.css">
     <script defer src="searchScript.js"></script>
     
@@ -25,7 +25,7 @@
 <body>
     <header>
         <h1 class="headerText">Battles 2 Stats</h1>
-        <section class = "toolsSection">
+        <nav class = "toolsSection">
             <ul class="toolList">
                 <li><a href="../index.html">Home</a></li>
                 <li class="currentPage"><span>Player Search</span></li>
@@ -33,35 +33,42 @@
                 <li><span>Eco Simulator</span></li>
                 <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
             </ul>
-        </section>
-    </header>
-    <div class="searchContainer">
-        <section class="searchInputSection">
-            <h2 class="pageHeader">Player Search</h2>
-            <form class= 'searchForm' action="">
-                <div class="searchSubmitContainer">
-                    <input title="player search" placeholder="Player" required="true" type="search" name="searchValue" id="searchBar">
-                    <button type="submit" class="searchSubmit"><span class="material-symbols-outlined">
-                        search
-                    </span></button>
-                </div>
-                <label for="segmentContainer" class = "segmentContainerLabel">Search For</label>
-                <div class="segmentContainer">
-                    <input title="search mode" type="radio" name="searchMode" checked="true" value="name" class ="searchRadio" id="modeRadioName">
-                    <label for="modeRadioName" class="segmentLabel pressed">Name</label>
-                    <input title="search mode" type="radio" name="searchMode" value = "place" class ="searchRadio" id="modeRadioPlace">
-                    <label for="modeRadioPlace" class="segmentLabel">Place</label>
-                    <input title="search mode" type="radio" name="searchMode" value = "score" class ="searchRadio" id="modeRadioScore">
-                    <label for="modeRadioScore" class="segmentLabel">Score</label>
-                </div>
-            </form>
-        </section>
-        <section class="resultsSection">
-            <h3 class="resultsHeader" hidden>Results</h3>
-            <div class="resultsOutput">
-        
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </section>
-    </div>
+        </nav>
+    </header>
+    <main>
+        <div class="searchContainer">
+            <section class="searchInputSection">
+                <h2 class="pageHeader">Player Search</h2>
+                <form class= 'searchForm' action="">
+                    <div class="searchSubmitContainer">
+                        <input title="player search" placeholder="Player" required="true" type="search" name="searchValue" id="searchBar">
+                        <button type="submit" class="searchSubmit"><span class="material-symbols-outlined">
+                            search
+                        </span></button>
+                    </div>
+                    <label for="segmentContainer" class = "segmentContainerLabel">Search For</label>
+                    <div class="segmentContainer">
+                        <input title="search mode" type="radio" name="searchMode" checked="true" value="name" class ="searchRadio" id="modeRadioName">
+                        <label for="modeRadioName" class="segmentLabel pressed">Name</label>
+                        <input title="search mode" type="radio" name="searchMode" value = "place" class ="searchRadio" id="modeRadioPlace">
+                        <label for="modeRadioPlace" class="segmentLabel">Place</label>
+                        <input title="search mode" type="radio" name="searchMode" value = "score" class ="searchRadio" id="modeRadioScore">
+                        <label for="modeRadioScore" class="segmentLabel">Score</label>
+                    </div>
+                </form>
+            </section>
+            <section class="resultsSection">
+                <h3 class="resultsHeader" hidden>Results</h3>
+                <div class="resultsOutput">
+        
+                </div>
+            </section>
+        </div>
+    </main>
 </body>
 </html>

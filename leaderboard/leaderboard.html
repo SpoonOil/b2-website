@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
-    <script src="leaderboardScript.js"></script>
+    <script defer src="leaderboardScript.js"></script>
     <link rel="stylesheet" href="leaderboardStyles.css">
 
     <!-- fonts -->
@@ -22,15 +22,20 @@
 <body>
     <header>
         <h1 class="headerText">Battles 2 Stats</h1>
-        <section class = "toolsSection">
+        <nav class = "toolsSection">
             <ul class="toolList">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="../playerSearch/playerSearch.html">Player Search</a></li>
+                <li class='navItem'><a class = 'navLink' href="playerSearch/playerSearch.html">Player Search</a></li>
                 <li><span>Micro Practice Tool</span></li>
                 <li><span>Eco Simulator</span></li>
                 <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
             </ul>
-        </section>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
     </header>
     <section class = "leaderboardDisplay">
         <h2 class="leaderboardInfoHeader">Leaderboard</h2>

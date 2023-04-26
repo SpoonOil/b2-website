@@ -1,4 +1,16 @@
 let place = 1;
+
+const navMenu = document.querySelector(".toolList");
+
+const hamburger = document.querySelector(".hamburger");
+
+hamburger.addEventListener("click", mobileMenu);
+
+function mobileMenu() {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+}
+
 function updateSeasonInfo() {
     fetch('https://data.ninjakiwi.com/battles2/homs')
         .then((response) => response.json())
@@ -6,7 +18,7 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-    getLeaderboardInfo(json.body[0].leaderboard);
+    getLeaderboardInfo(json.body[1].leaderboard);
 }
 
 function getLeaderboardInfo(url) {

@@ -113,6 +113,20 @@ header {
   cursor: auto;
 }
 
+body .toolList > li.currentPage {
+  filter: brightness(120%);
+  font-weight: 600;
+  box-shadow: none;
+}
+
+body .toolList > li.currentPage:hover {
+  cursor: initial;
+}
+
+body .toolList > li.currentPage:active {
+  position: initial;
+}
+
 /* Season Info Styles */
 .currentSeasDisplay {
   flex: 1;
@@ -389,11 +403,6 @@ footer {
   nav.toolsSection .toolList.active {
     left: 0;
   }
-
-  .toolList>li.navItem:first-child {
-    margin: 1.88rem 0 0;
-  }
-
   .hamburger {
     margin: 10px;
     display: block;
