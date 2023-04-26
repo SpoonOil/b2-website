@@ -200,7 +200,7 @@ input[type="radio"] {
   bottom: 5px;
   margin: 0;
   font-weight: 300;
-  transition: all 0.15s ease;
+  transition: all 0.15s ease-out;
   background-color: #144272;
   flex: 1;
   padding: 15px;
@@ -220,7 +220,7 @@ input[type="radio"] {
 .segmentLabel.pressed {
   position: relative;
   bottom: 0px;
-  box-shadow: inset 0 2px 3px 0 black;
+  box-shadow: inset 0 2px 1px 0 black;
   filter: brightness(90%);
 }
 
