@@ -24,21 +24,26 @@
 
   </head>
   <body>
-    <header class="pageHeader">
-        <h1 class="headerText">Battles 2 Stats</h1>
-        <section class = "toolsSection">
-            <ul class="toolList">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../playerSearch/playerSearch.html">Player Search</a></li>
-                <li><span>Micro Practice Tool</span></li>
-                <li><span>Eco Simulator</span></li>
-                <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
-            </ul>
-        </section>
-    </header>
+    <header>
+      <h1 class="headerText">Battles 2 Stats</h1>
+      <nav class = "toolsSection">
+          <ul class="toolList">
+              <li><a href="../index.html">Home</a></li>
+              <li class='navItem'><a class = 'navLink' href="../playerSearch/playerSearch.html">Player Search</a></li>
+              <li><span>Micro Practice Tool</span></li>
+              <li><span>Eco Simulator</span></li>
+              <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
+          </ul>
+          <div class="hamburger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+          </div>
+      </nav>
+  </header>
     <main class="content">
       <section class="playerInfo">
-        <section class="playerHeader">
+        <section class="playerHeader panel">
           <div class="playerBannerContainer">
                         
           </div>
@@ -56,7 +61,7 @@
               </section>
         </section>
         </section>
-        <section class="playerStats">
+        <section class="playerStats panel">
           <h3 class="statHeader rankedHeader">Game Stats</h3>
           <table class="statsTable">
             <thead>
@@ -96,117 +101,121 @@
             </tbody>
           </table>
         </section>
-        <section class="towerStats">
+        <section class="towerStats panel">
           <h3 class="towersHeader statHeader">Towers</h3>
-          <div class="primaryStats">
-            <h4>Primary</h4>
-            <table class="primaryClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Placed</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div class="tablesContainer">
+            <div class="primaryStats">
+              <h4>Primary</h4>
+              <table class="primaryClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Placed</th>
+                  </tr>
+                </thead>
+                <tbody>
             
-              </tbody>
-            </table>
-          </div>
-          <div class="magicStats">
-            <h4>Magic</h4>
-            <table class="magicClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Placed</th>
-                </tr>
-              </thead>
-              <tbody>
+                </tbody>
+              </table>
+            </div>
+            <div class="militaryStats">
+              <h4>Military</h4>
+              <table class="militaryClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Placed</th>
+                  </tr>
+                </thead>
+                <tbody>
             
-              </tbody>
-            </table>
-          </div>
-          <div class="militaryStats">
-            <h4>Military</h4>
-            <table class="militaryClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Placed</th>
-                </tr>
-              </thead>
-              <tbody>
+                </tbody>
+              </table>
+            </div>
+            <div class="magicStats">
+              <h4>Magic</h4>
+              <table class="magicClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Placed</th>
+                  </tr>
+                </thead>
+                <tbody>
             
-              </tbody>
-            </table>
-          </div>
-          <div class="supportStats">
-            <h4>Support</h4>
-            <table class="supportClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Placed</th>
-                </tr>
-              </thead>
-              <tbody>
+                </tbody>
+              </table>
+            </div>
+            <div class="supportStats">
+              <h4>Support</h4>
+              <table class="supportClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Placed</th>
+                  </tr>
+                </thead>
+                <tbody>
             
-              </tbody>
-            </table>
-          </div>
-          <div class="heroStats">
-            <h4>Hero</h4>
-            <table class="heroClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Placed</th>
-                </tr>
-              </thead>
-              <tbody>
+                </tbody>
+              </table>
+            </div>
+            <div class="heroStats">
+              <h4>Hero</h4>
+              <table class="heroClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Placed</th>
+                  </tr>
+                </thead>
+                <tbody>
             
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
+                    </section>
           </div>
-        </section>
-        <section class="bloonStats">
+        <section class="bloonStats panel">
           <h3 class="statHeader bloonHeader">Bloon Stats</h3>
-          <section class="bloonClassStats">
-            <h4 class="bloonStatsHeader">
-              Bloons
-            </h4>
-            <table class="bloonClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sent</th>
-                  <th>Popped</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div class="tablesContainer">
+            <section class="bloonClassStats">
+              <h4 class="bloonStatsHeader">
+                Bloons
+              </h4>
+              <table class="bloonClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sent</th>
+                    <th>Popped</th>
+                  </tr>
+                </thead>
+                <tbody>
             
-              </tbody>
-            </table>
-          </section>
-          <section class="moabClassStats">
-            <h4 class="moabStatsHeader">Blimps</h4>
-            <table class="moabClass statsTable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sent</th>
-                  <th>Popped</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </section>
+                </tbody>
+              </table>
+            </section>
+            <section class="moabClassStats">
+              <h4 class="moabStatsHeader">Blimps</h4>
+              <table class="moabClass statsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sent</th>
+                    <th>Popped</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </section>
+          </div>
         </section>
         <section class="chestDisplay">
 
         </section>
-        <section class="badgeDisplay">
+        <section class="badgeDisplay panel">
           <h3>Badges</h3>
         </section>
       </section>

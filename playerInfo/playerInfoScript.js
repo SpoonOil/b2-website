@@ -1,6 +1,16 @@
 const submit = document.querySelector('.submit');
 const matchHistoryButton = document.querySelector('.matchHistoryButton');
 
+const navMenu = document.querySelector(".toolList");
+
+const hamburger = document.querySelector(".hamburger");
+
+hamburger.addEventListener("click", mobileMenu);
+
+function mobileMenu() {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+}
 
 
 
