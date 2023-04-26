@@ -6,7 +6,22 @@ html {
     width: 100%;
 }
 
+.hamburger {
+  display:none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #c8d0db;
+}
+
 :root {
+  box-sizing: border-box;
   font-size: 20px;
 }
 
@@ -21,18 +36,6 @@ body {
 main {
   flex: 1;
   display: flex;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  main {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .leaderboardDisplay {
-    width: 92%
-  }
 }
 
 .feedSection {
@@ -221,7 +224,6 @@ header {
 
 .leaderboard {
   flex: 1 1 50%;
-  min-width: 400px;
   background-color: #ffcc66;
   color: black;
   border: 1px solid  #ffaa00;
@@ -348,4 +350,65 @@ footer {
 
 .aboutText a:hover {
   text-decoration: none;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  main {
+
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  :root {
+    font-size: 15px;
+  }
+
+  body .leaderboardDisplay {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+  }
+
+  body .currentSeasDisplay {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
+
+  nav.toolsSection .toolList {
+    position: fixed;
+    left: -1000px;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  nav.toolsSection .toolList.active {
+    left: 0;
+  }
+
+  .toolList>li.navItem:first-child {
+    margin: 1.88rem 0 0;
+  }
+
+  .hamburger {
+    margin: 10px;
+    display: block;
+    cursor: pointer;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+  }
 }

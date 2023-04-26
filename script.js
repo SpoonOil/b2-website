@@ -4,7 +4,15 @@ const seasonTimeLeft = document.querySelector('.seasonTimeLeft');
 const startDate = document.querySelector('.startDate');
 const endDate = document.querySelector('.endDate');
 const playerCount = document.querySelector('.playerCount');
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.toolList');
 
+hamburger.addEventListener("click", mobileMenu);
+
+function mobileMenu() {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+}
 
 function updateSeasonInfo() {
     fetch('https://data.ninjakiwi.com/battles2/homs')

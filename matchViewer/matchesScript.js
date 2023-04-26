@@ -139,6 +139,9 @@ function createExpansion(matchInfo, matchContainer) {
         let extraInfo = document.createElement("span");
         extraInfo.classList.add("extraInfo");
         extraInfo.textContent = key.toUpperCase() + ": " + matchInfo[key] + " ";
+        if (key == "endRound") {
+            extraInfo.textContent += "End Round: " + matchInfo[key+1];
+        }
         extraInfoContainer.appendChild(extraInfo);
     }
     matchContainer.appendChild(extraInfoContainer);
