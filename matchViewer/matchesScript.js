@@ -82,25 +82,29 @@ function generateMatchTable(matchHistory) {
 
         updatePlayerName(matchHistory[i].playerLeft, playerLeftHeader);
         updatePlayerName(matchHistory[i].playerRight, playerRightHeader);
-        
+
         //generate dataRows
-        row2.classList.add("playerDataRow");
         for (key in matchHistory[i].playerLeft) {
+            let newRow = table.insertRow()
+            newRow.classList.add("playerDataRow");
             if (key == "profileURL" || key == "currentUser" || key == "result") {
                 continue;
             }
-            let cellLeft = row2.insertCell();
+            let cellLeft = newRow.insertCell();
             cellLeft.textContent = matchHistory[i].playerLeft[key];
             cellLeft.classList.add("playerDataLeft");
             if (matchHistory[i].playerLeft.currentUser) {
                 cellLeft.classList.add("currentUser");
             }
         }
+        let j = 0;
         for (key in matchHistory[i].playerRight) {
+            j++
             if (key == "profileURL" || key == "currentUser" || key == "result") {
                 continue;
             }
-            let cellRight = row2.insertCell();
+            let currentRow = table.querySelector('tr:nth-child('+(j+2)+')')
+            let cellRight = currentRow.insertCell();
             cellRight.textContent = matchHistory[i].playerRight[key];
             cellRight.classList.add("playerDataRight");
             if (matchHistory[i].playerRight.currentUser) {
@@ -135,7 +139,7 @@ playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
 
 function togglePlayerSide() {
     currentPlayers = document.getElementsByClassName("currentUser");
-    
+
     for(i = 0; i < currentPlayers.length; i++) {
         if (currentPlayers[i].classList.contains('playerLeft') === false) {
             if (currentPlayers[i].classList.contains('forceLeft')) {
