@@ -122,7 +122,7 @@ body {
   padding: 15px;
 }
 
-.leaderboard {
+.leaderboard, .leaderboardS11, .leaderboardS10{
   flex: 1 1 50%;
   min-width: 400px;
   background-color: #ffcc66;

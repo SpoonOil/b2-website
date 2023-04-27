@@ -1,5 +1,3 @@
-let place = 1;
-
 const navMenu = document.querySelector(".toolList");
 
 const hamburger = document.querySelector(".hamburger");
@@ -18,26 +16,36 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-    getLeaderboardInfo(json.body[1].leaderboard);
+    s10Leaderboard = document.querySelector('.leaderboardS10')
+    s11Leaderboard = document.querySelector('.leaderboardS11')
+    s12Leaderboard = document.querySelector('.leaderboardS12')
+    s13Leaderboard = document.querySelector('.leaderboardS13')
+    s14Leaderboard = document.querySelector('.leaderboardS14')
+    s15Leaderboard = document.querySelector('.leaderboardS15')
+    getLeaderboardInfo(json.body[0].leaderboard, 1, s12Leaderboard);
+    getLeaderboardInfo(json.body[1].leaderboard, 1, s11Leaderboard);
+    getLeaderboardInfo(json.body[2].leaderboard, 1, s10Leaderboard);
 }
 
-function getLeaderboardInfo(url) {
+function getLeaderboardInfo(url, index, output) {
     fetch(url)
         .then((response) => response.json())
-        .then((json) => createLeaderboard(json))
+        .then((json) => createLeaderboard(json, index, output))
 }
-function createLeaderboard(json) {
+function createLeaderboard(json, index, output) {
     currentPage = json
-    createLeaderboardPage(currentPage);
+    currentPlace = index
+    createLeaderboardPage(currentPage, currentPlace, output);
     if (currentPage.next) {
-        getLeaderboardInfo(currentPage.next);
+        getLeaderboardInfo(currentPage.next, index+50, output);
     }
 }
 
 
 updateSeasonInfo();
 
-function createLeaderboardPage(json) {
+function createLeaderboardPage(json, startingPlace, output) {
+    let place = startingPlace
     for (let i = 0; i < json.body.length; i++) {
         let player = json.body[i];
         let playerRow = document.createElement('tr');
@@ -63,6 +71,6 @@ function createLeaderboardPage(json) {
         playerRow.addEventListener('click', () => {
             window.open('../playerInfo/playerInfo.html?' + playerRow.dataset.profileURL, '_self');
         });
-        document.querySelector('.leaderboard>tbody').appendChild(playerRow);
+        output.appendChild(playerRow);
     }
 }
