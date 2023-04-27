@@ -208,6 +208,7 @@ body .toolList > li.currentPage:active {
 
 .leaderboardInfoHeader a {
   text-decoration: none;
+  color: #c8d0db;
 }
 
 .leaderboardInfoHeader a:visited {
