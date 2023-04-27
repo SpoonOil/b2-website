@@ -1,0 +1,252 @@
+html {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: #c8d0db;
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    width:100%;
+}
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #c8d0db;
+}
+
+:root {
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background-color: #0A2647;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    flex: 1;
+    display: flex;
+}
+
+
+.headerText {
+    background-color: #03162c;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0 0 0;
+    font-size: 2.5em;
+    color: #ffbb00;
+    font-family: 'Luckiest Guy';
+    font-weight: 100;
+    text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+    margin: 0 0 15px;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: space-around;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.toolList>li {
+    font-weight: 300;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 3px 0px black;
+    border-bottom: 3px solid #2C74B3;
+}
+
+.toolList>li>* {
+    box-sizing: border-box;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.toolList>li:hover {
+
+    transition: all 0.25s ease;
+    filter: brightness(105%);
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+}
+
+.toolList>li:active {
+    filter: brightness(95%);
+    position: relative;
+    top: 1px;
+}
+
+.toolList a {
+    width: 100%;
+    text-decoration: none;
+    color: #c8d0db;
+}
+
+.toolList a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+body .toolList>li.currentPage {
+    filter: brightness(120%);
+    font-weight: 600;
+    box-shadow: none;
+}
+
+body .toolList>li.currentPage:hover {
+    cursor: initial;
+}
+
+body .toolList>li.currentPage:active {
+    position: initial;
+}
+/* Info Container Styles */
+
+.infoContainer {
+    font-weight: 500;
+}
+
+code {
+    display: inline-block;
+    font-family: 'Luckiest Guy';
+    line-height: 100%;
+    width: 6ch;
+    letter-spacing: 10px;
+    background-color: #144272;
+    padding: 0.2em;
+    letter-spacing: -0.05em;
+    word-break: normal;
+    border-radius: 5px;
+}
+
+/* button styles */
+
+.launch {
+    margin-left: 20px;
+    font-size: 1em;
+    background-color: #144272;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #0e3763;
+    box-shadow: 0px 5px 3px #0A2647;
+}
+
+.launch {
+    transition: transform 0.1s ease, filter 0.25s ease-in-out;
+}
+
+.launch:active {
+    transform: translateY(3px);
+    box-shadow: 0px 2px 3px #0A2647;
+}
+
+.launch:hover {
+    filter: brightness(105%);
+}
+
+
+.infoContainer {
+    width: min(100%, 66ch);
+    background-color: #205295;
+    border-radius: 5px;
+    border: 3px solid #2C74B3;
+    padding: 15px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoContainer a {
+    color: inherit;
+}
+
+.infoContainer a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    :root {
+        font-size: 15px;
+    }
+
+    body .leaderboardDisplay {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+    }
+
+    body .infoContainer {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    nav.toolsSection .toolList {
+        position: fixed;
+        margin-top: 32px;
+        left: -1000px;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    nav.toolsSection .toolList.active {
+        left: 0;
+    }
+
+    .hamburger {
+        margin: 10px;
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
