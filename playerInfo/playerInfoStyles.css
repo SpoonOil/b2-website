@@ -171,12 +171,12 @@ header {
     text-align: left;
     z-index: 2;
     margin: 0;
-    padding: min(100px, 4.05%) 0 min(100px, 4.05%) min(18%, 90px);
+    padding: min(100px, 2.05%) 0 min(100px, 4.05%) min(18%, 90px);
     width:60%;
-    font-size: 2em;
+    font-weight: 100;
+    font-size: 2.5em;
     font-family: 'Luckiest Guy', cursive;
     color: white;
-    -webkit-text-stroke: 1px black;
     text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
 }
 
@@ -345,6 +345,46 @@ header {
         box-sizing: border-box;
         width: 100%
     }
+
+    .playerIcon {
+        width:min(60px, 10%);
+        margin: 0.5% 10px;
+        border: black 2px solid;
+        border-radius: 12px
+    }
+
+    .playerBanner, .playerIcon {
+        position:absolute;
+    }
+
+    body .playerName {
+        display: inline-block;
+        position: relative;
+        text-align: left;
+        z-index: 2;
+        margin: 0;
+        padding: min(100px, 2.05%) 0 min(100px, 4.05%) min(18%, 90px);
+        width:60%;
+        font-size: 2em;
+        font-family: 'Luckiest Guy', cursive;
+        color: white;
+        font-weight: 100;
+        letter-spacing: 0px;
+        -webkit-text-stroke: 0px black;
+        text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+    }
+
+    .playerBanner {
+        width: min(600px, 92%);
+        /* border-width: 6px 12px 19px;
+        border-style: solid;
+        border-image-source: url(../assets/images/testBorder.webp);
+        border-image-slice: 6 13 19 fill;
+        border-image-outset: 0;
+        border-image-repeat: stretch;
+        border-image-width: 6px 12px 20px  */
+    }
+
     .panel {
         width:100%;
     }
