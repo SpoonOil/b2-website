@@ -21,7 +21,7 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-    getLeaderboardInfo(json.body[1].leaderboard);
+    getLeaderboardInfo(json.body[0].leaderboard);
     updateText(json);
 }
 
@@ -58,7 +58,7 @@ function createLeaderboard(json) {
             window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
         });
         document.querySelector('.leaderboard>tbody').appendChild(playerRow);
-    }  
+    }
 }
 
 function updateText(json) {
