@@ -218,6 +218,7 @@ code {
     }
 
     nav.toolsSection .toolList {
+        background-color: #03162c;
         position: fixed;
         margin-top: 32px;
         left: -1000px;

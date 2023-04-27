@@ -391,6 +391,7 @@ footer {
   }
 
   nav.toolsSection .toolList {
+    background-color: #0A2647;
     position: fixed;
     left: -1000px;
     flex-direction: column;

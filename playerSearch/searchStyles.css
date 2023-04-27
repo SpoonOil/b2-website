@@ -353,6 +353,7 @@ img {
   }
 
   nav.toolsSection .toolList {
+    background-color: #0a2647;
     position: fixed;
     left: -1000px;
     flex-direction: column;

@@ -113,7 +113,7 @@ main {
 /* match history styles */
 
 table {
-    border-collapse: separate; 
+    border-collapse: separate;
     width:100%;
     background-color: #144272;
     border: 3px solid #2C74B3;
@@ -255,16 +255,17 @@ tr.playerDataRow {
       align-items: stretch;
       width:100%;
     }
-  
+
     body main>* {
       width: 100%;
     }
-  
+
     :root {
       font-size: 15px;
     }
-  
+
     nav.toolsSection .toolList {
+        background-color: #03162c;
       position: fixed;
       left: -1000px;
       flex-direction: column;
@@ -274,30 +275,30 @@ tr.playerDataRow {
       transition: 0.3s;
       z-index: 100;
     }
-  
+
     nav.toolsSection .toolList.active {
       left: 0;
       position: fixed;
     }
-  
+
     nav.toolsSection .toolList.toolList {
       margin: 1.88rem 0 0;
     }
-  
+
     .hamburger {
       margin: 10px;
       display: block;
       cursor: pointer;
     }
-    
+
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
-    
+
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-    
+
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }

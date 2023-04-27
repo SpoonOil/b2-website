@@ -152,7 +152,7 @@ header {
     width: min(600px, 100%);
     display: flex;
     flex-direction: column;
-} 
+}
 
 .playerIcon {
     width:min(60px, 7%);
@@ -293,16 +293,17 @@ header {
       align-items: stretch;
       width:100%;
     }
-  
+
     body main>* {
       width: 100%;
     }
-  
+
     :root {
       font-size: 15px;
     }
-  
+
     nav.toolsSection .toolList {
+        background-color: #03162c;
       position: fixed;
       left: -1000px;
       flex-direction: column;
@@ -312,34 +313,34 @@ header {
       transition: 0.3s;
       z-index: 100;
     }
-  
+
     nav.toolsSection .toolList.active {
       left: 0;
       position: fixed;
     }
-  
+
     nav.toolsSection .toolList.toolList {
       margin: 1.88rem 0 0;
     }
-  
+
     .hamburger {
       margin: 10px;
       display: block;
       cursor: pointer;
     }
-    
+
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
-    
+
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-    
+
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-    
+
     section.playerInfo {
         box-sizing: border-box;
         width: 100%
@@ -351,7 +352,7 @@ header {
     .tablesContainer {
         display: block;
     }
-    
+
     .panel table {
         width: 100%;
         margin: 1%;
@@ -361,4 +362,3 @@ header {
         text-align: center;
     }
   }
-  
