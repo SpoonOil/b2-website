@@ -196,7 +196,7 @@ input[type="radio"] {
   width: 80%;
 }
 
-.segmentLabel {
+.segmentLabel, .seasonLabel {
   position: relative;
   bottom: 5px;
   margin: 0;
@@ -210,11 +210,11 @@ input[type="radio"] {
   z-index: 0;
 }
 
-.segmentLabel:last-child {
+.segmentLabel:last-child , .seasonLabel:last-child{
   border-radius: 0 8px 8px 0;
 }
 
-.segmentLabel:nth-child(2) {
+.segmentLabel:nth-child(2), .seasonLabel:nth-child(2) {
   border-radius: 8px 0 0 8px;
 }
 .segmentLabel:active,
@@ -225,7 +225,16 @@ input[type="radio"] {
   filter: brightness(90%);
 }
 
-.searchRadio {
+.seasonLabel:active,
+.seasonLabel.pressed {
+  position: relative;
+  bottom: 0px;
+  box-shadow: inset 0 2px 1px 0 black;
+  filter: brightness(90%);
+}
+
+
+.searchRadio, .seasonRadio {
   display: none;
 }
 

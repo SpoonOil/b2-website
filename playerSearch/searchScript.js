@@ -15,10 +15,26 @@ const searchRadios = document.querySelectorAll('.searchRadio');
 searchButton.addEventListener('click', (e) => searchPlayers(e));
 
 searchRadios.forEach(radio => {
-    radio.addEventListener('click', (e) => updateSegmentDisplay(e));
+    radio.addEventListener('click', (e) => updateModeSegment(e));
 });
 
-function updateSegmentDisplay(e) {
+const seasonRadios = document.querySelectorAll('.seasonRadio');
+seasonRadios.forEach(radio => {
+    radio.addEventListener('click', (e) => updateSeasonSegment(e));
+});
+
+function updateSeasonSegment(e) {
+    console.log(e);
+    const seasons = document.querySelectorAll('.seasonLabel');
+    for (season of seasons) {
+        season.classList.remove('pressed');
+    }
+    e.target.classList.add('pressed')
+    season = document.querySelector('.seasonLabel[for='+e.target.id+']');
+    season.classList.add('pressed');
+}
+
+function updateModeSegment(e) {
     console.log(e);
     const segments = document.querySelectorAll('.segmentLabel');
     for (segment of segments) {
@@ -35,13 +51,15 @@ function searchPlayers(e) {
     const searchInput = document.querySelector('#searchBar');
     const searchValue = searchInput.value;
     const searchMode = document.querySelector('input[name="searchMode"]:checked').value
+    const searchSeason = document.querySelector('input[name="searchSeason"]:checked').value
     clearChildren(document.querySelector('.resultsOutput'))
     resultFound = false;
     rankIndex = 1;
-    searchAPI(searchValue, searchMode);
+    searchAPI(searchValue, searchMode, 'https://data.ninjakiwi.com/battles2/homs/'+searchSeason+'/leaderboard');
 }
 
-function searchAPI(searchValue, searchMode, url = 'https://data.ninjakiwi.com/battles2/homs/season_10/leaderboard') {
+function searchAPI(searchValue, searchMode, url) {
+    console.log(url)
     if (searchMode != 'oak') {
         fetch(url)
             .then(response => response.json())
