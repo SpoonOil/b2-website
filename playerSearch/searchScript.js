@@ -42,10 +42,18 @@ function searchPlayers(e) {
 }
 
 function searchAPI(searchValue, searchMode, url = 'https://data.ninjakiwi.com/battles2/homs/season_10/leaderboard') {
-    fetch(url)
-        .then(response => response.json())
-        .then((json) => {processData(json, searchMode, searchValue)})
-        .catch(error => console.log(error))
+    if (searchMode != 'oak') {
+        fetch(url)
+            .then(response => response.json())
+            .then((json) => {processData(json, searchMode, searchValue)})
+            .catch(error => console.log(error))
+    } else {
+        // oak_6d70312f0e6a3dacb41a23f8bbada10a Rosco OAK for testing
+        console.log(searchValue)
+        newUrl = "../playerInfo/playerInfo.html?" + 'https://data.ninjakiwi.com/battles2/users/' + searchValue+ '/'
+        console.log(newUrl)
+        window.open(newUrl, '_self');
+    }
 }
 
 function processData(json, searchMode, searchValue) {
@@ -74,7 +82,7 @@ function processData(json, searchMode, searchValue) {
                 if (eval(player.score.toString() + evalValue)) {
                     resultFound = true;
                     generatePlayerCard(player, rankIndex);
-                
+
                 }
             }
         } else if (searchMode == "place") {
@@ -94,7 +102,7 @@ function processData(json, searchMode, searchValue) {
                 if (eval(rankIndex + evalValue)) {
                     resultFound = true;
                     generatePlayerCard(player, rankIndex);
-                
+
                 }
             }
         }

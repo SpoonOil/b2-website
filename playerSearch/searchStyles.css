@@ -228,6 +228,23 @@ input[type="radio"] {
   display: none;
 }
 
+.oakInfo {
+  font-weight: bold;
+}
+
+a {
+  color: #c8d0db
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:visited {
+  color: #c8d0db;
+}
+
 /* player card stylings */
 
 .resultsSection {
