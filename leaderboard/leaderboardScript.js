@@ -16,12 +16,12 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-    s10Leaderboard = document.querySelector('.leaderboardS10')
-    s11Leaderboard = document.querySelector('.leaderboardS11')
-    s12Leaderboard = document.querySelector('.leaderboardS12')
-    s13Leaderboard = document.querySelector('.leaderboardS13')
-    s14Leaderboard = document.querySelector('.leaderboardS14')
-    s15Leaderboard = document.querySelector('.leaderboardS15')
+    s10Leaderboard = document.querySelector('.leaderboardS10 tbody')
+    s11Leaderboard = document.querySelector('.leaderboardS11 tbody')
+    s12Leaderboard = document.querySelector('.leaderboardS12 tbody')
+    s13Leaderboard = document.querySelector('.leaderboardS13 tbody')
+    s14Leaderboard = document.querySelector('.leaderboardS14 tbody')
+    s15Leaderboard = document.querySelector('.leaderboardS15 tbody')
     getLeaderboardInfo(json.body[0].leaderboard, 1, s12Leaderboard);
     getLeaderboardInfo(json.body[1].leaderboard, 1, s11Leaderboard);
     getLeaderboardInfo(json.body[2].leaderboard, 1, s10Leaderboard);
