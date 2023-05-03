@@ -15,6 +15,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from js import document
 
 from pyodide.http import open_url
 filepath = r"nat_send_lengths.csv"
@@ -1427,13 +1428,241 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
     logs.append("Successfully generated graph! \n")
 
 
-    </py-script>
+</py-script>
 
-    <py-repl>
-      max_stall_times
-    </py-repl>
+<py-repl>
+</py-repl>
 
-    <div id="graph-area"></div>
-    <div id="logdiv"></div>
-  </body>
+<main>
+    <h1>Eco Simulator</h1>
+    <button py-click="resetSim()">RESET</button>
+        <div class="stallInputContainer">
+            <form>
+                <label for="stallInput">Stall Factor</label>
+                <input type="number" id="stallInput" value="1">
+                <button py-click="setStallFactor">Set Stall Factor</button>
+            </form>
+        </div>
+        <section class="buyQueueContainer">
+            <form>
+                <h2>Add to Buy Queue</h2>
+                <label for="buyPriceInput">Price</label>
+                <input type="number" id ="buyPriceInput">
+            </form>
+            <button py-click="addToBuyQueue()">Add to Queue</button>
+            <div id="buyQueue">
+                <h3>Buy Queue</h3>
+            </div>
+        </section>
+        <section class="ecoQueueContainer">
+            <form>
+                <input type="radio" name="sendType" checked="true" id="Zero">
+                <label for="Zero">None</label>
+                <input type="radio" name="sendType" id="Grouped Reds">
+                <label for="Grouped Reds">Grouped Reds</label>
+                <input type="radio" name="sendType" id="Spaced Blues">
+                <label for="Spaced Blues">Spaced Blues</label>
+                <input type="radio" name="sendType" id="Grouped Blues">
+                <label for="Grouped Blues">Grouped Blues</label>
+                <input type="radio" name="sendType" id="Spaced Greens">
+                <label for="Spaced Greens">Spaced Greens</label>
+                <input type="radio" name="sendType" id="Grouped Greens">
+                <label for="Grouped Greens">Grouped Greens</label>
+                <input type="radio" name="sendType" id="Spaced Yellows">
+                <label for="Spaced Yellows">Spaced Yellows</label>
+                <input type="radio" name="sendType" id="Grouped Yellows">
+                <label for="Grouped Yellows">Grouped Yellows</label>
+                <input type="radio" name="sendType" id="Spaced Pinks">
+                <label for="Spaced Pinks">Spaced Pinks</label>
+                <input type="radio" name="sendType" id="Grouped Pinks">
+                <label for="Grouped Pinks">Grouped Pinks</label>
+                <input type="radio" name="sendType" id="Spaced Whites">
+                <label for="Spaced Whites">Spaced Whites</label>
+                <input type="radio" name="sendType" id="Grouped Whites">
+                <label for="Grouped Whites">Grouped Whites</label>
+                <input type="radio" name="sendType" id="Spaced Blacks">
+                <label for="Spaced Blacks">Spaced Blacks</label>
+                <input type="radio" name="sendType" id="Grouped Blacks">
+                <label for="Grouped Blacks">Grouped Blacks</label>
+                <input type="radio" name="sendType" id="Spaced Purples">
+                <label for="Spaced Purples">Spaced Purples</label>
+                <input type="radio" name="sendType" id="Grouped Purples">
+                <label for="Grouped Purples">Grouped Purples</label>
+                <input type="radio" name="sendType" id="Spaced Zebras">
+                <label for="Spaced Zebras">Spaced Zebra</label>
+                <input type="radio" name="sendType" id="Grouped Zebras">
+                <label for="Grouped Zebras">Grouped Zebra</label>
+                <input type="radio" name="sendType" id="Spaced Leads">
+                <label for="Spaced Leads">Spaced Leads</label>
+                <input type="radio" name="sendType" id="Grouped Leads">
+                <label for="Grouped Leads">Grouped Leads</label>
+                <input type="radio" name="sendType" id="Spaced Rainbows">
+                <label for="Spaced Rainbows">Spaced Rainbow</label>
+                <input type="radio" name="sendType" id="Grouped Rainbows">
+                <label for="Grouped Rainbows">Grouped Rainbow</label>
+                <input type="radio" name="sendType" id="Spaced Ceramics">
+                <label for="Spaced Ceramics">Spaced Ceramic</label>
+                <input type="radio" name="sendType" id="Grouped Ceramics">
+                <label for="Grouped Ceramics">Grouped Ceramic</label>
+                <input type="number" id = "ecoRound" value = "1">
+                <label for="roundNumber">Round</label>
+            </form>
+            <button py-click="addToEcoQueue()">Add to Eco Queue</button>
+            <div id="ecoQueue">
+                <h3>Eco Queue</h3>
+            </div>
+        </section>
+        <section class="initialGameState">
+            <form class='initialStateForm' action="">
+                <h2>Initial Game State</h2>
+                <label for="cashInput">Starting Cash</label>
+                <input type="number" id="cashInput" value="650">
+                <label for="ecoInput">Starting Eco</label>
+                <input type="number" id="ecoInput" value="250">
+                <label for="ecoSendInput">Starting Send</label>
+                <select name="startingSend" id="ecoSendInput">
+                    <option value="Zero">Zero</option>
+                    <option value="Grouped Reds">Grouped Reds</option>
+                    <option value="Spaced Blues">Spaced Blues</option>
+                    <option value="Grouped Blues">Grouped Blues</option>
+                    <option value="Spaced Greens">Spaced Greens</option>
+                    <option value="Grouped Greens">Grouped Greens</option>
+                    <option value="Spaced Yellows">Spaced Yellows</option>
+                    <option value="Grouped Yellows">Grouped Yellows</option>
+                    <option value="Spaced Pinks">Spaced Pinks</option>
+                    <option value="Grouped Pinks">Grouped Pinks</option>
+                    <option value="Spaced Whites">Spaced Whites</option>
+                    <option value="Grouped Whites">Grouped Whites</option>
+                    <option value="Spaced Blacks">Spaced Blacks</option>
+                    <option value="Grouped Blacks">Grouped Blacks</option>
+                    <option value="Spaced Purples">Spaced Purples</option>
+                    <option value="Grouped Purples">Grouped Purples</option>
+                    <option value="Spaced Zebras">Spaced Zebras</option>
+                    <option value="Grouped Zebras">Grouped Zebras</option>
+                    <option value="Spaced Leads">Spaced Leads</option>
+                    <option value="Grouped Leads">Grouped Leads</option>
+                    <option value="Spaced Rainbows">Spaced Rainbows</option>
+                    <option value="Grouped Rainbows">Grouped Rainbows</option>
+                    <option value="Spaced Ceramics">Spaced Ceramics</option>
+                    <option value="Grouped Ceramics">Grouped Ceramics</option>
+                </select>
+                <label for="startRoundInput">Starting Round</label>
+                <input type="number" id="startRoundInput" value="0">
+            </form>
+            <button py-click="setInitialState()" id="initalStateSubmit">
+                Change Initial State
+            </button>
+        </section>
+        <section class="runSimContainer">
+            <input type="number" id="endRoundInput" value="11">
+            <label for="endRoundInput">Simulation End Round</label>
+            <button py-click="runSim()">Run Sim</button>
+        </section>
+        <py-script>
+def setStallFactor():
+    rounds = Rounds(float(Element('stallInput').value))
+    setInitialState()
+
+rounds = Rounds(1)
+buy_queue = []
+eco_queue = []
+farms = {}
+
+initial_state = {
+    'Cash': 650,
+    'Eco': 250,
+    'Eco Send': 'Zero',
+    'Rounds': rounds,
+    'Game Round': 0,
+    'Buy Queue': buy_queue.copy(),
+    'Eco Queue': eco_queue.copy(),
+    'Farms': farms
+}
+
+# restart without reloading
+def resetSim():
+    rounds = Rounds(1)
+    buy_queue = []
+    eco_queue = []
+    farms = {}
+    initial_state = {
+        'Cash': 650,
+        'Eco': 250,
+        'Eco Send': 'Zero',
+        'Rounds': rounds,
+        'Game Round': 0,
+        'Buy Queue': buy_queue.copy(),
+        'Eco Queue': eco_queue.copy(),
+        'Farms': farms
+    }
+    resetDom()
+
+#Helper function to wipe dom instead of reloading
+def resetDom():
+    forms = document.querySelectorAll('form')
+    for form in forms:
+        form.reset()
+    deleteChildren('#ecoQueue')
+    deleteChildren('#buyQueue')
+    deleteChildren('#graph-area')
+    deleteChildren('#logdiv')
+
+#wipes node based on selector
+def deleteChildren(tag):
+    node = document.querySelector(tag)
+    while node.firstChild:
+        node.removeChild(node.lastChild)
+
+
+def setInitialState():
+    initial_state['Cash'] = float(Element('cashInput').value)
+    initial_state['Eco'] = float(Element('ecoInput').value)
+    initial_state['Eco Send'] = Element('ecoSendInput').value
+    initial_state['Rounds'] = rounds
+    initial_state['Game Round'] = float(Element('startRoundInput').value)
+    initial_state['Eco Queue'] = eco_queue.copy()
+    initial_state['Buy Queue'] = buy_queue.copy()
+    initial_state['Farms'] = farms
+    writeLog(initial_state);
+
+def createFarm():
+    farmInfo = []
+    farmInfo.append(initFarm(float(Element('farmTime').value), [ int(Element(farmPath1).value), int(Element(farmPath2).value), int(Element(farmPath3).value) ] ))
+    for index, farm in farmInfo:
+        farms[index] = farmInfo[index]
+    setInitialState()
+def addToBuyQueue():
+    buyValue = float(Element('buyPriceInput').value)
+    buy_queue.append([buyDefense(buyValue)])
+    buyDisplay = document.querySelector('#buyQueue')
+    buyLine = document.createElement('p')
+    buyLine.innerText = buyValue
+    buyDisplay.appendChild(buyLine)
+    copied_queues = [buy_queue.copy(), eco_queue.copy()]
+    setInitialState()
+
+def addToEcoQueue():
+    roundNum = float(document.getElementById('ecoRound').value)
+    document.getElementById('ecoRound').value = float(Element('ecoRound').value)+1
+    sendTypeInput = document.querySelector('input[name="sendType"]:checked')
+    sendType = sendTypeInput.id
+    eco_queue.append((rounds.getTimeFromRound(roundNum), sendType))
+    ecoDisplay = document.querySelector('#ecoQueue')
+    ecoLine = document.createElement('p')
+    ecoLine.innerText = f"{sendType}, Round: {roundNum}"
+    ecoDisplay.appendChild(ecoLine)
+    copied_queues = [buy_queue.copy(), eco_queue.copy()]
+    setInitialState()
+
+def runSim():
+    game_state = GameState(initial_state)
+    game_state.fastForward(target_round = float(Element('endRoundInput').value))
+    game_state.viewCashEcoHistory()
+    setInitialState()
+</py-script>
+    </main>
+
+<div id="graph-area"></div>
+<div id="logdiv"></div>
+</body>
 </html>
