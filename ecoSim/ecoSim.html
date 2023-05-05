@@ -1441,7 +1441,7 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
             <form>
                 <label for="stallInput">Stall Factor</label>
                 <input type="number" id="stallInput" value="1">
-                <button py-click="setStallFactor">Set Stall Factor</button>
+                <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
             </form>
         </div>
         <section class="buyQueueContainer">
@@ -1452,13 +1452,13 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
                 <label for="buyBuffer">Cash Buffer</label>
                 <input type="number" id ="buyBuffer">
             </form>
-            <button py-click="addToBuyQueue()">Add to Queue</button>
+            <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
             <div id="buyQueue">
                 <h3>Buy Queue</h3>
             </div>
         </section>
         <section class="ecoQueueContainer">
-            <form>
+            <form action="">
                 <input type="radio" name="sendType" checked="true" id="Zero">
                 <label for="Zero">None</label>
                 <input type="radio" name="sendType" id="Grouped Reds">
@@ -1510,7 +1510,7 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
                 <input type="number" id = "ecoRound" value = "1">
                 <label for="roundNumber">Round</label>
             </form>
-            <button py-click="addToEcoQueue()">Add to Eco Queue</button>
+            <button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button>
             <div id="ecoQueue">
                 <h3>Eco Queue</h3>
             </div>
@@ -1552,14 +1552,22 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
                 <label for="startRoundInput">Starting Round</label>
                 <input type="number" id="startRoundInput" value="0">
             </form>
-            <button py-click="setInitialState()" id="initalStateSubmit">
+            <button type="button" py-click="setInitialState()" id="initalStateSubmit">
                 Change Initial State
             </button>
+        </section>
+        <section class="initialFarmsContainer">
+            <form class="initialFarmsForm">
+                <input type="number" name="Farm Path 1" id="farmPath1" value="0">
+                <input type="number" name="Farm Path 2" id="farmPath2" value="0">
+                <input type="number" name="Farm Path 3" id="farmPath3" value="0">
+                <button type="button" py-click="createFarm()">Create Farm</button>
+            </form>
         </section>
         <section class="runSimContainer">
             <input type="number" id="endRoundInput" value="11">
             <label for="endRoundInput">Simulation End Round</label>
-            <button py-click="runSim()">Run Sim</button>
+            <button type="button" py-click="runSim()">Run Sim</button>
         </section>
         <py-script>
 from pyodide.ffi import create_proxy
@@ -1640,8 +1648,8 @@ def setInitialState():
 
 def createFarm():
     farmInfo = []
-    farmInfo.append(initFarm(float(Element('farmTime').value), [ int(Element(farmPath1).value), int(Element(farmPath2).value), int(Element(farmPath3).value) ] ))
-    for index, farm in farmInfo:
+    farmInfo.append(initFarm(0, [ int(Element('farmPath1').value), int(Element('farmPath2').value), int(Element('farmPath3').value) ] ))
+    for index, farm in enumerate(farmInfo):
         farms[index] = farmInfo[index]
     setInitialState()
 
@@ -1674,7 +1682,6 @@ def deleteSend(button):
 def renderEcoQueue():
     deleteChildren('#ecoQueue')
     queue = document.querySelector('#ecoQueue')
-    i = -1
     for ecoSend in sorted(eco_queue):
         p = document.createElement('p')
         p.textContent = ecoSend
@@ -1686,7 +1693,6 @@ def renderEcoQueue():
         console.log(str(ecoSend))
         proxy = create_proxy(lambda event: deleteSend(event.target))
         button.addEventListener("click", proxy)
-        i+=1
 def runSim():
     game_state = GameState(initial_state)
     game_state.fastForward(target_round = float(Element('endRoundInput').value))
