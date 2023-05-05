@@ -1595,8 +1595,8 @@ initial_state = {
 # restart without reloading
 def resetSim():
     rounds = Rounds(1)
-    buy_queue = []
-    eco_queue = []
+    buy_queue.clear()
+    eco_queue.clear()
     farms = {}
     initial_state = {
         'Cash': 650,
@@ -1666,23 +1666,27 @@ def addToEcoQueue():
     renderEcoQueue()
     setInitialState()
 
-def deleteSend(ecoSend):
-    console.log('hi')
-    eco_queue.remove(ecoSend)
+def deleteSend(button):
+    console.log(button.id)
+    eco_queue.remove(eval(button.id))
     renderEcoQueue()
 
 def renderEcoQueue():
     deleteChildren('#ecoQueue')
     queue = document.querySelector('#ecoQueue')
+    i = -1
     for ecoSend in sorted(eco_queue):
         p = document.createElement('p')
         p.textContent = ecoSend
         button = document.createElement('button')
         button.id = str(ecoSend)
         button.textContent = "Delete"
-        add_event_listener(button, "click", lambda e: deleteSend(ecoSend))
         p.appendChild(button)
         queue.appendChild(p)
+        console.log(str(ecoSend))
+        proxy = create_proxy(lambda event: deleteSend(event.target))
+        button.addEventListener("click", proxy)
+        i+=1
 def runSim():
     game_state = GameState(initial_state)
     game_state.fastForward(target_round = float(Element('endRoundInput').value))
