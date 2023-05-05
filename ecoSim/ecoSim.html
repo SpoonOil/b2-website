@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from js import document
+from js import console
 
 from pyodide.http import open_url
 filepath = r"nat_send_lengths.csv"
@@ -1447,7 +1448,9 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
             <form>
                 <h2>Add to Buy Queue</h2>
                 <label for="buyPriceInput">Price</label>
-                <input type="number" id ="buyPriceInput">
+                <input type="number" id ="buyPriceInput" value="100">
+                <label for="buyBuffer">Cash Buffer</label>
+                <input type="number" id ="buyBuffer">
             </form>
             <button py-click="addToBuyQueue()">Add to Queue</button>
             <div id="buyQueue">
@@ -1559,6 +1562,16 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
             <button py-click="runSim()">Run Sim</button>
         </section>
         <py-script>
+from pyodide.ffi import create_proxy
+from pyodide.ffi.wrappers import add_event_listener
+
+def partial(func, *args, **kwargs):
+    def f(*args_rest, **kwargs_rest):
+        kw = kwargs.copy()
+        kw.update(kwargs_rest)
+        return func(*(args + args_rest), **kw)
+    return f
+
 def setStallFactor():
     rounds = Rounds(float(Element('stallInput').value))
     setInitialState()
@@ -1620,8 +1633,8 @@ def setInitialState():
     initial_state['Eco Send'] = Element('ecoSendInput').value
     initial_state['Rounds'] = rounds
     initial_state['Game Round'] = float(Element('startRoundInput').value)
-    initial_state['Eco Queue'] = eco_queue.copy()
-    initial_state['Buy Queue'] = buy_queue.copy()
+    initial_state['Eco Queue'] = sorted(eco_queue.copy())
+    initial_state['Buy Queue'] = (buy_queue.copy())
     initial_state['Farms'] = farms
     writeLog(initial_state);
 
@@ -1631,14 +1644,17 @@ def createFarm():
     for index, farm in farmInfo:
         farms[index] = farmInfo[index]
     setInitialState()
+
 def addToBuyQueue():
     buyValue = float(Element('buyPriceInput').value)
-    buy_queue.append([buyDefense(buyValue)])
+    buyBuffer = 0
+    if Element('buyBuffer').value != '':
+        buyBuffer = float(Element('buyBuffer').value)
+    buy_queue.append([buyDefense(buyValue, buyBuffer)])
     buyDisplay = document.querySelector('#buyQueue')
     buyLine = document.createElement('p')
-    buyLine.innerText = buyValue
+    buyLine.innerText = f'{buyValue} Buffer: {buyBuffer}'
     buyDisplay.appendChild(buyLine)
-    copied_queues = [buy_queue.copy(), eco_queue.copy()]
     setInitialState()
 
 def addToEcoQueue():
@@ -1647,13 +1663,26 @@ def addToEcoQueue():
     sendTypeInput = document.querySelector('input[name="sendType"]:checked')
     sendType = sendTypeInput.id
     eco_queue.append((rounds.getTimeFromRound(roundNum), sendType))
-    ecoDisplay = document.querySelector('#ecoQueue')
-    ecoLine = document.createElement('p')
-    ecoLine.innerText = f"{sendType}, Round: {roundNum}"
-    ecoDisplay.appendChild(ecoLine)
-    copied_queues = [buy_queue.copy(), eco_queue.copy()]
+    renderEcoQueue()
     setInitialState()
 
+def deleteSend(ecoSend):
+    console.log('hi')
+    eco_queue.remove(ecoSend)
+    renderEcoQueue()
+
+def renderEcoQueue():
+    deleteChildren('#ecoQueue')
+    queue = document.querySelector('#ecoQueue')
+    for ecoSend in sorted(eco_queue):
+        p = document.createElement('p')
+        p.textContent = ecoSend
+        button = document.createElement('button')
+        button.id = str(ecoSend)
+        button.textContent = "Delete"
+        add_event_listener(button, "click", lambda e: deleteSend(ecoSend))
+        p.appendChild(button)
+        queue.appendChild(p)
 def runSim():
     game_state = GameState(initial_state)
     game_state.fastForward(target_round = float(Element('endRoundInput').value))
