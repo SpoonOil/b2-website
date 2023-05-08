@@ -1573,18 +1573,7 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
 from pyodide.ffi import create_proxy
 from pyodide.ffi.wrappers import add_event_listener
 
-def partial(func, *args, **kwargs):
-    def f(*args_rest, **kwargs_rest):
-        kw = kwargs.copy()
-        kw.update(kwargs_rest)
-        return func(*(args + args_rest), **kw)
-    return f
-
-def setStallFactor():
-    rounds = Rounds(float(Element('stallInput').value))
-    setInitialState()
-
-rounds = Rounds(1)
+rounds = Rounds(0)
 buy_queue = []
 eco_queue = []
 farms = {}
@@ -1599,6 +1588,11 @@ initial_state = {
     'Eco Queue': eco_queue.copy(),
     'Farms': farms
 }
+
+def setStallFactor():
+    rounds = Rounds(float(Element('stallInput').value))
+    console.log(rounds.stall_factor)
+    setInitialState(rounds)
 
 # restart without reloading
 def resetSim():
@@ -1635,11 +1629,11 @@ def deleteChildren(tag):
         node.removeChild(node.lastChild)
 
 
-def setInitialState():
+def setInitialState(stallFactorNum = rounds):
     initial_state['Cash'] = float(Element('cashInput').value)
     initial_state['Eco'] = float(Element('ecoInput').value)
     initial_state['Eco Send'] = Element('ecoSendInput').value
-    initial_state['Rounds'] = rounds
+    initial_state['Rounds'] = stallFactorNum
     initial_state['Game Round'] = float(Element('startRoundInput').value)
     initial_state['Eco Queue'] = sorted(eco_queue.copy())
     initial_state['Buy Queue'] = (buy_queue.copy())
