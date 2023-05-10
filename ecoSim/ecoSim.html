@@ -1850,12 +1850,14 @@ initial_state = {
 }
 
 def setStallFactor():
+    global rounds
     rounds = Rounds(float(Element('stallInput').value))
     console.log(rounds.stall_factor)
     setInitialState(rounds)
 
 # restart without reloading
 def resetSim():
+    rounds.clear()
     rounds = Rounds(1)
     buy_queue.clear()
     eco_queue.clear()
@@ -1893,6 +1895,8 @@ def deleteChildren(tag):
 
 
 def setInitialState(stallFactorNum = rounds):
+    global rounds
+    stallFactorNum = rounds
     initial_state['Cash'] = float(Element('cashInput').value)
     initial_state['Eco'] = float(Element('ecoInput').value)
     initial_state['Eco Send'] = Element('ecoSendInput').value
@@ -2011,6 +2015,7 @@ def deleteBuy(button):
     renderFarmSlots();
     renderBuyQueue()
 def addToEcoQueue():
+    global rounds
     roundNum = float(document.getElementById('ecoRound').value)
     document.getElementById('ecoRound').value = float(Element('ecoRound').value)+1
     sendTypeInput = document.querySelector('input[name="sendType"]:checked')
