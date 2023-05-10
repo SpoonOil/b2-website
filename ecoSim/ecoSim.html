@@ -213,7 +213,6 @@ farm_sell_values = {
 
 }
 
-#In each tuple, the left entry is the payout value while the right entry is the payout frequency
 farm_payout_values = {
 
     #Remember, x3x and higher farms do not payout like other farms do!
@@ -343,56 +342,78 @@ farm_payout_values = {
 
 }
 
+boat_upgrades_costs = [5400, 19000]
+boat_payout_values = [300, 1000, 3000]
+boat_sell_values = [1960, 6560, 21760]
+
+
+# # Rounds Class
+
+# The rounds class is designed to handle the conversion of round info to times and vice versa. That is, the class is capable of answering the following two questions:
+# 1. Given some time, what round of the game are we on, and how much of the round has elapsed?
+# 2. Given some round, how much time has elapsed in the game so far?
+
+# In[12]:
+
+
 class Rounds():
-  def __init__(self, stall_factor):
-      #Compute the round times given the stall factor
-      self.logs = []
-      self.stall_factor = stall_factor
+    def __init__(self, stall_factor):
+        #Compute the round times given the stall factor
+        self.logs = []
+        self.stall_factor = stall_factor
 
-      val = 0
-      self.round_starts = [0]
-      for i in range(len(nat_send_lens)):
-          round_len = nat_send_lens[i] + (1-self.stall_factor)*4 + self.stall_factor*max_stall_times[i]
-          val += round_len
-          self.round_starts.append(val)
+        val = 0
+        self.round_starts = [0]
+        for i in range(len(nat_send_lens)):
+            round_len = nat_send_lens[i] + (1-self.stall_factor)*4 + self.stall_factor*max_stall_times[i]
+            val += round_len
+            self.round_starts.append(val)
 
-  def getRoundFromTime(self, time):
-      ind = 0
-      while self.round_starts[ind] <= time:
-          ind += 1
-      #self.logs.append("Mapped time %s to round %s"%(time,ind-1))
-      return ind - 1
+    def getRoundFromTime(self, time):
+        ind = 0
+        while self.round_starts[ind] <= time:
+            ind += 1
+        #self.logs.append("Mapped time %s to round %s"%(time,ind-1))
+        return ind - 1
 
-  def getTimeFromRound(self, round_val):
-      frac_part = round_val - np.floor(round_val)
-      time = (1-frac_part)*self.round_starts[int(np.floor(round_val))] + frac_part*self.round_starts[int(np.ceil(round_val))]
-      #self.logs.append("Mapped round %s to time %s"%(round_val,time))
-      return time
+    def getTimeFromRound(self, round_val):
+        frac_part = round_val - np.floor(round_val)
+        #The 30's are there to compensate for a limitation in round data. We could use some more involved data rn...
+        time = (1-frac_part)*self.round_starts[int(min(np.floor(round_val),30))] + frac_part*self.round_starts[int(min(np.ceil(round_val),30))]
+        #self.logs.append("Mapped round %s to time %s"%(round_val,time))
+        return time
 
-  def changeStallFactor(self,stall_factor, current_time):
-      self.logs.append("MESSAGE FROM Rounds.changeStallFactor():")
-      self.logs.append("Changing the stall factor from %s to %s"%(self.stall_factor,stall_factor))
-      self.logs.append("The old round start times were %s"%(self.round_starts))
+    def changeStallFactor(self,stall_factor, current_time):
+        self.logs.append("MESSAGE FROM Rounds.changeStallFactor():")
+        self.logs.append("Changing the stall factor from %s to %s"%(self.stall_factor,stall_factor))
+        self.logs.append("The old round start times were %s"%(self.round_starts))
 
-      game_round = self.rounds.getRoundFromTime(current_time)
+        game_round = self.rounds.getRoundFromTime(current_time)
 
-      if current_time < self.round_starts[game_round] + nat_send_lens[game_round]:
-          #Yes, the current round should have its stall time modified
-          start_ind = game_round
-      else:
-          #No, the current round should not have its stall time modified
-          start_ind = game_round+1
-          val = self.round_starts[start_ind]
+        if current_time < self.round_starts[game_round] + nat_send_lens[game_round]:
+            #Yes, the current round should have its stall time modified
+            start_ind = game_round
+        else:
+            #No, the current round should not have its stall time modified
+            start_ind = game_round+1
+            val = self.round_starts[start_ind]
 
-      for i in range(start_ind, len(nat_send_lens)-1):
-          #print("Trying index %s"%(str(i)))
-          val += nat_send_lens[i] + (1-stall_factor)*4 + stall_factor*max_stall_times[i]
-          self.round_starts[i+1] = val
+        for i in range(start_ind, len(nat_send_lens)-1):
+            #print("Trying index %s"%(str(i)))
+            val += nat_send_lens[i] + (1-stall_factor)*4 + stall_factor*max_stall_times[i]
+            self.round_starts[i+1] = val
 
-      self.logs.append("The new round start times are %s"%(self.round_starts))
-      self.logs.append("The current game round is %s"%(self.round))
-      self.logs.append("The current game time is %s seconds"%(self.current_time))
-      self.logs.append("The next round starts at time %s \n"%(self.round_starts[self.round+1]))
+        self.logs.append("The new round start times are %s"%(self.round_starts))
+
+
+
+
+# # Game State Class
+
+# The game state class is an instance of battles 2 in action!
+
+# In[13]:
+
 
 def impact(cash, loan, amount):
     #If the amount is positive (like a payment), half of the payment should be directed to the outstanding loan
@@ -408,9 +429,12 @@ def impact(cash, loan, amount):
         cash = cash + amount
     return cash, loan
 
-def writeLog(lines):
-    log_div = Element("logDiv")
-    log_div.element.innerText = lines
+def writeLog(lines, filename = 'log', path = './logs/'):
+    return
+
+
+# In[39]:
+
 
 class GameState():
     def __init__(self, initial_state):
@@ -481,10 +505,12 @@ class GameState():
                 self.farms[key] = MonkeyFarm(farm_dict)
 
                 #If the farm is a T5 farm, modify our T5 flags appropriately
-                #WARNING: There is no currently no fail-safe to prevent the user from initializing with multiple T5's
+                #Do not allow the user to initialize with multiple T5's
                 for i in range(3):
-                    if self.farms[key].upgrades[i] == 5:
+                    if self.farms[key].upgrades[i] == 5 and self.T5_exists[i] == False:
                         self.T5_exists[i] = True
+                    elif self.farms[key].upgrades[i] == 5 and self.T5_exists[i] == True:
+                        self.farms[key].upgrades[i] = 4
 
         #Next, supply drops!
         self.supply_drops = initial_state.get('Supply Drops')
@@ -494,8 +520,23 @@ class GameState():
             #self.supply_drops.pop('Elite Sniper Index')
 
         #Next, boat farms!
-        # STILL UNDER CONSTRUCTION
         self.boat_farms = initial_state.get('Boat Farms')
+        self.Tempire_exists = False
+        self.boat_key = 0
+        if self.boat_farms is not None:
+            for key in boat_farms.keys():
+                if key >= self.key:
+                    self.key = key+1
+
+                boat_farm = self.boat_farms[key]
+                #If the boat farm is a Tempire, mark it as such appropriately.
+                #Do not allow the user to initialize with multiple Tempires!
+                if boat_farm['Upgrade'] == 5 and self.Tempire_exists[i] == False:
+                    self.Tempire_exists = True
+                elif boat_farm['Upgrade'] == 5 and self.Tempire_exists[i] == True:
+                    boat_farm['Upgrade'] = 4
+
+
 
         #~~~~~~~~~~~~~~~~
         #THE QUEUE SYSTEM
@@ -576,6 +617,46 @@ class GameState():
         #This is just a helper function
         self.rounds.changeStallFactor(stall_factor,self.current_time)
 
+    def ecoQueueCorrection(self):
+        #Check whether the next item in the eco queue is valid.
+        future_flag = False
+        while len(self.eco_queue) > 0 and future_flag == False:
+            break_flag = False
+            while len(self.eco_queue) > 0 and break_flag == False:
+                #print("length of queue: %s"%(len(self.eco_queue)))
+                #Is the eco send too late?
+                if self.eco_queue[0][0] >= self.rounds.getTimeFromRound(eco_send_availability[self.eco_queue[0][1]][1]+1):
+                    #Yes, the send is too late.
+                    self.logs.append("Warning! Time %s is too late to call %s. Removing from eco queue"%(self.eco_queue[0][0],self.eco_queue[0][1]))
+                    self.eco_queue.pop(0)
+
+                else:
+                    #No, the send is not too late
+
+                    #Is the eco send too early?
+                    candidate_time = self.rounds.getTimeFromRound(eco_send_availability[self.eco_queue[0][1]][0])
+                    if self.eco_queue[0][0] < candidate_time:
+                        #Yes, the send is too early
+                        self.logs.append("Warning! Time %s is too early to call %s. Adjusting the queue time to %s"%(self.eco_queue[0][0],self.eco_queue[0][1], candidate_time))
+                        self.eco_queue[0] = (candidate_time, self.eco_queue[0][1])
+                        #Is the adjusted time still valid?
+                        if len(self.eco_queue) < 2 or self.eco_queue[0][0] < self.eco_queue[1][0]:
+                            #Yes, it's still valid
+                            break_flag = True
+                        else:
+                            #No, it's not valid
+                            self.logs.append("Warning! Time %s is too late to call %s because the next item in the eco queue is slated to come earlier. Removing from eco queue"%(self.eco_queue[0][0],self.eco_queue[0][1]))
+                            self.eco_queue.pop(0)
+                    else:
+                        #No, the send is not too early
+                        break_flag = True
+
+            if len(self.eco_queue) > 0 and self.eco_queue[0][0] <= self.current_time:
+                self.changeEcoSend(self.eco_queue[0][1])
+                self.eco_queue.pop(0)
+            else:
+                future_flag = True
+
     def changeEcoSend(self,send_name):
         #TODO: Implement safeguards to prevent the player from changing to an eco send that is unavailable
         self.eco_cost = eco_send_info[send_name][0]
@@ -610,31 +691,28 @@ class GameState():
         # Advance the game to the time target_time,
         # computing the new money and eco amounts at target_time
 
-        # If a target round is given, compute the target_time from that
-        if target_round is not None:
-            target_time = self.rounds.getTimeFromRound(target_round)
+        # FAIL-SAFE
+        self.ecoQueueCorrection()
 
-        # A fail-safe to prevent the code from trying to go backwards in time
-        if target_time < self.current_time:
-            target_time = self.current_time
+        # FAIL-SAFE: Terminate advanceGameState early if an eco change is scheduled before the target_time.
+        if len(self.eco_queue) > 0 and self.eco_queue[0][0] < target_time:
+            #Yes, an eco change will occur
+            target_time = self.eco_queue[0][0]
 
-        # If either the player intends to change eco sends before the target time or the eco send will become unavailable before the target time,
-        # adjust the target time so that it ends at that moment
-        if len(self.eco_queue) > 0:
-            if target_time >= self.eco_queue[0][0]:
-                target_time = self.eco_queue[0][0]
-                self.logs.append("Warning! An eco change is coming at time %s. Adjusting the target time."%(target_time))
-
-        if eco_send_availability[self.send_name][1] + 1 < self.rounds.getRoundFromTime(target_time):
-            end_of_eco_time = self.rounds.getTimeFromRound(eco_send_availability[self.send_name][1]+1)
-            if target_time >= end_of_eco_time:
-                target_time = end_of_eco_time
-                self.logs.append("Warning! The current eco send will not be available after round %s. Adjusting the target time."%(eco_send_availability[self.send_name][1]))
-
-        #Check whether the current eco send is valid. If it is not, change the eco send to zero.
+        # FAIL-SAFE: Check whether the current eco send is valid. If it is not, change the eco send to zero.
         if eco_send_availability[self.send_name][1] < self.current_round:
             self.logs.append("Warning! The current eco send is no longer available! Switching to the zero send.")
             self.changeEcoSend('Zero')
+
+        # FAIL-SAFE: Prevent advanceGameState from using an eco send after it becomes unavailable by terminating early in this case.
+        if eco_send_availability[self.send_name][1] + 1 <= self.rounds.getRoundFromTime(target_time):
+            target_time = self.rounds.getTimeFromRound(eco_send_availability[self.send_name][1] + 1)
+            self.logs.append("Warning! The current eco send will not be available after the conclusion of round %s. Adjusting the target time."%(eco_send_availability[self.send_name][1]))
+
+        # FAIL-SAFE: Only try to update if we are trying to go into the future. Do NOT try to go back in time!
+        if target_time <= self.current_time:
+            self.logs.append("Warning! The target time is in the past! Terminating advanceGameState()")
+            return None
 
         ############################################
         #PART 1: COMPUTATION OF PAYOUT TIMES & INFOS
@@ -777,9 +855,33 @@ class GameState():
                             break
                     self.inc += 1
 
-        if len(self.boat_farms):
+        #Now, let's do boat farms!
+        if len(self.boat_farms) > 0:
+
+            #If the player has Trade Empire, determine the buff to be applied to other boat farm payments
+            if self.Tempire_exists == True:
+                arg = min(len(self.boat_farms) - 1,20)
+            else:
+                arg = 0
+            multiplier = 1 + 0.05*arg
+
+            #Determine the amount of the money the boats will give each round
+            boat_payout = 0
             for key in self.boat_farms.keys():
-                    boat_farm = self.boat_farms[key]
+                boat_farm = self.boat_farms[key]
+                boat_payout += multiplier*boat_payout_values[boat_farm['Upgrade'] - 3]
+
+            #At the start of each round, append a payout entry with the boat payout
+            self.inc = 1
+            while self.rounds.getTimeFromRound(self.current_round + self.inc) <= target_time:
+                payout_entry = {
+                    'Time': self.rounds.getTimeFromRound(self.current_round + self.inc),
+                    'Payout Type': 'Direct',
+                    'Payout': boat_payout
+                }
+                payout_times.append(payout_entry)
+                self.inc += 1
+
 
         #Now that we determined all the payouts, sort the payout times by the order they occur in
         payout_times = sorted(payout_times, key=lambda x: x['Time'])
@@ -965,6 +1067,24 @@ class GameState():
                         h_cash, h_loan = impact(h_cash, h_loan, 20000)
                         h_loan += 20000
 
+                    # BOAT FARM RELATED MATTERS
+                    elif dict_obj['Type'] == 'Buy Boat Farm':
+                        h_cash, h_loan = impact(h_cash, h_loan, -2800)
+                    elif dict_obj['Type'] == 'Upgrade Boat Farm':
+                        ind = dict_obj['Index']
+                        boat_farm = self.boat_farms[ind]
+                        #The following code prevents from the player from having multiple Trade Empires in play
+                        if boat_farm['Upgrade']+1 == 5 and self.Tempire_exists == True:
+                            self.logs.append("WARNING! Tried to purchase a Trade Empire when one already exists!")
+                            self.valid_action_flag = False
+                            break
+                        upgrade_cost = boat_upgrades_costs[boat_farm['Upgrade']-3]
+                        h_cash, h_loan = impact(h_cash, h_loan, -1*upgrade_cost)
+                    elif dict_obj['Type'] == 'Sell Boat Farm':
+                        ind = dict_obj['Index']
+                        boat_farm = self.boat_farms[ind]
+                        h_cash, h_loan = impact(h_cash, h_loan, boat_sell_values[boat_farm['Upgrade']-3])
+
                     # SUPPLY DROP RELATED MATTERS
                     elif dict_obj['Type'] == 'Buy Supply Drop':
                         h_cash, h_loan = impact(h_cash, h_loan, -9850)
@@ -977,6 +1097,11 @@ class GameState():
                             break
                         h_cash, h_loan = impact(h_cash, h_loan, -14000)
 
+                    #If at any point while performing these operations our cash becomes negative, then prevent the transaction from occurring:
+                    if h_cash < 0:
+                        self.logs.append("WARNING! Reached negative cash while attempting the transaction!")
+                        self.valid_action_flag = False
+                        break
 
                     #Read the buffer associated with the buy if any
                     #NOTE: Only one object in purchase_info should have buffer info
@@ -1080,6 +1205,46 @@ class GameState():
                             self.logs.append("Taking out a loan from the IMF at index %s"%(ind))
                             farm.min_use_time = payout['Time'] + 90
 
+                        # BOAT FARM RELATED MATTERS
+                        elif dict_obj['Type'] == 'Buy Boat Farm':
+                            self.logs.append("Purchasing boat farm!")
+                            boat_farm = {
+                                'Purchase Time': self.current_time,
+                                'Upgrade': 3
+                            }
+                            self.boat_farms[self.boat_key] = boat_farm
+                            self.boat_key += 1
+                        elif dict_obj['Type'] == 'Upgrade Boat Farm':
+                            ind = dict_obj['Index']
+
+                            self.logs.append("Upgrading the boat farm at index %s"%(ind))
+                            boat_farm = self.boat_farms[ind]
+                            boat_farm['Upgrade'] += 1
+
+                            #Update the payout information of the boat farm
+                            boat_farm['Payout'] = boat_payout_values[boat_farm['Upgrade'] - 3]
+
+                            #So that we can accurately track payments for the boat farm
+                            boat['Purchase Time'] = payout['Time']
+
+                            #Update the sellback value of the boat farm
+                            boat['Sell Value'] = boat_sell_values[boat_farm['Upgrade'] - 3]
+
+                            #If the new boat farm is a Trade Empire, indicate as such
+                            if boat_farm['Upgrade'] == 5:
+                                self.logs.append("The new boat farm is a Trade Empire!")
+                                self.Tempire_exists = True
+
+                        elif dict_obj['Type'] == 'Sell Boat Farm':
+                            ind = dict_obj['Index']
+                            self.logs.append("Selling the boat farm at index %s"%(ind))
+                            #If the farm being sold is a Trade Empire, indicate as such
+                            if boat_farm['Upgrade'] == 5:
+                                self.logs.append("The boat farm we're selling is a Trade Empire! Removing the Tempire buff.")
+                                self.Tempire_exists = False
+                            self.boat_farms.pop(ind)
+
+
                         # SUPPLY DROP RELATED MATTERS
                         elif dict_obj['Type'] == 'Buy Supply Drop':
                             self.supply_drops[self.sniper_key] = payout['Time']
@@ -1156,15 +1321,30 @@ class GameState():
         self.current_round -= 1
 
         #Update the eco send, if necessary
-        if len(self.eco_queue) > 0:
-            if target_time >= self.eco_queue[0][0]:
-                self.changeEcoSend(self.eco_queue[0][1])
-                self.eco_queue.pop(0)
+        if len(self.eco_queue) > 0 and target_time >= self.eco_queue[0][0]:
+            self.changeEcoSend(self.eco_queue[0][1])
+            self.eco_queue.pop(0)
 
         #self.logs.append("Advanced game state to round " + str(self.current_round))
         #self.logs.append("The current time is " + str(self.current_time))
         #self.logs.append("The next round starts at time " + str(self.rounds.round_starts[self.current_round+1]))
         #self.logs.append("Our new cash and eco is given by (%s,%s) \n"%(np.round(self.cash,2),np.round(self.eco,2)))
+
+
+
+
+# # The Monkey Farm Class
+
+# The payout of farms (for the most part) can be described by a payout amount and a payout frequency. There are three exceptions to this:
+# 1. Monkey Wall Street - The MWS has an additional start-of-round payment of 10000 dollars on top of its usual payment schedule. To account for this start-of-round bonus, we will do the following: Whenever a farm is upgraded to xx5, we will create an additional farm with payout frequency 1 and payout amount 10000. This "companion" farm will be marked with the self.MWS_bonus flag. If the player decides to sell their farm, we will search for this companion farm and delete it also.
+#
+# 2. Monkey banks - Monkey banks operate on entirely different rules. For now, because they are not commonly used in meta gameplay, I will ignore them for the time being.
+# 3. Banana Central - Banana central contains a buff which causes all BRF's to be worth 20% more. In order to accurately track this buff, we must set a variable within the *Game State* class that applies this buff when BC is bought (and removes it when it's sold).
+
+# Now it's time to define the MonkeyFarm class!
+
+# In[15]:
+
 
 class MonkeyFarm():
     def __init__(self, initial_state):
@@ -1201,6 +1381,14 @@ class MonkeyFarm():
         self.min_use_time = None
         if self.upgrades[1] >= 4:
             self.min_use_time = self.purchase_time + 20
+
+
+# # Functions For Simulation
+
+# To begin, we define "actions" that the player can perform in the simulation
+
+# In[16]:
+
 
 ##############
 # MONKEY FARMS
@@ -1261,6 +1449,39 @@ def initFarm(purchase_time = None, upgrades = [0,0,0]):
         'Account Value': 0
     }
 
+############
+# BOAT FARMS
+############
+
+def buyBoatFarm(buffer = 0, min_buy_time = 0):
+    return {
+        'Type': 'Buy Boat Farm',
+        'Buffer': buffer,
+        'Minimum Buy Time': min_buy_time
+    }
+
+def upgradeBoatFarm(index, buffer = 0, min_buy_time = 0):
+    return {
+        'Type': 'Upgrade Boat Farm',
+        'Index': index,
+        'Buffer': buffer,
+        'Minimum Buy Time': min_buy_time
+    }
+
+def sellBoatFarm(index, min_buy_time = 0):
+    #Look, I know this is confusing, but "min_buy_time" really is the minimum selling time in this case!
+    return {
+        'Type': 'Sell Boat Farm',
+        'Index': index,
+        'Minimum Buy Time': min_buy_time
+    }
+
+def initBoatFarm(purchase_time = None, upgrade = 3):
+    return {
+        'Purchase Time': purchase_time,
+        'Upgrade': upgrade,
+    }
+
 ##############
 # SUPPLY DROPS
 ##############
@@ -1305,7 +1526,14 @@ def initSupplyDrops(purchase_times, elite_sniper = None):
     dictionary['Elite Sniper Index'] = elite_sniper
     return dictionary
 
+
+# The goal of a simulator like this is to compare different strategies and see which one is better. To this end, we define a function capable of simulating multiple game states at once and comparing them.
+
+# In[17]:
+
+
 def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None, target_round = 30, display_farms = True):
+
     # Log file in case we need to check outputs
     logs = []
 
@@ -1341,7 +1569,7 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
 
     for game_state in game_states:
         logs.append("Simulating Game State %s"%(i))
-        game_state.fastForward(target_time)
+        game_state.fastForward(target_time = target_time)
 
         ax[0].plot(game_state.time_states, game_state.cash_states, label = "Cash of Game State %s"%(i))
         ax[1].plot(game_state.time_states, game_state.eco_states, label = "Eco of Game State %s"%(i))
@@ -1424,10 +1652,9 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
     df = pd.DataFrame(data=d)
 
     fig.tight_layout()
-    display(fig, target="graph-area", append=False)
     display(df)
+    display(fig, target="graph-area", append=False)
     logs.append("Successfully generated graph! \n")
-
 
 </py-script>
 
@@ -1437,146 +1664,179 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
 <main>
     <h1>Eco Simulator</h1>
     <button py-click="resetSim()">RESET</button>
-        <div class="stallInputContainer">
-            <form>
-                <label for="stallInput">Stall Factor</label>
-                <input type="number" id="stallInput" value="1">
-                <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
-            </form>
-        </div>
-        <section class="buyQueueContainer">
-            <form>
-                <h2>Add to Buy Queue</h2>
+    <div class="stallInputContainer">
+        <form>
+            <label for="stallInput">Stall Factor</label>
+            <input type="number" id="stallInput" value="1">
+            <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
+        </form>
+    </div>
+    <section class="initialGameState">
+        <form class='initialStateForm' action="">
+            <h2>Initial Game State</h2>
+            <label for="cashInput">Starting Cash</label>
+            <input type="number" id="cashInput" value="650">
+            <label for="ecoInput">Starting Eco</label>
+            <input type="number" id="ecoInput" value="250">
+            <label for="ecoSendInput">Starting Send</label>
+            <select name="startingSend" id="ecoSendInput">
+                <option value="Zero">Zero</option>
+                <option value="Grouped Reds">Grouped Reds</option>
+                <option value="Spaced Blues">Spaced Blues</option>
+                <option value="Grouped Blues">Grouped Blues</option>
+                <option value="Spaced Greens">Spaced Greens</option>
+                <option value="Grouped Greens">Grouped Greens</option>
+                <option value="Spaced Yellows">Spaced Yellows</option>
+                <option value="Grouped Yellows">Grouped Yellows</option>
+                <option value="Spaced Pinks">Spaced Pinks</option>
+                <option value="Grouped Pinks">Grouped Pinks</option>
+                <option value="Spaced Whites">Spaced Whites</option>
+                <option value="Grouped Whites">Grouped Whites</option>
+                <option value="Spaced Blacks">Spaced Blacks</option>
+                <option value="Grouped Blacks">Grouped Blacks</option>
+                <option value="Spaced Purples">Spaced Purples</option>
+                <option value="Grouped Purples">Grouped Purples</option>
+                <option value="Spaced Zebras">Spaced Zebras</option>
+                <option value="Grouped Zebras">Grouped Zebras</option>
+                <option value="Spaced Leads">Spaced Leads</option>
+                <option value="Grouped Leads">Grouped Leads</option>
+                <option value="Spaced Rainbows">Spaced Rainbows</option>
+                <option value="Grouped Rainbows">Grouped Rainbows</option>
+                <option value="Spaced Ceramics">Spaced Ceramics</option>
+                <option value="Grouped Ceramics">Grouped Ceramics</option>
+            </select>
+            <label for="startRoundInput">Starting Round</label>
+            <input type="number" id="startRoundInput" value="0">
+        </form>
+        <button type="button" py-click="setInitialState()" id="initalStateSubmit">
+            Change Initial State
+        </button>
+    </section>
+    <section class="initialFarmsContainer">
+        <form class="initialFarmsForm">
+            <input type="number" name="Farm Path 1" id="farmPath1" value="0">
+            <input type="number" name="Farm Path 2" id="farmPath2" value="0">
+            <input type="number" name="Farm Path 3" id="farmPath3" value="0">
+            <button type="button" py-click="createFarm()">Create Initial Farm</button>
+        </form>
+    </section>
+    <section class="buyQueueContainer">
+        <form>
+            <h2>Add to Buy Queue</h2>
+            <div class="buyDefenceContainer">
+                <h3>Buy Defence</h3>
                 <label for="buyPriceInput">Price</label>
-                <input type="number" id ="buyPriceInput" value="100">
+                <input type="number" id="buyPriceInput" value="200">
                 <label for="buyBuffer">Cash Buffer</label>
-                <input type="number" id ="buyBuffer">
-            </form>
-            <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
-            <div id="buyQueue">
-                <h3>Buy Queue</h3>
+                <input type="number" id="buyBuffer">
+                <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
             </div>
-        </section>
-        <section class="ecoQueueContainer">
-            <form action="">
-                <input type="radio" name="sendType" checked="true" id="Zero">
-                <label for="Zero">None</label>
-                <input type="radio" name="sendType" id="Grouped Reds">
-                <label for="Grouped Reds">Grouped Reds</label>
-                <input type="radio" name="sendType" id="Spaced Blues">
-                <label for="Spaced Blues">Spaced Blues</label>
-                <input type="radio" name="sendType" id="Grouped Blues">
-                <label for="Grouped Blues">Grouped Blues</label>
-                <input type="radio" name="sendType" id="Spaced Greens">
-                <label for="Spaced Greens">Spaced Greens</label>
-                <input type="radio" name="sendType" id="Grouped Greens">
-                <label for="Grouped Greens">Grouped Greens</label>
-                <input type="radio" name="sendType" id="Spaced Yellows">
-                <label for="Spaced Yellows">Spaced Yellows</label>
-                <input type="radio" name="sendType" id="Grouped Yellows">
-                <label for="Grouped Yellows">Grouped Yellows</label>
-                <input type="radio" name="sendType" id="Spaced Pinks">
-                <label for="Spaced Pinks">Spaced Pinks</label>
-                <input type="radio" name="sendType" id="Grouped Pinks">
-                <label for="Grouped Pinks">Grouped Pinks</label>
-                <input type="radio" name="sendType" id="Spaced Whites">
-                <label for="Spaced Whites">Spaced Whites</label>
-                <input type="radio" name="sendType" id="Grouped Whites">
-                <label for="Grouped Whites">Grouped Whites</label>
-                <input type="radio" name="sendType" id="Spaced Blacks">
-                <label for="Spaced Blacks">Spaced Blacks</label>
-                <input type="radio" name="sendType" id="Grouped Blacks">
-                <label for="Grouped Blacks">Grouped Blacks</label>
-                <input type="radio" name="sendType" id="Spaced Purples">
-                <label for="Spaced Purples">Spaced Purples</label>
-                <input type="radio" name="sendType" id="Grouped Purples">
-                <label for="Grouped Purples">Grouped Purples</label>
-                <input type="radio" name="sendType" id="Spaced Zebras">
-                <label for="Spaced Zebras">Spaced Zebra</label>
-                <input type="radio" name="sendType" id="Grouped Zebras">
-                <label for="Grouped Zebras">Grouped Zebra</label>
-                <input type="radio" name="sendType" id="Spaced Leads">
-                <label for="Spaced Leads">Spaced Leads</label>
-                <input type="radio" name="sendType" id="Grouped Leads">
-                <label for="Grouped Leads">Grouped Leads</label>
-                <input type="radio" name="sendType" id="Spaced Rainbows">
-                <label for="Spaced Rainbows">Spaced Rainbow</label>
-                <input type="radio" name="sendType" id="Grouped Rainbows">
-                <label for="Grouped Rainbows">Grouped Rainbow</label>
-                <input type="radio" name="sendType" id="Spaced Ceramics">
-                <label for="Spaced Ceramics">Spaced Ceramic</label>
-                <input type="radio" name="sendType" id="Grouped Ceramics">
-                <label for="Grouped Ceramics">Grouped Ceramic</label>
-                <input type="number" id = "ecoRound" value = "1">
-                <label for="roundNumber">Round</label>
-            </form>
-            <button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button>
-            <div id="ecoQueue">
-                <h3>Eco Queue</h3>
-            </div>
-        </section>
-        <section class="initialGameState">
-            <form class='initialStateForm' action="">
-                <h2>Initial Game State</h2>
-                <label for="cashInput">Starting Cash</label>
-                <input type="number" id="cashInput" value="650">
-                <label for="ecoInput">Starting Eco</label>
-                <input type="number" id="ecoInput" value="250">
-                <label for="ecoSendInput">Starting Send</label>
-                <select name="startingSend" id="ecoSendInput">
-                    <option value="Zero">Zero</option>
-                    <option value="Grouped Reds">Grouped Reds</option>
-                    <option value="Spaced Blues">Spaced Blues</option>
-                    <option value="Grouped Blues">Grouped Blues</option>
-                    <option value="Spaced Greens">Spaced Greens</option>
-                    <option value="Grouped Greens">Grouped Greens</option>
-                    <option value="Spaced Yellows">Spaced Yellows</option>
-                    <option value="Grouped Yellows">Grouped Yellows</option>
-                    <option value="Spaced Pinks">Spaced Pinks</option>
-                    <option value="Grouped Pinks">Grouped Pinks</option>
-                    <option value="Spaced Whites">Spaced Whites</option>
-                    <option value="Grouped Whites">Grouped Whites</option>
-                    <option value="Spaced Blacks">Spaced Blacks</option>
-                    <option value="Grouped Blacks">Grouped Blacks</option>
-                    <option value="Spaced Purples">Spaced Purples</option>
-                    <option value="Grouped Purples">Grouped Purples</option>
-                    <option value="Spaced Zebras">Spaced Zebras</option>
-                    <option value="Grouped Zebras">Grouped Zebras</option>
-                    <option value="Spaced Leads">Spaced Leads</option>
-                    <option value="Grouped Leads">Grouped Leads</option>
-                    <option value="Spaced Rainbows">Spaced Rainbows</option>
-                    <option value="Grouped Rainbows">Grouped Rainbows</option>
-                    <option value="Spaced Ceramics">Spaced Ceramics</option>
-                    <option value="Grouped Ceramics">Grouped Ceramics</option>
-                </select>
-                <label for="startRoundInput">Starting Round</label>
-                <input type="number" id="startRoundInput" value="0">
-            </form>
-            <button type="button" py-click="setInitialState()" id="initalStateSubmit">
-                Change Initial State
+        </form>
+        <form>
+            <h3>Farms</h5>
+            <button type="button" py-click="purchaseFarm()">
+                Buy New Farm
             </button>
-        </section>
-        <section class="initialFarmsContainer">
-            <form class="initialFarmsForm">
-                <input type="number" name="Farm Path 1" id="farmPath1" value="0">
-                <input type="number" name="Farm Path 2" id="farmPath2" value="0">
-                <input type="number" name="Farm Path 3" id="farmPath3" value="0">
-                <button type="button" py-click="createFarm()">Create Farm</button>
-            </form>
-        </section>
-        <section class="runSimContainer">
-            <input type="number" id="endRoundInput" value="11">
-            <label for="endRoundInput">Simulation End Round</label>
-            <button type="button" py-click="runSim()">Run Sim</button>
-        </section>
-        <py-script>
+            <div id="existingFarms">
+                <h5>Upgrade Existing Farms</h5>
+                <div id="upgradeFarmDiv">
+                    <div id="farmSelect">
+                        <p>no farms :&#40;</p>
+                    </div>
+                    <div id="upgradeFarmButtons">
+                        <button py-click="upgradePath('1')" type="button" disabled>
+                            Upgrade Path 1
+                        </button>
+                        <button py-click="upgradePath('2')" type="button" disabled>
+                            Upgrade Path 2
+                        </button>
+                        <button py-click="upgradePath('3')" type="button" disabled>
+                            Upgrade Path 3
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="buyQueueContainer">
+            <h3>Buy Queue</h3>
+            <div id="buyQueue">
+
+            </div>
+        </div>
+    </section>
+    <section class="ecoQueueContainer">
+        <form action="">
+            <input type="radio" name="sendType" checked="true" id="Zero">
+            <label for="Zero">None</label>
+            <input type="radio" name="sendType" id="Grouped Reds">
+            <label for="Grouped Reds">Grouped Reds</label>
+            <input type="radio" name="sendType" id="Spaced Blues">
+            <label for="Spaced Blues">Spaced Blues</label>
+            <input type="radio" name="sendType" id="Grouped Blues">
+            <label for="Grouped Blues">Grouped Blues</label>
+            <input type="radio" name="sendType" id="Spaced Greens">
+            <label for="Spaced Greens">Spaced Greens</label>
+            <input type="radio" name="sendType" id="Grouped Greens">
+            <label for="Grouped Greens">Grouped Greens</label>
+            <input type="radio" name="sendType" id="Spaced Yellows">
+            <label for="Spaced Yellows">Spaced Yellows</label>
+            <input type="radio" name="sendType" id="Grouped Yellows">
+            <label for="Grouped Yellows">Grouped Yellows</label>
+            <input type="radio" name="sendType" id="Spaced Pinks">
+            <label for="Spaced Pinks">Spaced Pinks</label>
+            <input type="radio" name="sendType" id="Grouped Pinks">
+            <label for="Grouped Pinks">Grouped Pinks</label>
+            <input type="radio" name="sendType" id="Spaced Whites">
+            <label for="Spaced Whites">Spaced Whites</label>
+            <input type="radio" name="sendType" id="Grouped Whites">
+            <label for="Grouped Whites">Grouped Whites</label>
+            <input type="radio" name="sendType" id="Spaced Blacks">
+            <label for="Spaced Blacks">Spaced Blacks</label>
+            <input type="radio" name="sendType" id="Grouped Blacks">
+            <label for="Grouped Blacks">Grouped Blacks</label>
+            <input type="radio" name="sendType" id="Spaced Purples">
+            <label for="Spaced Purples">Spaced Purples</label>
+            <input type="radio" name="sendType" id="Grouped Purples">
+            <label for="Grouped Purples">Grouped Purples</label>
+            <input type="radio" name="sendType" id="Spaced Zebras">
+            <label for="Spaced Zebras">Spaced Zebra</label>
+            <input type="radio" name="sendType" id="Grouped Zebras">
+            <label for="Grouped Zebras">Grouped Zebra</label>
+            <input type="radio" name="sendType" id="Spaced Leads">
+            <label for="Spaced Leads">Spaced Leads</label>
+            <input type="radio" name="sendType" id="Grouped Leads">
+            <label for="Grouped Leads">Grouped Leads</label>
+            <input type="radio" name="sendType" id="Spaced Rainbows">
+            <label for="Spaced Rainbows">Spaced Rainbow</label>
+            <input type="radio" name="sendType" id="Grouped Rainbows">
+            <label for="Grouped Rainbows">Grouped Rainbow</label>
+            <input type="radio" name="sendType" id="Spaced Ceramics">
+            <label for="Spaced Ceramics">Spaced Ceramic</label>
+            <input type="radio" name="sendType" id="Grouped Ceramics">
+            <label for="Grouped Ceramics">Grouped Ceramic</label>
+            <input type="number" id="ecoRound" value="1">
+            <label for="roundNumber">Round</label>
+        </form>
+        <button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button>
+        <div id="ecoQueue">
+            <h3>Eco Queue</h3>
+        </div>
+    </section>
+    <section class="runSimContainer">
+        <input type="number" id="endRoundInput" value="11">
+        <label for="endRoundInput">Simulation End Round</label>
+        <button type="button" py-click="runSim()">Run Sim</button>
+    </section>
+    <py-script>
 from pyodide.ffi import create_proxy
 from pyodide.ffi.wrappers import add_event_listener
 
-rounds = Rounds(0)
+rounds = Rounds(1)
 buy_queue = []
 eco_queue = []
 farms = {}
+farmInfo = []
+farmSlots = {}
 
 initial_state = {
     'Cash': 650,
@@ -1599,7 +1859,9 @@ def resetSim():
     rounds = Rounds(1)
     buy_queue.clear()
     eco_queue.clear()
-    farms = {}
+    farms.clear()
+    farmInfo = []
+    farmSlots.clear()
     initial_state = {
         'Cash': 650,
         'Eco': 250,
@@ -1611,6 +1873,7 @@ def resetSim():
         'Farms': farms
     }
     resetDom()
+    renderFarmSlots()
 
 #Helper function to wipe dom instead of reloading
 def resetDom():
@@ -1641,24 +1904,112 @@ def setInitialState(stallFactorNum = rounds):
     writeLog(initial_state);
 
 def createFarm():
-    farmInfo = []
     farmInfo.append(initFarm(0, [ int(Element('farmPath1').value), int(Element('farmPath2').value), int(Element('farmPath3').value) ] ))
+    console.log(enumerate(farmInfo))
     for index, farm in enumerate(farmInfo):
         farms[index] = farmInfo[index]
+    i = 0
+    while True:
+        if not (i in farmSlots):
+            farmSlots[i] = True
+            break
+        i+=1
+    console.log(farmInfo, farms)
     setInitialState()
+    renderFarmSlots()
 
+def purchaseFarm():
+    buy_queue.append([buyFarm()])
+    i = 0
+    while True:
+        if not (i in farmSlots):
+            farmSlots[i] = True
+            break
+        i+=1
+    renderBuyQueue()
+    setInitialState()
+    renderFarmSlots()
+
+def renderFarmSlots():
+# looks like This
+# <div id="upgradeFarmDiv">
+#     <div id="farmSelect">
+#         <p>no farms :&#40;</p>
+#     </div>
+#     <div id="upgradeFarmButtons">
+#         <button py-click="upgradePath(1)" id = "1" type="button" disabled>
+#             Upgrade Path 1
+#         </button>
+#         <button py-click="upgradePath(1)" id = "1" type="button" disabled>
+#             Upgrade Path 2
+#         </button>
+#         <button py-click="upgradePath(1)" id = "1" type="button" disabled>
+#             Upgrade Path 3
+#         </button>
+#     </div>
+# </div>
+# <input type="radio" name="sendType" checked="true" id="Zero">
+# <label for="Zero">None</label>
+    deleteChildren('#farmSelect')
+    farmSelect = document.querySelector('#farmSelect')
+    if 0 in farmSlots:
+        for index in farmSlots:
+            farmRadio = document.createElement('input')
+            farmRadio.type = 'radio'
+            farmRadio.name = 'farmIndex'
+            farmRadio.id = f"farm{index}"
+            farmRadio.value = index
+            radioLabel = document.createElement('label')
+            radioLabel.setAttribute('for', f"farm{index}")
+            radioLabel.innerText = f"Farm {index}"
+            farmSelect.appendChild(farmRadio)
+            farmSelect.appendChild(radioLabel)
+        buttons = document.querySelectorAll('#upgradeFarmButtons button')
+        for button in buttons:
+            button.disabled = False
+    else:
+        p = document.createElement('p')
+        p.textContent = "No farms :("
+        farmSelect.appendChild(p)
+        buttons = document.querySelectorAll('#upgradeFarmButtons button')
+        for button in buttons:
+            button.disabled = True
+
+def upgradePath(path):
+    pathNum = int(path)
+    console.log(pathNum)
+    farmIndex = int(document.querySelector('input[name="farmIndex"]:checked').value)
+    buy_queue.append([upgradeFarm(farmIndex, pathNum-1, buffer = 0)])
+    renderBuyQueue()
+    setInitialState()
 def addToBuyQueue():
     buyValue = float(Element('buyPriceInput').value)
     buyBuffer = 0
     if Element('buyBuffer').value != '':
         buyBuffer = float(Element('buyBuffer').value)
     buy_queue.append([buyDefense(buyValue, buyBuffer)])
-    buyDisplay = document.querySelector('#buyQueue')
-    buyLine = document.createElement('p')
-    buyLine.innerText = f'{buyValue} Buffer: {buyBuffer}'
-    buyDisplay.appendChild(buyLine)
+    renderBuyQueue()
     setInitialState()
 
+def renderBuyQueue():
+    deleteChildren('#buyQueue')
+    queue = document.querySelector('#buyQueue')
+    for buy in buy_queue:
+        p = document.createElement('p')
+        p.textContent = buy
+        button = document.createElement('button')
+        button.id = str(buy)
+        button.textContent = "Delete"
+        p.appendChild(button)
+        queue.appendChild(p)
+        proxy = create_proxy(lambda event: deleteBuy(event.target))
+        button.addEventListener("click", proxy)
+
+def deleteBuy(button):
+    console.log(button.id)
+    buy_queue.remove(eval(button.id))
+    renderFarmSlots();
+    renderBuyQueue()
 def addToEcoQueue():
     roundNum = float(document.getElementById('ecoRound').value)
     document.getElementById('ecoRound').value = float(Element('ecoRound').value)+1
