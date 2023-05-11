@@ -2006,6 +2006,15 @@ def upgradePath(path):
     buy_queue.append([upgradeFarm(farmIndex, pathNum-1, cashBuffer)])
     renderBuyQueue()
     setInitialState()
+
+def farmSell():
+    farmIndex = int(document.querySelector('input[name="farmIndex"]:checked').value)
+    farm = document.querySelector('input[name="farmIndex"]:checked')
+    farm.disabled = True
+    console.log(farmIndex)
+    buy_queue.append([sellFarm(farmIndex)])
+    renderBuyQueue()
+    setInitialState()
 def addToBuyQueue():
     buyValue = float(Element('buyPriceInput').value)
     buyBuffer = 0
