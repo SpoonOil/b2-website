@@ -1836,7 +1836,8 @@ buy_queue = []
 eco_queue = []
 farms = {}
 farmInfo = []
-farmSlots = {}
+farmSlots = []
+farmsToBuy = 0
 
 initial_state = {
     'Cash': 650,
@@ -1857,12 +1858,17 @@ def setStallFactor():
 
 # restart without reloading
 def resetSim():
-    rounds.clear()
+    global rounds
+    global farmSlots
+    global farms
+    global eco_queue
+    global buy_queue
+    console.log("hi")
     rounds = Rounds(1)
     buy_queue.clear()
     eco_queue.clear()
     farms.clear()
-    farmInfo = []
+    farmInfo.clear()
     farmSlots.clear()
     initial_state = {
         'Cash': 650,
@@ -1913,25 +1919,29 @@ def createFarm():
     for index, farm in enumerate(farmInfo):
         farms[index] = farmInfo[index]
     i = 0
-    while True:
-        if not (i in farmSlots):
-            farmSlots[i] = True
-            break
-        i+=1
-    console.log(farmInfo, farms)
+    updateFarmSlots()
     setInitialState()
-    renderFarmSlots()
+
 
 def purchaseFarm():
     buy_queue.append([buyFarm()])
-    i = 0
-    while True:
-        if not (i in farmSlots):
-            farmSlots[i] = True
-            break
-        i+=1
+    global farmsToBuy
+    farmsToBuy+=1
+    updateFarmSlots()
     renderBuyQueue()
     setInitialState()
+
+def updateFarmSlots():
+    global farmSlots
+    farmSlots = []
+    global farmInfo
+    console.log('farmInfo:' + str(repr(farmInfo)))
+    for index, farm in enumerate(farmInfo):
+        farmSlots.append(True)
+    global farmsToBuy
+    for i in range(farmsToBuy):
+        farmSlots.append(True)
+    console.log(repr(farmSlots))
     renderFarmSlots()
 
 def renderFarmSlots():
@@ -1956,8 +1966,8 @@ def renderFarmSlots():
 # <label for="Zero">None</label>
     deleteChildren('#farmSelect')
     farmSelect = document.querySelector('#farmSelect')
-    if 0 in farmSlots:
-        for index in farmSlots:
+    if len(farmSlots) !=0:
+        for index, value in enumerate(farmSlots):
             farmRadio = document.createElement('input')
             farmRadio.type = 'radio'
             farmRadio.name = 'farmIndex'
@@ -2011,7 +2021,14 @@ def renderBuyQueue():
 
 def deleteBuy(button):
     console.log(button.id)
-    buy_queue.remove(eval(button.id))
+    buy = eval(button.id)
+    buy_queue.remove(buy)
+    console.log(buy[0]['Type'])
+    if buy[0]['Type'] == 'Buy Farm':
+        global farmsToBuy
+        farmsToBuy-=1
+        console.log(farmsToBuy)
+        updateFarmSlots()
     renderFarmSlots();
     renderBuyQueue()
 def addToEcoQueue():
