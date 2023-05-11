@@ -1737,6 +1737,8 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
             <button type="button" py-click="purchaseFarm()">
                 Buy New Farm
             </button>
+            <input type="number" value = "0"name="newFarmBuffer" id="newFarmBuffer">
+            <label for="newFarmBuffer">Cash Buffer</label>
             <div id="existingFarms">
                 <h5>Upgrade Existing Farms</h5>
                 <div id="upgradeFarmDiv">
@@ -1753,6 +1755,11 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
                         <button py-click="upgradePath('3')" type="button" disabled>
                             Upgrade Path 3
                         </button>
+                        <button disabled py-click="farmSell()" type="button">
+                            Sell Farm
+                        </button>
+                        <input type="number" value = "0" name="farmBuffer" id="farmBuffer">
+                        <label for="farmBuffer">Cash Buffer</label>
                     </div>
                 </div>
             </div>
@@ -1900,6 +1907,7 @@ def deleteChildren(tag):
         node.removeChild(node.lastChild)
 
 
+#updates gamestate based on all the global variables and their inputs
 def setInitialState(stallFactorNum = rounds):
     global rounds
     stallFactorNum = rounds
@@ -1924,7 +1932,8 @@ def createFarm():
 
 
 def purchaseFarm():
-    buy_queue.append([buyFarm()])
+    buffer = int(document.querySelector('#newFarmBuffer').value)
+    buy_queue.append([buyFarm(buffer)])
     global farmsToBuy
     farmsToBuy+=1
     updateFarmSlots()
@@ -1990,10 +1999,11 @@ def renderFarmSlots():
             button.disabled = True
 
 def upgradePath(path):
+    cashBuffer = int(document.querySelector('#farmBuffer').value)
     pathNum = int(path)
     console.log(pathNum)
     farmIndex = int(document.querySelector('input[name="farmIndex"]:checked').value)
-    buy_queue.append([upgradeFarm(farmIndex, pathNum-1, buffer = 0)])
+    buy_queue.append([upgradeFarm(farmIndex, pathNum-1, cashBuffer)])
     renderBuyQueue()
     setInitialState()
 def addToBuyQueue():
