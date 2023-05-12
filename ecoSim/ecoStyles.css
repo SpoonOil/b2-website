@@ -1,0 +1,342 @@
+/* begin base styles */
+html {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: #c8d0db;
+    height: 100%;
+    width: 100%;
+}
+
+label {
+    font-family: 'Cabin';
+    font-weight: normal;
+}
+input[type='number'] {
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    width: 10ch;
+}
+
+button {
+    padding : 10px;
+    border-radius: 4px;
+    color: #c8d0db;
+    background: #144272;
+    border: 3px solid #2C74B3
+}
+
+button:hover {
+    filter: brightness(120%);
+    cursor: pointer;
+}
+
+button:active {
+    filter:brightness(90%);
+}
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #c8d0db;
+}
+
+:root {
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background-color: #0A2647;
+    display: flex;
+    flex-direction: column;
+}
+
+/* end base style */
+
+/* begin header styles */
+.headerText {
+    background-color: #03162c;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0 0 0;
+    font-size: 2.5em;
+    color: #ffbb00;
+    font-family: 'Luckiest Guy';
+    font-weight: 100;
+    text-shadow: 0px 3px 2px black;
+}
+
+.toolList {
+    margin: 0 0 15px;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: space-around;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.toolList>li {
+    font-weight: 300;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 3px 0px black;
+    border-bottom: 3px solid #2C74B3;
+}
+
+.toolList>li>* {
+    box-sizing: border-box;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.toolList>li:hover {
+
+    transition: all 0.25s ease;
+    filter: brightness(105%);
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+}
+
+.toolList>li:active {
+    filter: brightness(95%);
+    position: relative;
+    top: 1px;
+}
+
+.toolList a {
+    width: 100%;
+    text-decoration: none;
+    color: #c8d0db;
+}
+
+.toolList a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+body .toolList>li.currentPage {
+    filter: brightness(120%);
+    font-weight: 600;
+    box-shadow: none;
+}
+
+body .toolList>li.currentPage:hover {
+    cursor: initial;
+}
+
+body .toolList>li.currentPage:active {
+    position: initial;
+}
+
+/* end header styles */
+
+/* begin eco sim styles */
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.simHeader {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+    width:80%;
+}
+.subtitle {
+    font-size: 1em;
+    font-family: 'Cabin';
+    opacity: 0.8
+}
+button.resetButton {
+    margin-left:auto;
+    padding : 10px;
+    border-radius: 100%;
+    color: #c8d0db;
+    background: #144272;
+    border: 3px solid #2C74B3
+}
+
+/* begin graph styles */
+.graphContainer {
+    width: 90%;
+    height: max-content;
+}
+
+section.graphSection {
+    background-color: #03162c;
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+#graph-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    overflow:auto;
+}
+
+#graph-area img{
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+}
+
+#graph-area span {
+    padding: 28vh 0;
+}
+
+#graph-area .graphPlaceholder {
+    align-self: center;
+    opacity: .8;
+}
+
+.graphHeader {
+    margin: 0;
+    padding: 10px;
+    background-color: #144272;
+    border-radius: 8px 8px 0 0 ;
+}
+
+/* end graph styles */
+
+/* begin parameter styles */
+
+.paramsContainer {
+    display: flex;
+    gap: 10px;
+    width: 90%;
+}
+
+.paramsContainer>* {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.paramsContainer h2 {
+    margin-top: 0;
+}
+
+.initialStateParams{
+    background-color: #03162c;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+}
+
+.initialStateHeader {
+    text-align: center;
+    background-color: #144272;
+    margin: 0;
+    padding: 8px;
+    border-radius: 8px 8px 0 0;
+}
+.stallInputContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.stallForm {
+    margin: 0;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.stallForm button {
+    background: #144272;
+}
+
+.initialGameState h2 {
+    flex: 0
+}
+
+.initButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.initialStateForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.initialStateForm select {
+    width: 20ch;
+    padding: 3px;
+    border-radius: 4px;
+    border: none;
+}
+.initialStateForm>* {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.initialFarmsContainer {
+    margin-top: 20px;
+}
+.initialFarmsForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.initFarmPaths {
+    display: flex;
+    gap: 10%
+}
+
+.initialFarmsContainer h4, .initialFarmsContainer h3 {
+    margin-top: 0;
+}
+.initialFarmsContainer h4 {
+    font-family: 'Cabin';
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.initFarmPaths>* {
+    flex: 1;
+    width: 50px;
+    margin-bottom: 20px;
+}
+
+.initialFarmsForm button{
+    align-self: center;
+}
+
+#initialStateSubmit {
+    margin: auto;
+}
+
+h4.farmsListHeader {
+    font-weight: bold;
+    text-align: left;
+}

@@ -3,15 +3,270 @@
     <title>Eco Simulator</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <link rel="stylesheet" type="text/css" href="ecoStyles.css">
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+
   </head>
   <body>
+    <header>
+        <h1 class="headerText">Battles 2 Stats</h1>
+        <nav class="toolsSection">
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="toolList">
+                <li class='navItem currentPage'><span class='currentPage navLink'>Home</span></li>
+                <li class='navItem'><a class='navLink' href="playerSearch/playerSearch.html">Player Search</a></li>
+                <li class='navItem'><a class='navLink' href="microPractice/practice.html">Micro Practice Tool</a></li>
+                <li class='navItem'><a class="navLink" href="ecoSim/ecoSim.html">Eco Simulator</a></li>
+                <li class='navItem'><a
+                        href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2
+                        Popology</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <py-config>
-      packages = ["matplotlib", "pandas", "numpy"]
-    </py-config>
+<py-config>
+packages = ["matplotlib", "pandas", "numpy"]
+</py-config>
 
-    <py-script>
+<py-repl hidden>
+</py-repl>
+
+<main>
+    <div class="simHeader">
+        <h1>Eco Simulator </h1>
+        <span class="subtitle">made by redlaserbm</span>
+        <button class = "resetButton" py-click="resetSim()"><span class="material-symbols-outlined">
+            restart_alt
+            </span></button>
+    </div>
+    <div class="graphContainer">
+        <h3 class="graphHeader">Graph</h3>
+        <section class="graphSection">
+            <div id="graph-area"><span class="graphPlaceholder">Nothing Here Yet :P</span></div>
+        </section>
+    </div>
+    <div class="stallInputContainer">
+        <form class="stallForm">
+            <label for="stallInput">Stall Factor</label>
+            <input type="range" id="stallInput" min="0" max = "1" step = "0.1" value="1">
+            <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
+        </form>
+    </div>
+    <div class="paramsContainer">
+        <section class="initialGameState">
+            <h2 class ="initialStateHeader">Initial Game State</h2>
+            <div class="initialStateParams">
+                <h3>Starting Parameters</h3>
+                <form class='initialStateForm' action="">
+                    <div class="startCashContainer">
+                        <label for="cashInput">Starting Cash</label>
+                        <input type="number" id="cashInput" value="650">
+                    </div>
+                    <div class="startEcoContainer">
+                        <label for="ecoInput">Starting Eco</label>
+                        <input type="number" id="ecoInput" value="250">
+                    </div>
+                    <div class="startSendContainer">
+                        <label for="ecoSendInput">Starting Send</label>
+                        <select name="startingSend" id="ecoSendInput">
+                            <option value="Zero">None</option>
+                            <option value="Grouped Reds">Grouped Reds</option>
+                            <option value="Spaced Blues">Spaced Blues</option>
+                            <option value="Grouped Blues">Grouped Blues</option>
+                            <option value="Spaced Greens">Spaced Greens</option>
+                            <option value="Grouped Greens">Grouped Greens</option>
+                            <option value="Spaced Yellows">Spaced Yellows</option>
+                            <option value="Grouped Yellows">Grouped Yellows</option>
+                            <option value="Spaced Pinks">Spaced Pinks</option>
+                            <option value="Grouped Pinks">Grouped Pinks</option>
+                            <option value="Spaced Whites">Spaced Whites</option>
+                            <option value="Grouped Whites">Grouped Whites</option>
+                            <option value="Spaced Blacks">Spaced Blacks</option>
+                            <option value="Grouped Blacks">Grouped Blacks</option>
+                            <option value="Spaced Purples">Spaced Purples</option>
+                            <option value="Grouped Purples">Grouped Purples</option>
+                            <option value="Spaced Zebras">Spaced Zebras</option>
+                            <option value="Grouped Zebras">Grouped Zebras</option>
+                            <option value="Spaced Leads">Spaced Leads</option>
+                            <option value="Grouped Leads">Grouped Leads</option>
+                            <option value="Spaced Rainbows">Spaced Rainbows</option>
+                            <option value="Grouped Rainbows">Grouped Rainbows</option>
+                            <option value="Spaced Ceramics">Spaced Ceramics</option>
+                            <option value="Grouped Ceramics">Grouped Ceramics</option>
+                        </select>
+                    </div>
+                    <div class="startRoundContainer">
+                        <label for="startRoundInput">Starting Round</label>
+                        <input type="number" id="startRoundInput" value="0">
+                    </div>
+                </form>
+                <div class="initButtonContainer">
+                    <button type="button" py-click="setInitialState()" id="initialStateSubmit">
+                        Change Initial State
+                    </button>
+                </div>
+                <section class="initialFarmsContainer">
+                    <h3>Starting Farms</h3>
+                    <form class="initialFarmsForm">
+                        <h4>Farm Paths</h4>
+                        <div class="initFarmPaths">
+                            <input type="number" name="Farm Path 1" id="farmPath1" value="0">
+                            <input type="number" name="Farm Path 2" id="farmPath2" value="0">
+                            <input type="number" name="Farm Path 3" id="farmPath3" value="0">
+                        </div>
+                        <button type="button" py-click="createFarm()">Create INITIAL Farm</button>
+                    </form>
+                    <section class="farms">
+                        <h4 class="farmsListHeader">Starting Farms List</h4>
+                        <div id="startingFarms">
+
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </section>
+        <section class="buyQueueContainer">
+            <form>
+                <h2>Add to Buy Queue</h2>
+                <div class="buyDefenceContainer">
+                    <h3>Buy Defence</h3>
+                    <label for="buyPriceInput">Price</label>
+                    <input type="number" id="buyPriceInput" value="200">
+                    <label for="buyBuffer">Cash Buffer</label>
+                    <input type="number" id="buyBuffer">
+                    <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
+                </div>
+            </form>
+            <form>
+                <h3>Farms</h5>
+                <button type="button" py-click="purchaseFarm()">
+                    Buy New Farm
+                </button>
+                <input type="number" value = "0"name="newFarmBuffer" id="newFarmBuffer">
+                <label for="newFarmBuffer">Cash Buffer</label>
+                <div id="existingFarms">
+                    <h5>Upgrade Existing Farms</h5>
+                    <div id="upgradeFarmDiv">
+                        <div id="farmSelect">
+                            <p>no farms :&#40;</p>
+                        </div>
+                        <div id="upgradeFarmButtons">
+                            <button py-click="upgradePath('1')" type="button" disabled>
+                                Upgrade Path 1
+                            </button>
+                            <button py-click="upgradePath('2')" type="button" disabled>
+                                Upgrade Path 2
+                            </button>
+                            <button py-click="upgradePath('3')" type="button" disabled>
+                                Upgrade Path 3
+                            </button>
+                            <button disabled py-click="farmSell()" type="button">
+                                Sell Farm
+                            </button>
+                            <input type="number" value = "0" name="farmBuffer" id="farmBuffer">
+                            <label for="farmBuffer">Cash Buffer</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div id="buyQueueContainer">
+                <h3>Buy Queue</h3>
+                <div id="buyQueue">
+                </div>
+            </div>
+        </section>
+        <section class="ecoQueueContainer">
+            <form action="">
+                <div class="sendsContainer">
+                    <input type="radio" name="sendType" checked="true" id="Zero">
+                    <label for="Zero">None</label>
+                    <input type="radio" name="sendType" id="Grouped Reds">
+                    <label for="Grouped Reds">Grouped Reds</label>
+                    <input type="radio" name="sendType" id="Spaced Blues">
+                    <label for="Spaced Blues">Spaced Blues</label>
+                    <input type="radio" name="sendType" id="Grouped Blues">
+                    <label for="Grouped Blues">Grouped Blues</label>
+                    <input type="radio" name="sendType" id="Spaced Greens">
+                    <label for="Spaced Greens">Spaced Greens</label>
+                    <input type="radio" name="sendType" id="Grouped Greens">
+                    <label for="Grouped Greens">Grouped Greens</label>
+                    <input type="radio" name="sendType" id="Spaced Yellows">
+                    <label for="Spaced Yellows">Spaced Yellows</label>
+                    <input type="radio" name="sendType" id="Grouped Yellows">
+                    <label for="Grouped Yellows">Grouped Yellows</label>
+                    <input type="radio" name="sendType" id="Spaced Pinks">
+                    <label for="Spaced Pinks">Spaced Pinks</label>
+                    <input type="radio" name="sendType" id="Grouped Pinks">
+                    <label for="Grouped Pinks">Grouped Pinks</label>
+                    <input type="radio" name="sendType" id="Spaced Whites">
+                    <label for="Spaced Whites">Spaced Whites</label>
+                    <input type="radio" name="sendType" id="Grouped Whites">
+                    <label for="Grouped Whites">Grouped Whites</label>
+                    <input type="radio" name="sendType" id="Spaced Blacks">
+                    <label for="Spaced Blacks">Spaced Blacks</label>
+                    <input type="radio" name="sendType" id="Grouped Blacks">
+                    <label for="Grouped Blacks">Grouped Blacks</label>
+                    <input type="radio" name="sendType" id="Spaced Purples">
+                    <label for="Spaced Purples">Spaced Purples</label>
+                    <input type="radio" name="sendType" id="Grouped Purples">
+                    <label for="Grouped Purples">Grouped Purples</label>
+                    <input type="radio" name="sendType" id="Spaced Zebras">
+                    <label for="Spaced Zebras">Spaced Zebra</label>
+                    <input type="radio" name="sendType" id="Grouped Zebras">
+                    <label for="Grouped Zebras">Grouped Zebra</label>
+                    <input type="radio" name="sendType" id="Spaced Leads">
+                    <label for="Spaced Leads">Spaced Leads</label>
+                    <input type="radio" name="sendType" id="Grouped Leads">
+                    <label for="Grouped Leads">Grouped Leads</label>
+                    <input type="radio" name="sendType" id="Spaced Rainbows">
+                    <label for="Spaced Rainbows">Spaced Rainbow</label>
+                    <input type="radio" name="sendType" id="Grouped Rainbows">
+                    <label for="Grouped Rainbows">Grouped Rainbow</label>
+                    <input type="radio" name="sendType" id="Spaced Ceramics">
+                    <label for="Spaced Ceramics">Spaced Ceramic</label>
+                    <input type="radio" name="sendType" id="Grouped Ceramics">
+                    <label for="Grouped Ceramics">Grouped Ceramic</label>
+                </div>
+                    <input type="number" id="ecoRound" value="1">
+                    <label for="roundNumber">Round</label>
+            </form>
+            <button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button>
+            <div id="ecoQueue">
+                <h3>Eco Queue</h3>
+            </div>
+        </section>
+    </div>
+    <section class="runSimContainer">
+        <input type="number" id="endRoundInput" value="11">
+        <label for="endRoundInput">Simulation End Round</label>
+        <button type="button" py-click="runSim()">Run Sim</button>
+    </section>
+<py-script>
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -346,16 +601,15 @@ boat_upgrades_costs = [5400, 19000]
 boat_payout_values = [300, 1000, 3000]
 boat_sell_values = [1960, 6560, 21760]
 
-
+# %% [markdown]
 # # Rounds Class
 
+# %% [markdown]
 # The rounds class is designed to handle the conversion of round info to times and vice versa. That is, the class is capable of answering the following two questions:
 # 1. Given some time, what round of the game are we on, and how much of the round has elapsed?
 # 2. Given some round, how much time has elapsed in the game so far?
 
-# In[12]:
-
-
+# %%
 class Rounds():
     def __init__(self, stall_factor):
         #Compute the round times given the stall factor
@@ -407,14 +661,13 @@ class Rounds():
 
 
 
-
+# %% [markdown]
 # # Game State Class
 
+# %% [markdown]
 # The game state class is an instance of battles 2 in action!
 
-# In[13]:
-
-
+# %%
 def impact(cash, loan, amount):
     #If the amount is positive (like a payment), half of the payment should be directed to the outstanding loan
     #If the amount is negative (like a purhcase), then we can treat it "normally"
@@ -430,18 +683,15 @@ def impact(cash, loan, amount):
     return cash, loan
 
 def writeLog(lines, filename = 'log', path = './logs/'):
-    return
+    document.getElementById('logdiv').textContent = lines
 
-
-# In[39]:
-
-
+# %%
 class GameState():
     def __init__(self, initial_state):
 
-        ###########################
-        #PART 1: INITIAL PARAMETERS
-        ###########################
+        ############################
+        #INITIALIZING THE GAME STATE
+        ############################
 
         #To ensure the code runs properly, we'll create a log file to track cash and eco as they evolve over time
         self.logs = []
@@ -455,8 +705,14 @@ class GameState():
         self.send_name = initial_state.get('Eco Send')
         if self.send_name is None:
             self.send_name = 'Zero'
-        self.eco_cost = eco_send_info[self.send_name][0]
-        self.eco_gain = eco_send_info[self.send_name][1]
+
+        try:
+            self.eco_cost = eco_send_info[self.send_name][0]
+            self.eco_gain = eco_send_info[self.send_name][1]
+        except:
+            self.send_name = 'Zero'
+            self.eco_cost = 0
+            self.eco_gain = 0
 
         #~~~~~~~~~~~~~~~~~
         #ROUND LENGTH INFO
@@ -478,16 +734,24 @@ class GameState():
             self.current_time = initial_state.get('Game Time')
             self.current_round = self.rounds.getRoundFromTime(self.current_time)
 
+        #~~~~~~~
+        #LOGGING
+        #~~~~~~~
+
         #As the Game State evolves, I'll use these arrays to track how cash and eco have changed over time
         self.time_states = [self.current_time]
         self.cash_states = [self.cash]
         self.eco_states = [self.eco]
 
+        #These lists will hold tuples (time, message)
+        self.buy_messages = []
+        self.eco_messages = []
+
         #~~~~~~~~~~~~~~~
         #FARMS & ALT-ECO
         #~~~~~~~~~~~~~~~
 
-        #Now that round length info is initialized, let's process the initial info given about farms/alt-eco:
+        #Process the initial info given about farms/alt-eco:
 
         #Info for whether T5 Farms are up or not
         self.T5_exists = [False, False, False]
@@ -512,13 +776,6 @@ class GameState():
                     elif self.farms[key].upgrades[i] == 5 and self.T5_exists[i] == True:
                         self.farms[key].upgrades[i] = 4
 
-        #Next, supply drops!
-        self.supply_drops = initial_state.get('Supply Drops')
-        if self.supply_drops is not None:
-            self.elite_sniper = self.supply_drops['Elite Sniper Index']
-            self.sniper_key = len(self.supply_drops) - 2
-            #self.supply_drops.pop('Elite Sniper Index')
-
         #Next, boat farms!
         self.boat_farms = initial_state.get('Boat Farms')
         self.Tempire_exists = False
@@ -536,7 +793,28 @@ class GameState():
                 elif boat_farm['Upgrade'] == 5 and self.Tempire_exists[i] == True:
                     boat_farm['Upgrade'] = 4
 
+        #Next, druid farms!
+        self.druid_farms = initial_state.get('Druid Farms')
+        if self.druid_farms is not None:
+            self.sotf = self.druid_farms['Spirit of the Forest Index']
+            self.druid_key = len(self.druid_farms) - 2
+        else:
+            self.sotf = None
+            self.druid_key = 0
 
+        if self.sotf is not None:
+            self.sotf_min_use_time = self.druid_farms[self.sotf] + 20
+        else:
+            self.sotf_min_use_time = None
+
+        #Next, supply drops!
+        self.supply_drops = initial_state.get('Supply Drops')
+        if self.supply_drops is not None:
+            self.elite_sniper = self.supply_drops['Elite Sniper Index']
+            self.sniper_key = len(self.supply_drops) - 2
+        else:
+            self.elite_sniper = None
+            self.sniper_key = 0
 
         #~~~~~~~~~~~~~~~~
         #THE QUEUE SYSTEM
@@ -554,6 +832,10 @@ class GameState():
         #For repeated supply drop buys
         self.supply_drop_max_buy_time = -1
         self.supply_drop_buffer = 0
+
+        #For repeated druid farm buys
+        self.druid_farm_max_buy_time = -1
+        self.druid_farm_buffer = 0
 
         #~~~~~~~~~~
         #FAIL-SAFES
@@ -576,27 +858,56 @@ class GameState():
         self.logs.append("The current game time is %s seconds"%(self.current_time))
         self.logs.append("The game round start times are given by %s \n"%(self.rounds.round_starts))
 
-    def viewCashEcoHistory(self):
+    def viewCashEcoHistory(self, dim = (15,18)):
         self.logs.append("MESSAGE FROM GameState.viewCashEcoHistory():")
         self.logs.append("Graphing history of cash and eco!")
-        fig, ax = plt.subplots(2)
-        fig.set_size_inches(6,9)
+
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #Graph the cash and eco values over time
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        fig, ax = plt.subplots(1, 2)
+        fig.set_size_inches(dim[0],dim[1])
         ax[0].plot(self.time_states, self.cash_states, label = "Cash")
         ax[1].plot(self.time_states, self.eco_states, label = "Eco")
 
-        #For easy reference, let's also mark on these graphs where the rounds start
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #Mark where the rounds start
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         cash_min = min(self.cash_states)
         eco_min = min(self.eco_states)
 
         cash_max = max(self.cash_states)
         eco_max = max(self.eco_states)
+
         round_to_graph = self.rounds.getRoundFromTime(self.time_states[0]) + 1
         while self.rounds.round_starts[round_to_graph] <= self.time_states[-1]:
-            self.logs.append("Graphing round %s, which starts at time %s"%(str(round_to_graph),str(self.rounds.round_starts[round_to_graph])))
-            ax[0].plot([self.rounds.round_starts[round_to_graph], self.rounds.round_starts[round_to_graph]],[cash_min, cash_max], label = "R" + str(round_to_graph) + " start")
-            ax[1].plot([self.rounds.round_starts[round_to_graph], self.rounds.round_starts[round_to_graph]],[eco_min, eco_max], label = "R" + str(round_to_graph) + " start")
+            ax[0].plot([self.rounds.round_starts[round_to_graph], self.rounds.round_starts[round_to_graph]],[cash_min-1, cash_max+1], label = "R" + str(round_to_graph) + " start", linestyle='dotted', color = 'k')
+            ax[1].plot([self.rounds.round_starts[round_to_graph], self.rounds.round_starts[round_to_graph]],[eco_min-1, eco_max+1], label = "R" + str(round_to_graph) + " start", linestyle='dotted', color = 'k')
             round_to_graph += 1
+
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #Mark where purchases in the buy queue and eco queue occurred
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        for message in self.buy_messages:
+            if message[2] == 'Eco':
+                line_color = 'b'
+            elif message[2] == 'Buy':
+                line_color = 'r'
+
+            if len(message[1]) > 30:
+                thing_to_say = message[1][0:22] + '...'
+            else:
+                thing_to_say = message[1]
+
+            ax[0].plot([message[0],message[0]],[cash_min-1, cash_max+1], label = thing_to_say, linestyle = 'dashed', color = line_color)
+            ax[1].plot([message[0],message[0]],[eco_min-1, eco_max+1], label = thing_to_say, linestyle = 'dashed', color = line_color)
+
+        #~~~~~~~~~~~~~~~~
+        #Label the graphs
+        #~~~~~~~~~~~~~~~~
 
         ax[0].set_title("Cash vs Time")
         ax[1].set_title("Eco vs Time")
@@ -606,8 +917,8 @@ class GameState():
 
         ax[1].set_xlabel("Time (seconds)")
 
-        ax[0].legend(loc='upper left')
-        ax[1].legend(loc='upper left')
+        ax[0].legend(bbox_to_anchor = (1.02, 1))
+        ax[1].legend(bbox_to_anchor = (1.02, 1))
 
         fig.tight_layout()
         display(fig, target="graph-area", append=False)
@@ -664,7 +975,7 @@ class GameState():
         self.send_name = send_name
         self.logs.append("Modified the eco send to %s"%(send_name))
 
-    def fastForward(self, target_time = None, target_round = None, interval = 1):
+    def fastForward(self, target_time = None, target_round = None, interval = 0.1):
         self.logs.append("MESSAGE FROM GameState.fastForward: ")
 
         # If a target round is given, compute the target_time from that
@@ -676,8 +987,8 @@ class GameState():
             target_time = self.current_time
 
         while self.current_time < target_time:
-            intermediate_time = min(np.floor((self.current_time + interval)/interval)*interval,target_time)
-            self.logs.append("Advancing game to time %s"%(intermediate_time))
+            intermediate_time = min(max(np.floor(self.current_time/interval + 1)*interval,self.current_time + interval/2),target_time)
+            self.logs.append("Advancing game to time %s"%(np.round(intermediate_time,3)))
             self.advanceGameState(target_time = intermediate_time)
             self.logs.append("----------")
 
@@ -687,7 +998,7 @@ class GameState():
         self.logs.append("Our new cash and eco is given by (%s,%s) \n"%(np.round(self.cash,2),np.round(self.eco,2)))
 
     def advanceGameState(self, target_time = None, target_round = None):
-        self.logs.append("MESSAGE FROM GameState.advanceGameState: ")
+        #self.logs.append("MESSAGE FROM GameState.advanceGameState: ")
         # Advance the game to the time target_time,
         # computing the new money and eco amounts at target_time
 
@@ -703,6 +1014,7 @@ class GameState():
         if eco_send_availability[self.send_name][1] < self.current_round:
             self.logs.append("Warning! The current eco send is no longer available! Switching to the zero send.")
             self.changeEcoSend('Zero')
+            self.buy_messages.append((self.current_time, 'Change eco to %s'%(self.send_name), 'Eco'))
 
         # FAIL-SAFE: Prevent advanceGameState from using an eco send after it becomes unavailable by terminating early in this case.
         if eco_send_availability[self.send_name][1] + 1 <= self.rounds.getRoundFromTime(target_time):
@@ -733,6 +1045,36 @@ class GameState():
             }
             payout_times.append(payout_entry)
             eco_time += 6
+
+        #Next, let's do druid farms!
+        if self.druid_farms is not None:
+            for key in self.druid_farms.keys():
+                druid_farm = self.druid_farms[key]
+                if key != self.sotf:
+                    #Determine the earliest druid farm activation that could occur within the interval of interest (self.current_time,target_time]
+                    use_index = max(1,np.floor(1 + (self.current_time - druid_farm - 20)/40)+1)
+                    druid_farm_time = druid_farm + 20 + 40*(use_index-1)
+                    while druid_farm_time <= target_time:
+                        payout_entry = {
+                            'Time': druid_farm_time,
+                            'Payout Type': 'Direct',
+                            'Payout': 1000
+                        }
+                        payout_times.append(payout_entry)
+                        druid_farm_time += 40
+                elif key == self.sotf:
+                    #Spirit of the Forest has a start of round payment of 3000 dollars and an "optional" active that is used
+                    #At the start of each round, append a payout entry with the SOTF payout
+                    self.inc = 1
+                    while self.rounds.getTimeFromRound(self.current_round + self.inc) <= target_time:
+                        payout_entry = {
+                            'Time': self.rounds.getTimeFromRound(self.current_round + self.inc),
+                            'Payout Type': 'Direct',
+                            'Payout': 3000
+                        }
+                        payout_times.append(payout_entry)
+                        self.inc += 1
+
 
         #Next, let's do supply drops
         if self.supply_drops is not None:
@@ -885,7 +1227,7 @@ class GameState():
 
         #Now that we determined all the payouts, sort the payout times by the order they occur in
         payout_times = sorted(payout_times, key=lambda x: x['Time'])
-        self.logs.append("Sorted the payouts in order of increasing time!")
+        #self.logs.append("Sorted the payouts in order of increasing time!")
 
         ##############################
         #PART 2: COMPUTATION OF WEALTH
@@ -964,15 +1306,7 @@ class GameState():
             elif payout_times[i]['Time'] < payout_times[i+1]['Time']:
                 try_to_buy = True
 
-            # There is an option in the buy queue to trigger the action of repeatedly buying supply drops.
-            # This while loop processes *those* purchases independently of the buy queue
-            if payout['Time'] <= self.supply_drop_max_buy_time:
-                while self.cash >= 9850 + self.supply_drop_buffer:
-                    buy_time = payout['Time'] #Lazy code, but it works
-                    self.cash -= 9850
-                    self.supply_drops[self.sniper_key] = payout['Time']
-                    self.sniper_key += 1
-                    self.logs.append("Purchased a supply drop! (Automated purchase)")
+            buy_message_list = []
 
             # DEVELOPER'S NOTE: It is possible for the queue to be empty but for there to still be purchases to be performed
             while len(self.buy_queue) > 0 and try_to_buy == True:
@@ -1006,6 +1340,19 @@ class GameState():
                             farm = self.farms[ind]
                             if farm.min_use_time is not None and farm.min_use_time > self.min_buy_time:
                                 self.min_buy_time = farm.min_use_time
+                            elif farm.min_use_time is None:
+                                #If the farm doesn't have a min_use_time designated, it can't be an IMF farm!
+                                self.min_buy_time = float('inf')
+                                break
+
+                        #If the dict_obj is a SOTF use, force self.min_buy_time to be at least be the self.sotf_min_use_time
+                        if dict_obj['Type'] == 'Use Spirit of the Forest':
+                            if self.sotf_min_use_time is not None and self.sotf_min_use_time > self.min_buy_time:
+                                self.min_buy_time = self.sotf_min_use_time
+                            elif self.sotf_min_use_time is None:
+                                #Do not attempt to use SOTF if we don't have SOTF
+                                self.min_buy_time = float('inf')
+                                break
 
                     self.logs.append("Determined the minimum buy time of the next purchase to be %s"%(self.min_buy_time))
 
@@ -1015,6 +1362,8 @@ class GameState():
                     break
 
                 #Next, let's compute the cash and loan values we would have if the transaction was performed
+                #We will also take the opportunity here to form the message that gets sent to the graph for viewCashEcoHistory
+
 
                 self.valid_action_flag = True
                 for dict_obj in purchase_info:
@@ -1055,6 +1404,7 @@ class GameState():
                     elif dict_obj['Type'] == 'Activate IMF':
                         #WARNING: The farm in question must actually be an IMF Loan for us to use this ability!
                         #If it isn't, set a flag to False and break the loop.
+                        #DEVELOPER'S NOTE: A farm that has a min_use_time is not necessarily an IMF loan, it could also be an Monkeyopolis
                         if farm.upgrades[1] != 4:
                             self.logs.append("WARNING! Tried to take out a loan from a farm that is not an IMF!")
                             self.valid_action_flag = False
@@ -1085,6 +1435,21 @@ class GameState():
                         boat_farm = self.boat_farms[ind]
                         h_cash, h_loan = impact(h_cash, h_loan, boat_sell_values[boat_farm['Upgrade']-3])
 
+                    # DRUID FARM RELATED MATTERS
+                    elif dict_obj['Type'] == 'Buy Druid Farm':
+                        h_cash, h_loan = impact(h_cash, h_loan, -4775)
+                    elif dict_obj['Type'] == 'Sell Druid Farm':
+                        h_cash, h_loan = impact(h_cash, h_loan, 3342.5)
+                    elif dict_obj['Type'] == 'Buy Spirit of the Forest':
+                        #WARNING: There can only be one sotf at a time!
+                        if self.sotf is not None:
+                            self.valid_action_flag = False
+                            break
+                        h_cash, h_loan = impact(h_cash, h_loan, -35000)
+                    elif dict_obj['Type'] == 'Use Spirit of the Forest':
+                        #Whether or not SOTF is off cooldown is governed by the min_buy_time check
+                        h_cash, h_loan = impact(h_cash, h_loan, 750)
+
                     # SUPPLY DROP RELATED MATTERS
                     elif dict_obj['Type'] == 'Buy Supply Drop':
                         h_cash, h_loan = impact(h_cash, h_loan, -9850)
@@ -1099,7 +1464,7 @@ class GameState():
 
                     #If at any point while performing these operations our cash becomes negative, then prevent the transaction from occurring:
                     if h_cash < 0:
-                        self.logs.append("WARNING! Reached negative cash while attempting the transaction!")
+                        #self.logs.append("WARNING! Reached negative cash while attempting the transaction!")
                         self.valid_action_flag = False
                         break
 
@@ -1118,17 +1483,19 @@ class GameState():
                 # Note at this point we have already checked whether we have reached the minimum time for the buy and also
                 # we have already checked whether the buy item is valid. We now just need to check whether we have enough money!
 
-                self.logs.append("We have %s cash, but the next buy costs %s and has a buffer of %s and needs to be made on or after time %s!"%(np.round(self.cash,2), np.round(self.cash - h_cash,2),np.round(self.buffer,2), self.min_buy_time))
+                #self.logs.append("We have %s cash, but the next buy costs %s and has a buffer of %s and needs to be made on or after time %s!"%(np.round(self.cash,2), np.round(self.cash - h_cash,2),np.round(self.buffer,2), self.min_buy_time))
                 if h_cash >= self.buffer:
                     #If we do, perform the buy!
                     buy_time = payout['Time']
-                    self.logs.append("We have %s cash! That's enough to perform the next buy, which costs %s and has a buffer of %s!"%(np.round(self.cash,2), np.round(self.cash - h_cash,2),np.round(self.buffer,2)))
+                    self.logs.append("We have %s cash! We can do the next buy, which costs %s and has a buffer of %s and a minimum buy time of %s!"%(np.round(self.cash,2), np.round(self.cash - h_cash,2),np.round(self.buffer,2),np.round(self.min_buy_time,2)))
 
                     #Make the adjustments to the cash and loan amounts
                     self.cash = h_cash
                     self.loan = h_loan
 
                     for dict_obj in purchase_info:
+
+                        buy_message_list.append(dict_obj['Message'])
 
                         #FARM RELATED MATTERS
                         if dict_obj['Type'] == 'Buy Farm':
@@ -1244,6 +1611,33 @@ class GameState():
                                 self.Tempire_exists = False
                             self.boat_farms.pop(ind)
 
+                        # DRUID FARMS
+                        elif dict_obj['Type'] == 'Buy Druid Farm':
+                            self.druid_farms[self.druid_key] = payout['Time']
+                            self.druid_key += 1
+                            self.logs.append("Purchased a druid farm!")
+                        elif dict_obj['Type'] == 'Sell Druid Farm':
+                            ind = dict_obj['Index']
+                            self.logs.append("Selling the druid farm at index %s"%(ind))
+                            #If the druid we're selling is actually SOTF...
+                            if self.sotf is not None and ind == self.sotf:
+                                self.logs.append("The druid farm being sold is a Spirit of the Forest!")
+                                self.sotf = None
+                                self.sotf_min_use_time = None
+                        elif dict_obj['Type'] == 'Buy Spirit of the Forest':
+                            ind = dict_obj['Index']
+                            self.sotf = ind
+                            self.logs.append("Upgrading the druid farm at index %s into a Spirit of the Forest!"%(ind))
+                            #Determine the minimum time that the SOTF active could be used
+                            i = np.floor((20 + payout['Time'] - self.druid_farms[ind])/40) + 1
+                            self.sotf_min_use_time = payout['Time'] + 20 + 40*(i-1)
+                        elif dict_obj['Type'] == 'Use Spirit of the Forest':
+                            self.logs.append("Using the Spirit of the Forest active (index %s)"%(self.sotf))
+                            self.sotf_min_use_time = payout['Time'] + 40
+                        elif dict_obj['Type'] == 'Repeatedly Buy Druid Farms':
+                            self.druid_farm_max_buy_time = dict_obj['Maximum Buy Time']
+                            self.druid_farm_buffer = dict_obj['Buffer']
+                            self.logs.append("Triggered automated druid farm purchases until time %s"%(self.supply_drop_max_buy_time))
 
                         # SUPPLY DROP RELATED MATTERS
                         elif dict_obj['Type'] == 'Buy Supply Drop':
@@ -1281,6 +1675,35 @@ class GameState():
                     #self.logs.append("We can't afford the buy! Terminating the buy queue while loop")
                     break
 
+            #...so that players can see where in the graphs their purchases are occuring
+            if len(buy_message_list) > 0:
+                buy_message = ', '.join(buy_message_list)
+                self.buy_messages.append((buy_time, buy_message, 'Buy'))
+
+            #~~~~~~~~~~~~~~~~~~~~
+            # Automated Purchases
+            #~~~~~~~~~~~~~~~~~~~~
+
+            # There is an option in the buy queue to trigger the action of repeatedly buying supply drops or druid farms.
+            # These while loops process *those* transactions independently of the buy queue
+            # WARNING: Unusual results will occur if you attempt to implement automated purchases of multiple alt eco's at the same time.
+            # WARNING: Because automated purchases are processed after checking the buy queue, unexpected results may occur if items in the buy queue do not have a min_buy_time designated.
+
+            if payout['Time'] <= self.supply_drop_max_buy_time and try_to_buy == True:
+                while self.cash >= 9850 + self.supply_drop_buffer:
+                    buy_time = payout['Time'] #Lazy code, but it works
+                    self.cash -= 9850
+                    self.supply_drops[self.sniper_key] = payout['Time']
+                    self.sniper_key += 1
+                    self.logs.append("Purchased a supply drop! (Automated purchase)")
+
+            if payout['Time'] <= self.druid_farm_max_buy_time and try_to_buy == True:
+                while self.cash >= 4775 + self.druid_farm_buffer:
+                    buy_time = payout['Time'] #Lazy code, but it works
+                    self.cash -= 4775
+                    self.druid_farm[self.druid_key] = payout['Time']
+                    self.druid_key += 1
+                    self.logs.append("Purchased a druid farm!")
 
             #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             #Record the cash & eco history and advance the game time
@@ -1323,6 +1746,7 @@ class GameState():
         #Update the eco send, if necessary
         if len(self.eco_queue) > 0 and target_time >= self.eco_queue[0][0]:
             self.changeEcoSend(self.eco_queue[0][1])
+            self.buy_messages.append((self.current_time, 'Change eco to %s'%(self.send_name), 'Eco'))
             self.eco_queue.pop(0)
 
         #self.logs.append("Advanced game state to round " + str(self.current_round))
@@ -1332,20 +1756,16 @@ class GameState():
 
 
 
-
+# %% [markdown]
 # # The Monkey Farm Class
 
-# The payout of farms (for the most part) can be described by a payout amount and a payout frequency. There are three exceptions to this:
-# 1. Monkey Wall Street - The MWS has an additional start-of-round payment of 10000 dollars on top of its usual payment schedule. To account for this start-of-round bonus, we will do the following: Whenever a farm is upgraded to xx5, we will create an additional farm with payout frequency 1 and payout amount 10000. This "companion" farm will be marked with the self.MWS_bonus flag. If the player decides to sell their farm, we will search for this companion farm and delete it also.
-#
-# 2. Monkey banks - Monkey banks operate on entirely different rules. For now, because they are not commonly used in meta gameplay, I will ignore them for the time being.
-# 3. Banana Central - Banana central contains a buff which causes all BRF's to be worth 20% more. In order to accurately track this buff, we must set a variable within the *Game State* class that applies this buff when BC is bought (and removes it when it's sold).
+# %% [markdown]
+# The payout of farms (for the most part) can be described by a payout amount and a payout frequency.
 
+# %% [markdown]
 # Now it's time to define the MonkeyFarm class!
 
-# In[15]:
-
-
+# %%
 class MonkeyFarm():
     def __init__(self, initial_state):
 
@@ -1382,14 +1802,13 @@ class MonkeyFarm():
         if self.upgrades[1] >= 4:
             self.min_use_time = self.purchase_time + 20
 
-
+# %% [markdown]
 # # Functions For Simulation
 
+# %% [markdown]
 # To begin, we define "actions" that the player can perform in the simulation
 
-# In[16]:
-
-
+# %%
 ##############
 # MONKEY FARMS
 ##############
@@ -1398,7 +1817,8 @@ def buyFarm(buffer = 0, min_buy_time = 0):
     return {
         'Type': 'Buy Farm',
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Buy Farm'
     }
 
 def upgradeFarm(index, path, buffer = 0, min_buy_time = 0):
@@ -1407,7 +1827,8 @@ def upgradeFarm(index, path, buffer = 0, min_buy_time = 0):
         'Index': index,
         'Path': path,
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Upgrade farm %s at path %s'%(index, path)
     }
 
 def sellFarm(index, min_buy_time = 0):
@@ -1415,29 +1836,33 @@ def sellFarm(index, min_buy_time = 0):
     return {
         'Type': 'Sell Farm',
         'Index': index,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Sell farm %s'%(index)
     }
 
-def buyDefense(cost, buffer = 0, min_buy_time = 0):
+def buyDefense(cost, buffer = 0, min_buy_time = 0, message = 'Buy Defense'):
     return {
         'Type': 'Buy Defense',
         'Cost': cost,
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': message
     }
 
 def withdrawBank(index, min_buy_time = 0):
     return {
         'Type': 'Withdraw Bank',
         'Index': index,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Withdraw from farm %s'%(index)
     }
 
 def activateIMF(index, min_buy_time = 0):
     return {
         'Type': 'Activate IMF',
         'Index': index,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Take out loan from farm %s'%(index)
     }
 
 # WARNING: This function is for declaring farms in the initial game state.
@@ -1457,7 +1882,8 @@ def buyBoatFarm(buffer = 0, min_buy_time = 0):
     return {
         'Type': 'Buy Boat Farm',
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Buy boat farm'
     }
 
 def upgradeBoatFarm(index, buffer = 0, min_buy_time = 0):
@@ -1465,7 +1891,8 @@ def upgradeBoatFarm(index, buffer = 0, min_buy_time = 0):
         'Type': 'Upgrade Boat Farm',
         'Index': index,
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Upgrade boat farm at index %s'%(index)
     }
 
 def sellBoatFarm(index, min_buy_time = 0):
@@ -1473,7 +1900,8 @@ def sellBoatFarm(index, min_buy_time = 0):
     return {
         'Type': 'Sell Boat Farm',
         'Index': index,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Sell boat farm %s'%(index)
     }
 
 def initBoatFarm(purchase_time = None, upgrade = 3):
@@ -1481,6 +1909,62 @@ def initBoatFarm(purchase_time = None, upgrade = 3):
         'Purchase Time': purchase_time,
         'Upgrade': upgrade,
     }
+
+#############
+# DRUID FARMS
+#############
+
+def buyDruidFarm(buffer = 0, min_buy_time = 0):
+    return {
+        'Type': 'Buy Druid Farm',
+        'Buffer': buffer,
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Buy druid farm'
+    }
+
+def buySOTF(index, buffer = 0, min_buy_time = 0):
+    return {
+        'Type': 'Buy Spirit of the Forest',
+        'Index': index,
+        'Buffer': buffer,
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Upgrade druid farm %s to SOTF'%(index)
+    }
+
+def sellDruidFarm(index, buffer = 0, min_buy_time = 0):
+    return {
+        'Type': 'Sell Druid Farm',
+        'Index': index,
+        'Buffer': buffer,
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Sell druid farm %s'%(index)
+    }
+
+def repeatedlyBuyDruidFarms(min_buy_time = 0, max_buy_time = float('inf'), buffer = 0):
+    return {
+        'Type': 'Repeatedly Buy Druid Farms',
+        'Minimum Buy Time': min_buy_time,
+        'Maximum Buy Time': max_buy_time,
+        'Buffer': buffer,
+        'Message': 'Trigger repeated druid farm buys until time %s'%(max_buy_time)
+    }
+
+def useSOTF(min_buy_time = 0):
+    #Look, I know this is confusing, but minimum buy time really is the minimum time that we use SOTF in this case!
+    return {
+        'Type': 'Use Spirit of the Forest',
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Use SOTF active'
+    }
+
+# WARNING: This function is for declaring druid farms in the initial game state.
+# Do NOT use it to add druid farms during simulation
+def initDruidFarms(purchase_times, sotf = None):
+    dictionary = {}
+    for i in range(len(purchase_times)):
+        dictionary[i] = purchase_times[i]
+    dictionary['Spirit of the Forest Index'] = sotf
+    return dictionary
 
 ##############
 # SUPPLY DROPS
@@ -1490,7 +1974,8 @@ def buySupplyDrop(buffer = 0, min_buy_time = 0):
     return {
         'Type': 'Buy Supply Drop',
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Buy supply drop'
     }
 
 def buyEliteSniper(index, buffer = 0, min_buy_time = 0):
@@ -1498,7 +1983,8 @@ def buyEliteSniper(index, buffer = 0, min_buy_time = 0):
         'Type': 'Buy Elite Sniper',
         'Index': index,
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Upgrade supply drop %s to e-sniper'%(index)
     }
 
 def sellSupplyDrop(index, buffer = 0, min_buy_time = 0):
@@ -1506,7 +1992,8 @@ def sellSupplyDrop(index, buffer = 0, min_buy_time = 0):
         'Type': 'Sell Supply Drop',
         'Index': index,
         'Buffer': buffer,
-        'Minimum Buy Time': min_buy_time
+        'Minimum Buy Time': min_buy_time,
+        'Message': 'Sell supply drop %s'%(index)
     }
 
 def repeatedlyBuySupplyDrops(min_buy_time = 0, max_buy_time = float('inf'), buffer = 0):
@@ -1514,7 +2001,8 @@ def repeatedlyBuySupplyDrops(min_buy_time = 0, max_buy_time = float('inf'), buff
         'Type': 'Repeatedly Buy Supply Drops',
         'Minimum Buy Time': min_buy_time,
         'Maximum Buy Time': max_buy_time,
-        'Buffer': buffer
+        'Buffer': buffer,
+        'Message': 'Trigger repeated supply drop buys until time %s'%(max_buy_time)
     }
 
 # WARNING: This function is for declaring supply drops in the initial game state.
@@ -1526,12 +2014,10 @@ def initSupplyDrops(purchase_times, elite_sniper = None):
     dictionary['Elite Sniper Index'] = elite_sniper
     return dictionary
 
-
+# %% [markdown]
 # The goal of a simulator like this is to compare different strategies and see which one is better. To this end, we define a function capable of simulating multiple game states at once and comparing them.
 
-# In[17]:
-
-
+# %%
 def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None, target_round = 30, display_farms = True):
 
     # Log file in case we need to check outputs
@@ -1557,7 +2043,7 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
     #########################
 
     #Now intialize the graphs, one for cash and one for eco
-    fig, ax = plt.subplots(2)
+    fig, ax = plt.subplots(1, 2)
     fig.set_size_inches(8,12)
 
     #For each GameState object, advance the time, and then graph the cash and eco history
@@ -1656,184 +2142,7 @@ def compareStrategies(initial_state, eco_queues, buy_queues, target_time = None,
     display(fig, target="graph-area", append=False)
     logs.append("Successfully generated graph! \n")
 
-</py-script>
-
-<py-repl>
-</py-repl>
-
-<main>
-    <h1>Eco Simulator</h1>
-    <button py-click="resetSim()">RESET</button>
-    <div class="stallInputContainer">
-        <form>
-            <label for="stallInput">Stall Factor</label>
-            <input type="number" id="stallInput" value="1">
-            <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
-        </form>
-    </div>
-    <section class="initialGameState">
-        <form class='initialStateForm' action="">
-            <h2>Initial Game State</h2>
-            <label for="cashInput">Starting Cash</label>
-            <input type="number" id="cashInput" value="650">
-            <label for="ecoInput">Starting Eco</label>
-            <input type="number" id="ecoInput" value="250">
-            <label for="ecoSendInput">Starting Send</label>
-            <select name="startingSend" id="ecoSendInput">
-                <option value="Zero">Zero</option>
-                <option value="Grouped Reds">Grouped Reds</option>
-                <option value="Spaced Blues">Spaced Blues</option>
-                <option value="Grouped Blues">Grouped Blues</option>
-                <option value="Spaced Greens">Spaced Greens</option>
-                <option value="Grouped Greens">Grouped Greens</option>
-                <option value="Spaced Yellows">Spaced Yellows</option>
-                <option value="Grouped Yellows">Grouped Yellows</option>
-                <option value="Spaced Pinks">Spaced Pinks</option>
-                <option value="Grouped Pinks">Grouped Pinks</option>
-                <option value="Spaced Whites">Spaced Whites</option>
-                <option value="Grouped Whites">Grouped Whites</option>
-                <option value="Spaced Blacks">Spaced Blacks</option>
-                <option value="Grouped Blacks">Grouped Blacks</option>
-                <option value="Spaced Purples">Spaced Purples</option>
-                <option value="Grouped Purples">Grouped Purples</option>
-                <option value="Spaced Zebras">Spaced Zebras</option>
-                <option value="Grouped Zebras">Grouped Zebras</option>
-                <option value="Spaced Leads">Spaced Leads</option>
-                <option value="Grouped Leads">Grouped Leads</option>
-                <option value="Spaced Rainbows">Spaced Rainbows</option>
-                <option value="Grouped Rainbows">Grouped Rainbows</option>
-                <option value="Spaced Ceramics">Spaced Ceramics</option>
-                <option value="Grouped Ceramics">Grouped Ceramics</option>
-            </select>
-            <label for="startRoundInput">Starting Round</label>
-            <input type="number" id="startRoundInput" value="0">
-        </form>
-        <button type="button" py-click="setInitialState()" id="initalStateSubmit">
-            Change Initial State
-        </button>
-    </section>
-    <section class="initialFarmsContainer">
-        <form class="initialFarmsForm">
-            <input type="number" name="Farm Path 1" id="farmPath1" value="0">
-            <input type="number" name="Farm Path 2" id="farmPath2" value="0">
-            <input type="number" name="Farm Path 3" id="farmPath3" value="0">
-            <button type="button" py-click="createFarm()">Create INITIAL Farm</button>
-        </form>
-    </section>
-    <section class="buyQueueContainer">
-        <form>
-            <h2>Add to Buy Queue</h2>
-            <div class="buyDefenceContainer">
-                <h3>Buy Defence</h3>
-                <label for="buyPriceInput">Price</label>
-                <input type="number" id="buyPriceInput" value="200">
-                <label for="buyBuffer">Cash Buffer</label>
-                <input type="number" id="buyBuffer">
-                <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
-            </div>
-        </form>
-        <form>
-            <h3>Farms</h5>
-            <button type="button" py-click="purchaseFarm()">
-                Buy New Farm
-            </button>
-            <input type="number" value = "0"name="newFarmBuffer" id="newFarmBuffer">
-            <label for="newFarmBuffer">Cash Buffer</label>
-            <div id="existingFarms">
-                <h5>Upgrade Existing Farms</h5>
-                <div id="upgradeFarmDiv">
-                    <div id="farmSelect">
-                        <p>no farms :&#40;</p>
-                    </div>
-                    <div id="upgradeFarmButtons">
-                        <button py-click="upgradePath('1')" type="button" disabled>
-                            Upgrade Path 1
-                        </button>
-                        <button py-click="upgradePath('2')" type="button" disabled>
-                            Upgrade Path 2
-                        </button>
-                        <button py-click="upgradePath('3')" type="button" disabled>
-                            Upgrade Path 3
-                        </button>
-                        <button disabled py-click="farmSell()" type="button">
-                            Sell Farm
-                        </button>
-                        <input type="number" value = "0" name="farmBuffer" id="farmBuffer">
-                        <label for="farmBuffer">Cash Buffer</label>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div id="buyQueueContainer">
-            <h3>Buy Queue</h3>
-            <div id="buyQueue">
-
-            </div>
-        </div>
-    </section>
-    <section class="ecoQueueContainer">
-        <form action="">
-            <input type="radio" name="sendType" checked="true" id="Zero">
-            <label for="Zero">None</label>
-            <input type="radio" name="sendType" id="Grouped Reds">
-            <label for="Grouped Reds">Grouped Reds</label>
-            <input type="radio" name="sendType" id="Spaced Blues">
-            <label for="Spaced Blues">Spaced Blues</label>
-            <input type="radio" name="sendType" id="Grouped Blues">
-            <label for="Grouped Blues">Grouped Blues</label>
-            <input type="radio" name="sendType" id="Spaced Greens">
-            <label for="Spaced Greens">Spaced Greens</label>
-            <input type="radio" name="sendType" id="Grouped Greens">
-            <label for="Grouped Greens">Grouped Greens</label>
-            <input type="radio" name="sendType" id="Spaced Yellows">
-            <label for="Spaced Yellows">Spaced Yellows</label>
-            <input type="radio" name="sendType" id="Grouped Yellows">
-            <label for="Grouped Yellows">Grouped Yellows</label>
-            <input type="radio" name="sendType" id="Spaced Pinks">
-            <label for="Spaced Pinks">Spaced Pinks</label>
-            <input type="radio" name="sendType" id="Grouped Pinks">
-            <label for="Grouped Pinks">Grouped Pinks</label>
-            <input type="radio" name="sendType" id="Spaced Whites">
-            <label for="Spaced Whites">Spaced Whites</label>
-            <input type="radio" name="sendType" id="Grouped Whites">
-            <label for="Grouped Whites">Grouped Whites</label>
-            <input type="radio" name="sendType" id="Spaced Blacks">
-            <label for="Spaced Blacks">Spaced Blacks</label>
-            <input type="radio" name="sendType" id="Grouped Blacks">
-            <label for="Grouped Blacks">Grouped Blacks</label>
-            <input type="radio" name="sendType" id="Spaced Purples">
-            <label for="Spaced Purples">Spaced Purples</label>
-            <input type="radio" name="sendType" id="Grouped Purples">
-            <label for="Grouped Purples">Grouped Purples</label>
-            <input type="radio" name="sendType" id="Spaced Zebras">
-            <label for="Spaced Zebras">Spaced Zebra</label>
-            <input type="radio" name="sendType" id="Grouped Zebras">
-            <label for="Grouped Zebras">Grouped Zebra</label>
-            <input type="radio" name="sendType" id="Spaced Leads">
-            <label for="Spaced Leads">Spaced Leads</label>
-            <input type="radio" name="sendType" id="Grouped Leads">
-            <label for="Grouped Leads">Grouped Leads</label>
-            <input type="radio" name="sendType" id="Spaced Rainbows">
-            <label for="Spaced Rainbows">Spaced Rainbow</label>
-            <input type="radio" name="sendType" id="Grouped Rainbows">
-            <label for="Grouped Rainbows">Grouped Rainbow</label>
-            <input type="radio" name="sendType" id="Spaced Ceramics">
-            <label for="Spaced Ceramics">Spaced Ceramic</label>
-            <input type="radio" name="sendType" id="Grouped Ceramics">
-            <label for="Grouped Ceramics">Grouped Ceramic</label>
-            <input type="number" id="ecoRound" value="1">
-            <label for="roundNumber">Round</label>
-        </form>
-        <button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button>
-        <div id="ecoQueue">
-            <h3>Eco Queue</h3>
-        </div>
-    </section>
-    <section class="runSimContainer">
-        <input type="number" id="endRoundInput" value="11">
-        <label for="endRoundInput">Simulation End Round</label>
-        <button type="button" py-click="runSim()">Run Sim</button>
-    </section>
+    </py-script>
     <py-script>
 from pyodide.ffi import create_proxy
 from pyodide.ffi.wrappers import add_event_listener
@@ -1898,6 +2207,10 @@ def resetDom():
     deleteChildren('#ecoQueue')
     deleteChildren('#buyQueue')
     deleteChildren('#graph-area')
+    span = document.createElement('span')
+    span.textContent = "Nothing Here Yet :P"
+    span.classList.add('graphPlaceholder')
+    document.getElementById('graph-area').appendChild(span)
     deleteChildren('#logdiv')
 
 #wipes node based on selector
@@ -1928,8 +2241,17 @@ def createFarm():
         farms[index] = farmInfo[index]
     i = 0
     updateFarmSlots()
+    renderInitialFarms()
     setInitialState()
 
+def renderInitialFarms():
+    global farmInfo
+    farmDisplay = document.querySelector('#startingFarms')
+    deleteChildren('#startingFarms')
+    for index, farm in enumerate(farmInfo):
+        p = document.createElement('p')
+        p.textContent = f"Farm #{index}: {str(farm['Upgrades'])}"
+        farmDisplay.appendChild(p)
 
 def purchaseFarm():
     buffer = int(document.querySelector('#newFarmBuffer').value)
@@ -2082,12 +2404,11 @@ def renderEcoQueue():
 def runSim():
     game_state = GameState(initial_state)
     game_state.fastForward(target_round = float(Element('endRoundInput').value))
-    game_state.viewCashEcoHistory()
+    game_state.viewCashEcoHistory(dim = (18, 6))
     setInitialState()
 </py-script>
     </main>
 
-<div id="graph-area"></div>
 <div id="logdiv"></div>
 </body>
 </html>
