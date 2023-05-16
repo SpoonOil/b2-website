@@ -26,6 +26,10 @@ button {
     border: 3px solid #2C74B3
 }
 
+button:disabled {
+    opacity: 0.5;
+}
+
 button:hover {
     filter: brightness(120%);
     cursor: pointer;
@@ -163,13 +167,38 @@ main {
     justify-content: center;
     width:80%;
 }
+
+section.runSimContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    margin-left: auto;
+    align-items: center
+}
+
+.runInputContainer {
+    margin-right: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.runInputContainer input {
+    width: 6ch
+}
+
+.runSimContainer button {
+    border-radius: 50%;
+    margin-left: 10px;
+}
 .subtitle {
     font-size: 1em;
     font-family: 'Cabin';
     opacity: 0.8
 }
 button.resetButton {
-    margin-left:auto;
     padding : 10px;
     border-radius: 100%;
     color: #c8d0db;
@@ -223,7 +252,7 @@ section.graphSection {
 
 /* begin parameter styles */
 
-.paramsContainer {
+.paramsContainer{
     display: flex;
     gap: 10px;
     width: 90%;
@@ -239,13 +268,13 @@ section.graphSection {
     margin-top: 0;
 }
 
-.initialStateParams{
+.initialStateParams, .buyQueueParams, .ecoQueueParams{
     background-color: #03162c;
     padding: 10px;
     border-radius: 0 0 8px 8px;
 }
 
-.initialStateHeader {
+.initialStateHeader, .buyQueueHeader, .ecoQueueHeader{
     text-align: center;
     background-color: #144272;
     margin: 0;
@@ -255,14 +284,32 @@ section.graphSection {
 .stallInputContainer {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
     align-items: center;
     padding: 20px;
 }
+
+.stallSpacer {
+    width: 10%;
+}
+
+.stallContent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stallContent p {
+    margin-left: 10px;
+}
+
 .stallForm {
+    flex: 1;
     margin: 0;
     width: 30%;
     display: flex;
+    gap: 20px;
     align-items: center;
     justify-content: space-around;
 }
@@ -293,7 +340,7 @@ section.graphSection {
     border-radius: 4px;
     border: none;
 }
-.initialStateForm>* {
+.initialStateForm>*{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -307,9 +354,9 @@ section.graphSection {
     flex-direction: column;
 }
 
-.initFarmPaths {
+section form .initFarmPaths {
     display: flex;
-    gap: 10%
+    justify-content: center;
 }
 
 .initialFarmsContainer h4, .initialFarmsContainer h3 {
@@ -322,10 +369,21 @@ section.graphSection {
     font-weight: normal;
 }
 
-.initFarmPaths>* {
-    flex: 1;
-    width: 50px;
-    margin-bottom: 20px;
+section form .initFarmPaths>* {
+    width: 5ch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.initfarmsinfo {
+    display: flex;
+    justify-content: center;
+}
+
+section form .initFarmPaths>*>input {
+    width: 4ch;
+    margin-left: 5px;
 }
 
 .initialFarmsForm button{
@@ -336,7 +394,148 @@ section.graphSection {
     margin: auto;
 }
 
+.initFarmsInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
 h4.farmsListHeader {
     font-weight: bold;
     text-align: left;
+}
+
+/* begin buy queue param styles */
+
+.inputContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.buyDefenceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.farmsForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#upgradeFarmButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upgradePathsContainer {
+    align-self: center;
+}
+
+#farmSelect {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+#farmSelect input {
+    display: none;
+}
+
+#farmSelect label {
+    transition: all 0.1s ease-in-out;
+    background-color: #144272;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    border: solid black 1px;
+    border-top: none;
+}
+
+#farmSelect label:hover {
+    filter: opacity(80%);
+    cursor: pointer;
+}
+
+#farmSelect label:active, #farmSelect label.pressed {
+    filter:brightness(130%);
+}
+
+
+#farmSelect label:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-right: none;
+}
+
+#farmSelect label:first-of-type {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-left: none;
+}
+
+.selectFarmText {
+    margin: 0;
+    text-align: center;
+}
+
+#farmSelect p {
+    opacity: 0.5;
+    margin-bottom: 0;
+}
+
+.sendsContainer input {
+    display: none;
+}
+
+.sendsContainer {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sendsContainer input {
+    display: none;
+}
+
+.sendsContainer label {
+    transition: all 0.1s ease-in-out;
+    background-color: #144272;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    border: solid black 1px;
+}
+
+.sendsContainer label:hover {
+    filter: opacity(80%);
+    cursor: pointer;
+}
+
+.sendsContainer label:active, .sendsContainer label.pressed {
+    filter:brightness(130%);
+}
+
+.sendContainer {
+    display: flex;
+}
+
+.sendContainer label {
+    width: 80px;
+}
+
+.runSimContainer {
+    margin: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+    .paramsContainer {
+        flex-direction: column;
+    }
 }

@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <link rel="stylesheet" type="text/css" href="ecoStyles.css">
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
     <!-- icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 
@@ -60,9 +60,18 @@ packages = ["matplotlib", "pandas", "numpy"]
     <div class="simHeader">
         <h1>Eco Simulator </h1>
         <span class="subtitle">made by redlaserbm</span>
-        <button class = "resetButton" py-click="resetSim()"><span class="material-symbols-outlined">
-            restart_alt
-            </span></button>
+        <section class="runSimContainer">
+            <div class="runInputContainer">
+                <input type="number" id="endRoundInput" value="11">
+                <label for="endRoundInput">End Round</label>
+            </div>
+            <button type="button" py-click="runSim()"><span class="material-symbols-outlined">
+                play_arrow
+                </span></button>
+            <button class = "resetButton" py-click="resetSim()"><span class="material-symbols-outlined">
+                restart_alt
+                </span></button>
+        </section>
     </div>
     <div class="graphContainer">
         <h3 class="graphHeader">Graph</h3>
@@ -71,11 +80,14 @@ packages = ["matplotlib", "pandas", "numpy"]
         </section>
     </div>
     <div class="stallInputContainer">
-        <form class="stallForm">
-            <label for="stallInput">Stall Factor</label>
-            <input type="range" id="stallInput" min="0" max = "1" step = "0.1" value="1">
-            <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
-        </form>
+        <div class="stallContent">
+            <form class="stallForm">
+                <label for="stallInput">Stall Factor</label>
+                <input type="range" id="stallInput" min="0" max = "1" step = "0.1" value="1">
+                <button type="button" py-click="setStallFactor()">Set Stall Factor</button>
+            </form>
+            <p>Always do this first!</p>
+        </div>
     </div>
     <div class="paramsContainer">
         <section class="initialGameState">
@@ -85,7 +97,7 @@ packages = ["matplotlib", "pandas", "numpy"]
                 <form class='initialStateForm' action="">
                     <div class="startCashContainer">
                         <label for="cashInput">Starting Cash</label>
-                        <input type="number" id="cashInput" value="650">
+                        <div><span>$ </span><input type="number" id="cashInput" value="650"></div>
                     </div>
                     <div class="startEcoContainer">
                         <label for="ecoInput">Starting Eco</label>
@@ -132,140 +144,173 @@ packages = ["matplotlib", "pandas", "numpy"]
                 </div>
                 <section class="initialFarmsContainer">
                     <h3>Starting Farms</h3>
-                    <form class="initialFarmsForm">
-                        <h4>Farm Paths</h4>
-                        <div class="initFarmPaths">
-                            <input type="number" name="Farm Path 1" id="farmPath1" value="0">
-                            <input type="number" name="Farm Path 2" id="farmPath2" value="0">
-                            <input type="number" name="Farm Path 3" id="farmPath3" value="0">
-                        </div>
-                        <button type="button" py-click="createFarm()">Create INITIAL Farm</button>
-                    </form>
-                    <section class="farms">
-                        <h4 class="farmsListHeader">Starting Farms List</h4>
-                        <div id="startingFarms">
-
-                        </div>
-                    </section>
+                    <div class="initFarmsInfo">
+                        <form class="initialFarmsForm">
+                            <div class="initFarmPaths">
+                                <div class="pathContainer">
+                                    <input type="number" name="Farm Path 1" id="farmPath1" value="0">
+                                    <label for="farmPath1">Path 1</label>
+                                </div>
+                                <div class="pathContainer">
+                                    <input type="number" name="Farm Path 2" id="farmPath2" value="0">
+                                    <label for="farmPath2">Path 2</label>
+                                </div>
+                                <div class="pathContainer">
+                                    <input type="number" name="Farm Path 3" id="farmPath3" value="0">
+                                    <label for="farmPath3">Path 3</label>
+                                </div>
+                            </div>
+                            <button type="button" py-click="createFarm()">Create INITIAL Farm</button>
+                        </form>
+                        <section class="farms">
+                            <h4 class="farmsListHeader" hidden>Farm Indexes</h4>
+                            <div id="startingFarms">
+                            </div>
+                        </section>
+                    </div>
                 </section>
             </div>
         </section>
         <section class="buyQueueContainer">
-            <form>
-                <h2>Add to Buy Queue</h2>
-                <div class="buyDefenceContainer">
-                    <h3>Buy Defence</h3>
-                    <label for="buyPriceInput">Price</label>
-                    <input type="number" id="buyPriceInput" value="200">
-                    <label for="buyBuffer">Cash Buffer</label>
-                    <input type="number" id="buyBuffer">
-                    <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
-                </div>
-            </form>
-            <form>
-                <h3>Farms</h5>
-                <button type="button" py-click="purchaseFarm()">
-                    Buy New Farm
-                </button>
-                <input type="number" value = "0"name="newFarmBuffer" id="newFarmBuffer">
-                <label for="newFarmBuffer">Cash Buffer</label>
-                <div id="existingFarms">
-                    <h5>Upgrade Existing Farms</h5>
-                    <div id="upgradeFarmDiv">
-                        <div id="farmSelect">
-                            <p>no farms :&#40;</p>
+            <h2 class="buyQueueHeader">Buy Queue</h2>
+            <div class="buyQueueParams">
+                <form class = "buyDefForm">
+                    <div class="buyDefenceContainer">
+                        <h3>Buy Defence</h3>
+                        <div class="defPriceContainer inputContainer">
+                            <label for="buyPriceInput">Price</label>
+                            <div class="">
+                                <span>$</span>
+                                <input type="number" id="buyPriceInput" value="200">
+                            </div>
                         </div>
-                        <div id="upgradeFarmButtons">
-                            <button py-click="upgradePath('1')" type="button" disabled>
-                                Upgrade Path 1
-                            </button>
-                            <button py-click="upgradePath('2')" type="button" disabled>
-                                Upgrade Path 2
-                            </button>
-                            <button py-click="upgradePath('3')" type="button" disabled>
-                                Upgrade Path 3
-                            </button>
-                            <button disabled py-click="farmSell()" type="button">
-                                Sell Farm
-                            </button>
-                            <input type="number" value = "0" name="farmBuffer" id="farmBuffer">
-                            <label for="farmBuffer">Cash Buffer</label>
+                        <div class="defBufferContainer inputContainer">
+                            <label for="buyBuffer">Cash Buffer</label>
+                            <div class="div"><span>$ </span><input type="number" id="buyBuffer"></div>
+                        </div>
+                        <div class="buttonContainer">
+                            <button type="button" py-click="addToBuyQueue()">Add to Queue</button>
                         </div>
                     </div>
-                </div>
-            </form>
-            <div id="buyQueueContainer">
-                <h3>Buy Queue</h3>
-                <div id="buyQueue">
+                </form>
+                <form class="farmsForm">
+                    <h3>Farms</h5>
+                    <div class="farmBufferContainer inputContainer">
+                        <label for="newFarmBuffer">Cash Buffer</label>
+                        <div class=""><span>$ </span><input type="number" value = "0"name="newFarmBuffer" id="newFarmBuffer"></div>
+                    </div>
+                    <div class="buttonContainer">
+                        <button type="button" py-click="purchaseFarm()">
+                            Buy New Farm
+                        </button>
+                    </div>
+                    <div id="existingFarms">
+                        <h4>Upgrade Existing Farms</h4>
+                        <div id="upgradeFarmDiv">
+                            <div class="farmSelectContainer">
+                                <p class = "selectFarmText">Select Farm to Upgrade</p>
+                                <div id="farmSelect">
+                                    <p>no farms :&#40;</p>
+                                </div>
+                            </div>
+                            <div id="upgradeFarmButtons">
+                                <div class="upgradeBufferContainer inputContainer">
+                                    <label for="farmBuffer">Cash Buffer</label>
+                                    <div class=""><span>$ </span><input type="number" value = "0" name="farmBuffer" id="farmBuffer"></div>
+                                </div>
+                                <div class="upgradePathsContainer">
+                                    <button py-click="upgradePath('1')" type="button" disabled>
+                                        ⇧ Path 1
+                                    </button>
+                                    <button py-click="upgradePath('2')" type="button" disabled>
+                                        ⇧ Path 2
+                                    </button>
+                                    <button py-click="upgradePath('3')" type="button" disabled>
+                                        ⇧ Path 3
+                                    </button>
+                                </div>
+                                <button disabled py-click="farmSell()" type="button">
+                                    Sell
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div id="buyQueueContainer">
+                    <h3>Buy Queue</h3>
+                    <div id="buyQueue">
+                    </div>
                 </div>
             </div>
         </section>
         <section class="ecoQueueContainer">
-            <form action="">
-                <div class="sendsContainer">
-                    <input type="radio" name="sendType" checked="true" id="Zero">
-                    <label for="Zero">None</label>
-                    <input type="radio" name="sendType" id="Grouped Reds">
-                    <label for="Grouped Reds">Grouped Reds</label>
-                    <input type="radio" name="sendType" id="Spaced Blues">
-                    <label for="Spaced Blues">Spaced Blues</label>
-                    <input type="radio" name="sendType" id="Grouped Blues">
-                    <label for="Grouped Blues">Grouped Blues</label>
-                    <input type="radio" name="sendType" id="Spaced Greens">
-                    <label for="Spaced Greens">Spaced Greens</label>
-                    <input type="radio" name="sendType" id="Grouped Greens">
-                    <label for="Grouped Greens">Grouped Greens</label>
-                    <input type="radio" name="sendType" id="Spaced Yellows">
-                    <label for="Spaced Yellows">Spaced Yellows</label>
-                    <input type="radio" name="sendType" id="Grouped Yellows">
-                    <label for="Grouped Yellows">Grouped Yellows</label>
-                    <input type="radio" name="sendType" id="Spaced Pinks">
-                    <label for="Spaced Pinks">Spaced Pinks</label>
-                    <input type="radio" name="sendType" id="Grouped Pinks">
-                    <label for="Grouped Pinks">Grouped Pinks</label>
-                    <input type="radio" name="sendType" id="Spaced Whites">
-                    <label for="Spaced Whites">Spaced Whites</label>
-                    <input type="radio" name="sendType" id="Grouped Whites">
-                    <label for="Grouped Whites">Grouped Whites</label>
-                    <input type="radio" name="sendType" id="Spaced Blacks">
-                    <label for="Spaced Blacks">Spaced Blacks</label>
-                    <input type="radio" name="sendType" id="Grouped Blacks">
-                    <label for="Grouped Blacks">Grouped Blacks</label>
-                    <input type="radio" name="sendType" id="Spaced Purples">
-                    <label for="Spaced Purples">Spaced Purples</label>
-                    <input type="radio" name="sendType" id="Grouped Purples">
-                    <label for="Grouped Purples">Grouped Purples</label>
-                    <input type="radio" name="sendType" id="Spaced Zebras">
-                    <label for="Spaced Zebras">Spaced Zebra</label>
-                    <input type="radio" name="sendType" id="Grouped Zebras">
-                    <label for="Grouped Zebras">Grouped Zebra</label>
-                    <input type="radio" name="sendType" id="Spaced Leads">
-                    <label for="Spaced Leads">Spaced Leads</label>
-                    <input type="radio" name="sendType" id="Grouped Leads">
-                    <label for="Grouped Leads">Grouped Leads</label>
-                    <input type="radio" name="sendType" id="Spaced Rainbows">
-                    <label for="Spaced Rainbows">Spaced Rainbow</label>
-                    <input type="radio" name="sendType" id="Grouped Rainbows">
-                    <label for="Grouped Rainbows">Grouped Rainbow</label>
-                    <input type="radio" name="sendType" id="Spaced Ceramics">
-                    <label for="Spaced Ceramics">Spaced Ceramic</label>
-                    <input type="radio" name="sendType" id="Grouped Ceramics">
-                    <label for="Grouped Ceramics">Grouped Ceramic</label>
+            <h2 class="ecoQueueHeader">Eco Queue</h2>
+            <div class="ecoQueueParams">
+                <form action="">
+                    <div class="sendsContainer">
+                        <input type="radio" name="sendType" checked="true" id="Zero">
+                        <label for="Zero">None</label>
+                        <input type="radio" name="sendType" id="Grouped Reds">
+                        <label for="Grouped Reds">Grouped Reds</label>
+                        <input type="radio" name="sendType" id="Spaced Blues">
+                        <label for="Spaced Blues">Spaced Blues</label>
+                        <input type="radio" name="sendType" id="Grouped Blues">
+                        <label for="Grouped Blues">Grouped Blues</label>
+                        <input type="radio" name="sendType" id="Spaced Greens">
+                        <label for="Spaced Greens">Spaced Greens</label>
+                        <input type="radio" name="sendType" id="Grouped Greens">
+                        <label for="Grouped Greens">Grouped Greens</label>
+                        <input type="radio" name="sendType" id="Spaced Yellows">
+                        <label for="Spaced Yellows">Spaced Yellows</label>
+                        <input type="radio" name="sendType" id="Grouped Yellows">
+                        <label for="Grouped Yellows">Grouped Yellows</label>
+                        <input type="radio" name="sendType" id="Spaced Pinks">
+                        <label for="Spaced Pinks">Spaced Pinks</label>
+                        <input type="radio" name="sendType" id="Grouped Pinks">
+                        <label for="Grouped Pinks">Grouped Pinks</label>
+                        <input type="radio" name="sendType" id="Spaced Whites">
+                        <label for="Spaced Whites">Spaced Whites</label>
+                        <input type="radio" name="sendType" id="Grouped Whites">
+                        <label for="Grouped Whites">Grouped Whites</label>
+                        <input type="radio" name="sendType" id="Spaced Blacks">
+                        <label for="Spaced Blacks">Spaced Blacks</label>
+                        <input type="radio" name="sendType" id="Grouped Blacks">
+                        <label for="Grouped Blacks">Grouped Blacks</label>
+                        <input type="radio" name="sendType" id="Spaced Purples">
+                        <label for="Spaced Purples">Spaced Purples</label>
+                        <input type="radio" name="sendType" id="Grouped Purples">
+                        <label for="Grouped Purples">Grouped Purples</label>
+                        <input type="radio" name="sendType" id="Spaced Zebras">
+                        <label for="Spaced Zebras">Spaced Zebra</label>
+                        <input type="radio" name="sendType" id="Grouped Zebras">
+                        <label for="Grouped Zebras">Grouped Zebra</label>
+                        <input type="radio" name="sendType" id="Spaced Leads">
+                        <label for="Spaced Leads">Spaced Leads</label>
+                        <input type="radio" name="sendType" id="Grouped Leads">
+                        <label for="Grouped Leads">Grouped Leads</label>
+                        <input type="radio" name="sendType" id="Spaced Rainbows">
+                        <label for="Spaced Rainbows">Spaced Rainbow</label>
+                        <input type="radio" name="sendType" id="Grouped Rainbows">
+                        <label for="Grouped Rainbows">Grouped Rainbow</label>
+                        <input type="radio" name="sendType" id="Spaced Ceramics">
+                        <label for="Spaced Ceramics">Spaced Ceramic</label>
+                        <input type="radio" name="sendType" id="Grouped Ceramics">
+                        <label for="Grouped Ceramics">Grouped Ceramic</label>
+                    </div>
+                        <div class="inputContainer">
+                            <label for="roundNumber">Round</label>
+                            <input type="number" id="ecoRound" value="1">
+                        </div>
+                </form>
+                <div class="buttonContainer"><button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button></div>
+                <div id="ecoQueue">
+                    <h3>Eco Queue</h3>
                 </div>
-                    <input type="number" id="ecoRound" value="1">
-                    <label for="roundNumber">Round</label>
-            </form>
-            <button type="button" py-click="addToEcoQueue()">Add to Eco Queue</button>
-            <div id="ecoQueue">
-                <h3>Eco Queue</h3>
             </div>
         </section>
     </div>
-    <section class="runSimContainer">
-        <input type="number" id="endRoundInput" value="11">
-        <label for="endRoundInput">Simulation End Round</label>
-        <button type="button" py-click="runSim()">Run Sim</button>
-    </section>
+    <div hidden id="logdiv"></div>
+
 <py-script>
 import numpy as np
 import pandas as pd
@@ -684,6 +729,7 @@ def impact(cash, loan, amount):
 
 def writeLog(lines, filename = 'log', path = './logs/'):
     document.getElementById('logdiv').textContent = lines
+    console.log(str(lines))
 
 # %%
 class GameState():
@@ -2206,6 +2252,7 @@ def resetDom():
         form.reset()
     deleteChildren('#ecoQueue')
     deleteChildren('#buyQueue')
+    deleteChildren('#startingFarms')
     deleteChildren('#graph-area')
     span = document.createElement('span')
     span.textContent = "Nothing Here Yet :P"
@@ -2319,6 +2366,30 @@ def renderFarmSlots():
         buttons = document.querySelectorAll('#upgradeFarmButtons button')
         for button in buttons:
             button.disabled = True
+    farmRadios = document.querySelectorAll('#farmSelect input')
+    for radio in farmRadios:
+        add_event_listener(radio, 'click', lambda e: updateFarmSegment(e))
+
+def updateFarmSegment(e):
+    segments = document.querySelectorAll('#farmSelect label');
+    for segment in segments:
+        segment.classList.remove('pressed');
+    e.target.classList.add('pressed')
+    segment = document.querySelector('#farmSelect label[for='+e.target.id+']');
+    segment.classList.add('pressed');
+
+ecoRadios = document.querySelectorAll('.sendsContainer input')
+for radio in ecoRadios:
+    add_event_listener(radio, 'click', lambda e: updateEcoSegment(e))
+
+def updateEcoSegment(e):
+    segments = document.querySelectorAll('.sendsContainer label');
+    for segment in segments:
+        segment.classList.remove('pressed');
+    e.target.classList.add('pressed')
+    segment = document.querySelector(".sendsContainer label[for=\'"+str(e.target.id)+"\']");
+    segment.classList.add('pressed');
+
 
 def upgradePath(path):
     cashBuffer = int(document.querySelector('#farmBuffer').value)
@@ -2351,7 +2422,12 @@ def renderBuyQueue():
     queue = document.querySelector('#buyQueue')
     for buy in buy_queue:
         p = document.createElement('p')
-        p.textContent = buy
+        buyMessage = ""
+        # [{'Type': 'Buy Farm', 'Buffer': 0, 'Minimum Buy Time': 0, 'Message': 'Buy Farm'}]
+        for index in buy:
+            buyMessage += f"{index['Type']}"
+            buyMessage += f" Buffer: ${index['Buffer']} "
+        p.textContent = buyMessage
         button = document.createElement('button')
         button.id = str(buy)
         button.textContent = "Delete"
@@ -2409,6 +2485,5 @@ def runSim():
 </py-script>
     </main>
 
-<div id="logdiv"></div>
 </body>
 </html>
