@@ -1875,7 +1875,7 @@ def upgradeFarm(index, path, buffer = 0, min_buy_time = 0):
         'Path': path,
         'Buffer': buffer,
         'Minimum Buy Time': min_buy_time,
-        'Message': 'Upgrade farm %s at path %s'%(index, path)
+        'Message': 'Upgrade farm %s at path %s'%(index, path+1)
     }
 
 def sellFarm(index, min_buy_time = 0):
@@ -2422,18 +2422,28 @@ def renderBuyQueue():
     deleteChildren('#buyQueue')
     queue = document.querySelector('#buyQueue')
     for buy in buy_queue:
+        buyContainer = document.createElement('div')
+        buyContainer.classList.add('buyContainer')
         p = document.createElement('p')
-        buyMessage = ""
         # [{'Type': 'Buy Farm', 'Buffer': 0, 'Minimum Buy Time': 0, 'Message': 'Buy Farm'}]
         for index in buy:
-            buyMessage += f"{index['Type']}"
-            buyMessage += f" Buffer: ${index['Buffer']} "
-        p.textContent = buyMessage
+            titleSpan = document.createElement('span')
+            titleSpan.classList.add('buyTitle')
+            buyTitle = f"{index['Message']}"
+            titleSpan.textContent = buyTitle
+            p.appendChild(titleSpan)
+            if index['Buffer'] != 0:
+                bufferSpan = document.createElement('span')
+                bufferSpan.classList.add('buyBuffer')
+                buyMessage = f" Buffer: ${index['Buffer']} "
+                bufferSpan.textContent = buyMessage
+                p.appendChild(bufferSpan)
         button = document.createElement('button')
         button.id = str(buy)
         button.textContent = "Delete"
-        p.appendChild(button)
-        queue.appendChild(p)
+        buyContainer.appendChild(p)
+        buyContainer.appendChild(button)
+        queue.appendChild(buyContainer)
         proxy = create_proxy(lambda event: deleteBuy(event.target))
         button.addEventListener("click", proxy)
 
@@ -2468,13 +2478,24 @@ def renderEcoQueue():
     deleteChildren('#ecoQueue')
     queue = document.querySelector('#ecoQueue')
     for ecoSend in sorted(eco_queue):
+        ecoContainer = document.createElement('div')
+        ecoContainer.classList.add('ecoContainer')
         p = document.createElement('p')
-        p.textContent = ecoSend
+        console.log(ecoSend)
+        span = document.createElement('span')
+        span.classList.add('ecoTitle')
+        span.textContent = ecoSend[1]
+        timeSpan = document.createElement('span')
+        timeSpan.classList.add('ecoTime')
+        timeSpan.textContent = f" at {ecoSend[0]}"
+        p.appendChild(span)
+        p.appendChild(timeSpan)
         button = document.createElement('button')
         button.id = str(ecoSend)
         button.textContent = "Delete"
-        p.appendChild(button)
-        queue.appendChild(p)
+        ecoContainer.appendChild(p)
+        ecoContainer.appendChild(button)
+        queue.appendChild(ecoContainer)
         console.log(str(ecoSend))
         proxy = create_proxy(lambda event: deleteSend(event.target))
         button.addEventListener("click", proxy)

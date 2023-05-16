@@ -354,6 +354,11 @@ section.graphSection {
     flex-direction: column;
 }
 
+.initFarmsInfo {
+    display: flex;
+    flex-direction: column;
+}
+
 section form .initFarmPaths {
     display: flex;
     justify-content: center;
@@ -530,10 +535,18 @@ h4.farmsListHeader {
     width: 80px;
 }
 
+.ecoContainer, .buyContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
 .runSimContainer {
     margin: 20px;
 }
 
+.buyTitle, .ecoTitle {
+    font-weight: bold;
+}
 @media screen and (max-width: 1200px) {
     .paramsContainer {
         flex-direction: column;
