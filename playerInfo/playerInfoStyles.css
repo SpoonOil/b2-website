@@ -423,4 +423,8 @@ section.summaryContent {
     h4 {
         text-align: center;
     }
+    .mostUsedTowers {
+        flex: 1;
+        flex-direction: column;
+    }
   }
