@@ -193,7 +193,7 @@ header {
 
 /* player Rank History styles */
 
-.playerRankHistory {
+.playerRankHistory, .summaryContent {
     padding: 30px;
     font-weight: 500;
     background-color: #144272;
@@ -243,7 +243,29 @@ header {
 .lastMatchResult.draw {
     color: goldenrod;
 }
+/* Quick Stat Styles */
 
+section.summaryContent {
+    display: flex;
+    width:90%
+}
+
+.winrateContainer {
+    flex: 1;
+}
+
+.mostUsedContainer {
+    flex: 2;
+}
+
+.mostUsedTowers {
+    display: flex;
+    gap: 10px;
+}
+
+.mostUsedTowers {
+    flex: 1;
+}
 /* Stat styles */
 
 .statHeader {

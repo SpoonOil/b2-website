@@ -1,229 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Battles 2 Data</title>
-    <script defer src="playerInfoScript.js"></script>
-    <link rel="stylesheet" href="playerInfoStyles.css">
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battles 2 Data</title>
+  <script defer src="playerInfoScript.js"></script>
+  <link rel="stylesheet" href="playerInfoStyles.css">
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-  </head>
-  <body>
-    <header>
-      <h1 class="headerText">Battles 2 Stats</h1>
-      <nav class = "toolsSection">
-          <ul class="toolList">
-              <li><a href="../index.html">Home</a></li>
-              <li class='navItem'><a class = 'navLink' href="../playerSearch/playerSearch.html">Player Search</a></li>
-              <li><a class = 'navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
-              <li class='navItem'><a class = 'navLink' href="../ecoSim/ecoSim.html">Eco Simulator</a></li>
-              <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2 Popology</a></li>
-          </ul>
-          <div class="hamburger">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-          </div>
-      </nav>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+  <header>
+    <h1 class="headerText">Battles 2 Stats</h1>
+    <nav class="toolsSection">
+      <ul class="toolList">
+        <li><a href="../index.html">Home</a></li>
+        <li class='navItem'><a class='navLink' href="../playerSearch/playerSearch.html">Player Search</a></li>
+        <li><a class='navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
+        <li class='navItem'><a class='navLink' href="../ecoSim/ecoSim.html">Eco Simulator</a></li>
+        <li><a href="https://docs.google.com/document/d/1F2PwRxST2Y4YoHFOGBlWo5yby-qQD53dQqjpItxaAS4">Battles 2
+            Popology</a></li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
   </header>
-    <main class="content">
-      <section class="playerInfo">
-        <section class="playerHeader panel">
-          <div class="playerBannerContainer">
+  <main class="content">
+    <section class="playerInfo">
+      <section class="playerHeader panel">
+        <div class="playerBannerContainer">
 
+        </div>
+        <h3 class="rankHistory">Basic Info</h3>
+        <section class="playerRankHistory">
+          <div class="currentRank">
+            <h4 class="currentRankTitle">Current Season's Rank</h2>
           </div>
-          <h3 class="rankHistory">Basic Info</h3>
-          <section class="playerRankHistory">
-            <div class="currentRank">
-              <h4 class="currentRankTitle">Current Season's Rank</h2>
-              </div>
-              <div class="previousRank">
-                <h4 class="previousRankTitle">Last Season's Rank</h4>
-              </div>
-              <section class="matchHistory">
-                <h4>Last Match Result: <span class="lastMatchResult"></span></h4>
-                <button type="button" class = "matchHistoryButton">View Match History</button>
-              </section>
-        </section>
-        </section>
-        <section class="playerStats panel">
-          <h3 class="statHeader rankedHeader">Game Stats</h3>
-          <table class="statsTable">
-            <thead>
-              <tr>
-                <th colspan = '2'>Ranked Games</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-key = 'wins'>
-                <th>Wins</th>
-                <td>0</td>
-              </tr>
-              <tr data-key= 'draws'>
-                <th>Draws</th>
-                <td>0</td>
-              </tr>
-              <tr data-key= 'losses'>
-                <th>Losses</th>
-                <td>0</td>
-              </tr>
-              <tr data-key= 'win_streak'>
-                <th>Current Win Streak</th>
-                <td>0</td>
-              </tr>
-              <tr data-key= 'highest_win_streak'>
-                <th>Highest Win Streak</th>
-                <td>0</td>
-              </tr>
-              <tr data-key= 'no_lives_lost'>
-                <th>Games with No Lives Lost</th>
-                <td>0</td>
-              </tr>
-              <tr data-key= 'first_bloons'>
-                <th>First Bloods</th>
-                <td>0</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="towerStats panel">
-          <h3 class="towersHeader statHeader">Towers</h3>
-          <div class="tablesContainer">
-            <div class="primaryStats">
-              <h4>Primary</h4>
-              <table class="primaryClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Placed</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="militaryStats">
-              <h4>Military</h4>
-              <table class="militaryClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Placed</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="magicStats">
-              <h4>Magic</h4>
-              <table class="magicClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Placed</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="supportStats">
-              <h4>Support</h4>
-              <table class="supportClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Placed</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="heroStats">
-              <h4>Hero</h4>
-              <table class="heroClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Placed</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-                    </section>
+          <div class="previousRank">
+            <h4 class="previousRankTitle">Last Season's Rank</h4>
           </div>
-        <section class="bloonStats panel">
-          <h3 class="statHeader bloonHeader">Bloon Stats</h3>
-          <div class="tablesContainer">
-            <section class="bloonClassStats">
-              <h4 class="bloonStatsHeader">
-                Bloons
+          <section class="matchHistory">
+            <h4>Last Match Result: <span class="lastMatchResult"></span></h4>
+            <button type="button" class="matchHistoryButton">View Match History</button>
+          </section>
+        </section>
+        <section class="statsSummary">
+          <h3 class="summaryHeader">
+            Quick Stats
+          </h3>
+          <section class="summaryContent">
+            <div class="winrateContainer">
+              <h4 class="winrateHeader">
+                Winrate
               </h4>
-              <table class="bloonClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sent</th>
-                    <th>Popped</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </section>
-            <section class="moabClassStats">
-              <h4 class="moabStatsHeader">Blimps</h4>
-              <table class="moabClass statsTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sent</th>
-                    <th>Popped</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </section>
-          </div>
-        </section>
-        <section class="chestDisplay">
-
-        </section>
-        <section class="badgeDisplay panel">
-          <h3>Badges</h3>
+              <p class="winrateNum">69%</p>
+            </div>
+            <div class="mostUsedContainer">
+              <h4 class="mostUsedHeader">
+                Most Used Towers
+              </h4>
+              <p class="mostUsedTowers">
+                <span class = "tower1">Monkey Buccaneer</span>
+                <span class="tower2">Alchemist</span>
+                <span class="tower3">Spike Factory</span>
+              </p>
+            </div>
+          </section>
         </section>
       </section>
+      <section class="playerStats panel">
+        <h3 class="statHeader rankedHeader">Game Stats</h3>
+        <table class="statsTable">
+          <thead>
+            <tr>
+              <th colspan='2'>Ranked Games</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-key='wins'>
+              <th>Wins</th>
+              <td>0</td>
+            </tr>
+            <tr data-key='draws'>
+              <th>Draws</th>
+              <td>0</td>
+            </tr>
+            <tr data-key='losses'>
+              <th>Losses</th>
+              <td>0</td>
+            </tr>
+            <tr data-key='win_streak'>
+              <th>Current Win Streak</th>
+              <td>0</td>
+            </tr>
+            <tr data-key='highest_win_streak'>
+              <th>Highest Win Streak</th>
+              <td>0</td>
+            </tr>
+            <tr data-key='no_lives_lost'>
+              <th>Games with No Lives Lost</th>
+              <td>0</td>
+            </tr>
+            <tr data-key='first_bloons'>
+              <th>First Bloods</th>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="towerStats panel">
+        <h3 class="towersHeader statHeader">Towers</h3>
+        <div class="tablesContainer">
+          <div class="primaryStats">
+            <h4>Primary</h4>
+            <table class="primaryClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Placed</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="militaryStats">
+            <h4>Military</h4>
+            <table class="militaryClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Placed</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="magicStats">
+            <h4>Magic</h4>
+            <table class="magicClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Placed</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="supportStats">
+            <h4>Support</h4>
+            <table class="supportClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Placed</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="heroStats">
+            <h4>Hero</h4>
+            <table class="heroClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Placed</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+      </section>
+      </div>
+      <section class="bloonStats panel">
+        <h3 class="statHeader bloonHeader">Bloon Stats</h3>
+        <div class="tablesContainer">
+          <section class="bloonClassStats">
+            <h4 class="bloonStatsHeader">
+              Bloons
+            </h4>
+            <table class="bloonClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sent</th>
+                  <th>Popped</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </section>
+          <section class="moabClassStats">
+            <h4 class="moabStatsHeader">Blimps</h4>
+            <table class="moabClass statsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sent</th>
+                  <th>Popped</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </section>
+      <section class="chestDisplay">
+
+      </section>
+      <section class="badgeDisplay panel">
+        <h3>Badges</h3>
+      </section>
+    </section>
     <main>
-  </body>
+</body>
+
 </html>

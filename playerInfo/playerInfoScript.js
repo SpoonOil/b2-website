@@ -28,6 +28,7 @@ function displayResults(json) {
   player = json.body;
   generateBanner(player)
   updateRankedStats(player);
+  updateSummary(player);
   updateGeneralStats(player);
   updateMedals(player);
   updateRankHistory(player);
@@ -59,6 +60,56 @@ function updateRankedStats(player) {
     let dataOutput = document.querySelector(`[data-key = ${key.toString()}]>td:last-child`);
     dataOutput.textContent = player.rankedStats[key];
   }
+}
+
+function updateSummary(player) {
+  const towers = player._towers
+  let winrate = (player.rankedStats['wins']/(player.rankedStats['wins']+player.rankedStats['losses']))*100
+  winrate = Math.floor(winrate*10)/10
+  let favoriteTower1 = {
+    'type': 'none',
+    'used': 0
+  }
+  let favoriteTower2 = {
+    'type': 'none',
+    'used': 0
+  }
+  let favoriteTower3 = {
+    'type': 'none',
+    'used': 0
+  }
+  for (let i = 0; i < towers.length; i++) {
+    tower = towers[i]
+    const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman', 'Agent_Jericho', 'Highwayman_Jericho']
+    if (tower == favoriteTower1 || tower == favoriteTower2 || tower == favoriteTower3) {
+      continue
+    }
+    console.log(heroTowers)
+    if (heroTowers.includes(tower.type)) {
+      continue
+    }
+    if (tower.used > favoriteTower1.used) {
+      favoriteTower1 = tower
+      continue
+    }
+    if (tower.used > favoriteTower2.used) {
+      favoriteTower2 = tower
+      continue
+    }
+    if (tower.used > favoriteTower3.used) {
+      favoriteTower3 = tower
+      continue
+    }
+  }
+
+  let winrateText = document.querySelector('.winrateNum');
+  let tower1Text = document.querySelector('.tower1')
+  let tower2Text = document.querySelector('.tower2')
+  let tower3Text = document.querySelector('.tower3')
+  winrateText.textContent = winrate + "%"
+  tower1Text.textContent = favoriteTower1.type
+  tower2Text.textContent = favoriteTower2.type
+  tower3Text.textContent = favoriteTower3.type
 }
 
 function updateGeneralStats() {
