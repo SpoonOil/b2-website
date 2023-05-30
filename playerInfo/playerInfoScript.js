@@ -63,6 +63,17 @@ function updateRankedStats(player) {
 }
 
 function updateSummary(player) {
+  function getColor(value){
+    console.log(value)
+    //value from 0 to 1
+    if (value >= 0.5) {
+      value = 1-value
+      var hue=((1-value)*150).toString(10);
+    } else if (value < 0.5) {
+      var hue=((1-value)*50).toString(10);
+    }
+    return ["hsl(",hue,",100%,45%)"].join("");
+  }
   const towers = player._towers
   let winrate = (player.rankedStats['wins']/(player.rankedStats['wins']+player.rankedStats['losses']))*100
   winrate = Math.floor(winrate*10)/10
@@ -84,7 +95,6 @@ function updateSummary(player) {
     if (tower == favoriteTower1 || tower == favoriteTower2 || tower == favoriteTower3) {
       continue
     }
-    console.log(heroTowers)
     if (heroTowers.includes(tower.type)) {
       continue
     }
@@ -107,6 +117,7 @@ function updateSummary(player) {
   let tower2Text = document.querySelector('.tower2')
   let tower3Text = document.querySelector('.tower3')
   winrateText.textContent = winrate + "%"
+  winrateText.style.color = getColor((winrate/100))
   tower1Text.textContent = favoriteTower1.type
   tower2Text.textContent = favoriteTower2.type
   tower3Text.textContent = favoriteTower3.type
@@ -122,7 +133,6 @@ function updateGeneralStats() {
   supportTable = document.querySelector('.supportClass>tbody');
   bloonTable = document.querySelector('.bloonClass>tbody');
   moabTable = document.querySelector('.moabClass>tbody');
-  console.log(heroTable);
   bloonStats.forEach(bloon => {generateBloonRow(bloon, bloonTable, moabTable)});
   for (let i = 0; i < towerStats.length; i++) {
     generateTowerRow(towerStats[i], heroTable, primaryTable, militaryTable, magicTable, supportTable);
