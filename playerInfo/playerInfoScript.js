@@ -99,10 +99,13 @@ function updateSummary(player) {
       continue
     }
     if (tower.used > favoriteTower1.used) {
+      favoriteTower3 = favoriteTower2
+      favoriteTower2 = favoriteTower1
       favoriteTower1 = tower
       continue
     }
     if (tower.used > favoriteTower2.used) {
+      favoriteTower3 = favoriteTower2
       favoriteTower2 = tower
       continue
     }
