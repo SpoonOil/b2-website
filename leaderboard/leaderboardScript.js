@@ -22,9 +22,10 @@ function updateAll(json) {
     s13Leaderboard = document.querySelector('.leaderboardS13 tbody')
     s14Leaderboard = document.querySelector('.leaderboardS14 tbody')
     s15Leaderboard = document.querySelector('.leaderboardS15 tbody')
-    getLeaderboardInfo(json.body[0].leaderboard, 1, s12Leaderboard);
-    getLeaderboardInfo(json.body[1].leaderboard, 1, s11Leaderboard);
-    getLeaderboardInfo(json.body[2].leaderboard, 1, s10Leaderboard);
+    getLeaderboardInfo(json.body[0].leaderboard, 1, s13Leaderboard);
+    getLeaderboardInfo(json.body[1].leaderboard, 1, s12Leaderboard);
+    getLeaderboardInfo(json.body[2].leaderboard, 1, s11Leaderboard);
+    getLeaderboardInfo(json.body[3].leaderboard, 1, s10Leaderboard);
 }
 
 function getLeaderboardInfo(url, index, output) {
