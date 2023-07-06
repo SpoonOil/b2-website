@@ -308,14 +308,30 @@ body .toolList > li.currentPage:active {
   font-size: 1.3em;
 }
 
+.leaderboardLink{
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .playerName{
   font-weight: bolder;
   text-transform: uppercase;
 }
 
+.playerPlace {
+  font-family: 'Luckiest Guy';
+}
+.playerPlace a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 .place1 {
   color: rgb(224, 161, 0);
-  font-family: 'Luckiest Guy';
   font-size: 1.5em;
   text-shadow: 0 0 3px black;
   height: 50px;
@@ -323,7 +339,6 @@ body .toolList > li.currentPage:active {
 
 .place2 {
   color: rgb(139, 140, 151);
-  font-family: 'Luckiest Guy';
   font-size: 1.3em;
   text-shadow: 0 0 3px rgb(143, 143, 150);
   height: 30px;
@@ -331,7 +346,6 @@ body .toolList > li.currentPage:active {
 
 .place3 {
   color: rgb(136, 77, 0);
-  font-family: 'Luckiest Guy';
   font-size: 1.3em;
   text-shadow: 0 0 3px rgb(161, 76, 6);
 }

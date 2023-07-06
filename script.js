@@ -46,18 +46,23 @@ function createLeaderboard(json) {
             playerRow.classList.add('firstPlace');
         }
         playerPlace.classList.add('playerPlace');
-        playerPlace.textContent = i+1;
-        playerScore.textContent = player.score;
-        playerName.textContent = player.displayName;
         playerRow.appendChild(playerName);
         playerRow.appendChild(playerScore);
         playerRow.appendChild(playerPlace);
+        console.log(playerRow);
+
         playerRow.dataset.profileURL = player.profile;
         playerRow.classList.add('playerRow');
-        playerRow.addEventListener('click', () => {
-            window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
-        });
         document.querySelector('.leaderboard>tbody').appendChild(playerRow);
+        Array.from(playerRow.children).forEach(playerElement => {
+            let playerElementLink = document.createElement('a');
+            playerElementLink.classList.add('leaderboardLink');
+            playerElementLink.href = 'playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
+            playerElement.appendChild(playerElementLink);
+        });
+        playerPlace.firstChild.textContent = i+1;
+        playerScore.firstChild.textContent = player.score;
+        playerName.firstChild.textContent = player.displayName;
     }
 }
 
