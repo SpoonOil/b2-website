@@ -266,6 +266,10 @@ body .toolList > li.currentPage:active {
   justify-content: space-between;
 }
 
+.leaderboardHeader * {
+  margin: 0 15px 0 15px;
+}
+
 .leaderboardContainer {
   display: flex;
   justify-content: center;
@@ -278,11 +282,11 @@ body .toolList > li.currentPage:active {
   color: black;
   border: 1px solid  #ffaa00;
   border-radius: 10px;
-  width: 80%;
+  flex: 8;
 }
 
 .leaderboardSpacer {
-  flex: 3;
+  flex: 1;
 }
 
 
