@@ -162,6 +162,10 @@ function expandTable(matchContainer, matchInfo) {
 }
 getMatchInfo();
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function createExpansion(matchInfo, matchContainer) {
     let extraInfoContainer = document.createElement("div");
     extraInfoContainer.classList.add("extraInfoContainer");
@@ -171,10 +175,7 @@ function createExpansion(matchInfo, matchContainer) {
         }
         let extraInfo = document.createElement("span");
         extraInfo.classList.add("extraInfo");
-        extraInfo.textContent = key.toUpperCase() + ": " + matchInfo[key] + " ";
-        if (key == "endRound") {
-            extraInfo.textContent += "End Round: " + matchInfo[key+1];
-        }
+        extraInfo.textContent = capitalizeFirstLetter(key) + ": " + matchInfo[key] + " ";
         extraInfoContainer.appendChild(extraInfo);
     }
     matchContainer.appendChild(extraInfoContainer);

@@ -99,8 +99,17 @@ function updateSummary(player) {
       continue
     }
     if (tower.used > favoriteTower1.used) {
+      favoriteTower3 = favoriteTower2
+      favoriteTower2 = favoriteTower1
       favoriteTower1 = tower
+<<<<<<< HEAD
     } else if (tower.used > favoriteTower2.used) {
+=======
+      continue
+    }
+    if (tower.used > favoriteTower2.used) {
+      favoriteTower3 = favoriteTower2
+>>>>>>> 68daef28571668016c202e3a4b924c2d40b3be78
       favoriteTower2 = tower
     } else if (tower.used > favoriteTower3.used) {
       favoriteTower3 = tower
