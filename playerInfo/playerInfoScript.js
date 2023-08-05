@@ -100,15 +100,10 @@ function updateSummary(player) {
     }
     if (tower.used > favoriteTower1.used) {
       favoriteTower1 = tower
-      continue
-    }
-    if (tower.used > favoriteTower2.used) {
+    } else if (tower.used > favoriteTower2.used) {
       favoriteTower2 = tower
-      continue
-    }
-    if (tower.used > favoriteTower3.used) {
+    } else if (tower.used > favoriteTower3.used) {
       favoriteTower3 = tower
-      continue
     }
   }
 
