@@ -15,17 +15,24 @@ function updateSeasonInfo() {
         .then((json) => updateAll(json))
 }
 
+function getLiveSeason(json) {
+    // returns index of live season
+    // returns -1 if off-season
+    const liveIndex = json.body.findIndex(item => item.live === true);
+    return liveIndex;
+}
+
+function getLatestPopulatedSeason(json) {
+    const latestPopulatedIndex = json.body.findIndex(item => item.totalScores !== 0);
+    return latestPopulatedIndex;
+}
+
 function updateAll(json) {
-    s10Leaderboard = document.querySelector('.leaderboardS10 tbody')
-    s11Leaderboard = document.querySelector('.leaderboardS11 tbody')
-    s12Leaderboard = document.querySelector('.leaderboardS12 tbody')
-    s13Leaderboard = document.querySelector('.leaderboardS13 tbody')
-    s14Leaderboard = document.querySelector('.leaderboardS14 tbody')
-    s15Leaderboard = document.querySelector('.leaderboardS15 tbody')
-    getLeaderboardInfo(json.body[0].leaderboard, 1, s13Leaderboard);
-    getLeaderboardInfo(json.body[1].leaderboard, 1, s12Leaderboard);
-    getLeaderboardInfo(json.body[2].leaderboard, 1, s11Leaderboard);
-    getLeaderboardInfo(json.body[3].leaderboard, 1, s10Leaderboard);
+    let liveSeason = getLiveSeason(json)
+    if (liveSeason === -1) liveSeason = getLatestPopulatedSeason(json)
+    const leaderboardsList = document.getElementsByClassName("leaderboard")
+    for (let leaderboardIndex = 0; leaderboardIndex < leaderboardsList.length; leaderboardIndex++)
+        getLeaderboardInfo(json.body[liveSeason + leaderboardIndex].leaderboard, 1, leaderboardsList[leaderboardIndex]);
 }
 
 function getLeaderboardInfo(url, index, output) {
