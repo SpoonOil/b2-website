@@ -182,6 +182,7 @@ header {
 
 .playerBanner {
     width: min(600px, 70%);
+    aspect-ratio: 1419/178; /* 1419px by 178px is the default banner size */
     /* border-width: 6px 12px 19px;
     border-style: solid;
     border-image-source: url(../assets/images/testBorder.webp);
