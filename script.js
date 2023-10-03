@@ -1,5 +1,6 @@
 //grab nodes
 const seasonTitle = document.querySelector('.seasonTitle');
+const seasonLeaederboardTitle = document.querySelector('.seasonLeaederboardTitle');
 const seasonTimeLeft = document.querySelector('.seasonTimeLeft');
 const startDate = document.querySelector('.startDate');
 const endDate = document.querySelector('.endDate');
@@ -14,18 +15,6 @@ function mobileMenu() {
     navMenu.classList.toggle("active");
 }
 
-function getLiveSeason(json) {
-    // returns index of live season
-    // returns -1 if off-season
-    const liveIndex = json.body.findIndex(item => item.live === true);
-    return liveIndex;
-}
-
-function getLatestPopulatedSeason(json) {
-    const latestPopulatedIndex = json.body.findIndex(item => item.totalScores !== 0);
-    return latestPopulatedIndex;
-}
-
 function updateSeasonInfo() {
     fetch('https://data.ninjakiwi.com/battles2/homs')
         .then((response) => response.json())
@@ -33,11 +22,9 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-    let liveSeasonIndex = getLiveSeason(json);
-    // off season anti-break
-    if (liveSeasonIndex === -1) liveSeasonIndex = getLatestPopulatedSeason(json)
-    getLeaderboardInfo(json.body[liveSeasonIndex].leaderboard);
+    getLeaderboardInfo(json.body[0].leaderboard);
     updateText(json);
+    updateSeasonTitle(json);
 }
 
 function getLeaderboardInfo(url) {
@@ -61,72 +48,38 @@ function createLeaderboard(json) {
             playerRow.classList.add('firstPlace');
         }
         playerPlace.classList.add('playerPlace');
+        playerPlace.textContent = i+1;
+        playerScore.textContent = player.score;
+        playerName.textContent = player.displayName;
         playerRow.appendChild(playerName);
         playerRow.appendChild(playerScore);
         playerRow.appendChild(playerPlace);
-        console.log(playerRow);
-
         playerRow.dataset.profileURL = player.profile;
         playerRow.classList.add('playerRow');
-        document.querySelector('.leaderboard>tbody').appendChild(playerRow);
-        Array.from(playerRow.children).forEach(playerElement => {
-            let playerElementLink = document.createElement('a');
-            playerElementLink.classList.add('leaderboardLink');
-            playerElementLink.href = 'playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
-            playerElement.appendChild(playerElementLink);
+        playerRow.addEventListener('click', () => {
+            window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
         });
-        playerPlace.firstChild.textContent = i+1;
-        playerScore.firstChild.textContent = player.score;
-        playerName.firstChild.textContent = player.displayName;
+        document.querySelector('.leaderboard>tbody').appendChild(playerRow);
     }
 }
 
 function updateText(json) {
-    let liveSeasonIndex = getLiveSeason(json)
-    let isOffSeason;
-    if (liveSeasonIndex === -1) {
-        isOffSeason = true;
-    } else {
-        isOffSeason = false;
-    }
-    const latestPopulatedIndex = getLatestPopulatedSeason(json)
+    seasonTitle.textContent = json.body[0].name
     timeLeft = getTimeLeft(json);
     seasonTimeLeft.innerHTML = `<b>Time Left:</b> ${timeLeft.days} Days, ${timeLeft.hours} Hours, ${timeLeft.minutes} Minutes`
-    if (isOffSeason) {
-        seasonTitle.textContent = "Off-Season";
-        startDate.textContent = new Date(json.body[latestPopulatedIndex].end).toLocaleString();
-        if (latestPopulatedIndex > 0) {
-            endDate.textContent = new Date(json.body[latestPopulatedIndex - 1].start).toLocaleString();
-        } else {
-            endDate.textContent = "????-??-??, ?:??:??"
-        }
-    } else {
-        playerCount.textContent = json.body[latestPopulatedIndex].totalScores;
-        seasonTitle.textContent = json.body[liveSeasonIndex].name;
-        startDate.textContent = new Date(json.body[liveSeasonIndex].start).toLocaleString();
-        endDate.textContent = new Date(json.body[liveSeasonIndex].end).toLocaleString();
-        playerCount.textContent = json.body[liveSeasonIndex].totalScores;
-    }
+    startDate.textContent = new Date(json.body[0].start);
+    endDate.textContent = new Date(json.body[0].end);
+    playerCount.textContent = json.body[0].totalScores
+}
+
+function updateSeasonTitle(json) {
+    seasonLeaederboardTitle.textContent = json.body[0].name
 }
 
 function getTimeLeft(json) {
-    let liveSeasonIndex = getLiveSeason(json)
-    let isOffSeason;
-    if (liveSeasonIndex === -1) {
-        isOffSeason = true;
-    } else {
-        isOffSeason = false;
-    }
-    const latestPopulatedIndex = getLatestPopulatedSeason(json)
     const todayDate = new Date()
     // console.log(todayDate.toLocaleDateString());
-    let endDate;
-    // if off season and api has next season
-    if (isOffSeason && latestPopulatedIndex > 0) {
-        endDate = new Date(json.body[latestPopulatedIndex - 1].start);
-    } else {
-        endDate = new Date(json.body[latestPopulatedIndex].end);
-    }
+    let endDate = new Date(json.body[0].end);
     // console.log(endDate.toLocaleDateString());
     let timeToEnd = (endDate - todayDate) /1000
     timeToEnd/=60 //seconds to minutes
