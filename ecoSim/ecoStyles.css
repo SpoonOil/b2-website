@@ -124,7 +124,7 @@ body {
     top: 1px;
 }
 
-.toolList a {
+.toolList a, .warning-link{
     width: 100%;
     text-decoration: none;
     color: #c8d0db;
@@ -152,6 +152,23 @@ body .toolList>li.currentPage:active {
 
 /* end header styles */
 
+/* begin warning styles */
+
+.warning-banner-container {
+    background-color: #144272;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+.warning-banner-close button {
+    border-radius: 50%;
+    height:50px;
+    width:50px;
+}
 /* begin eco sim styles */
 
 main {

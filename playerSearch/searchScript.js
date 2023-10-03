@@ -136,18 +136,20 @@ function processData(json, searchMode, searchValue) {
 function generatePlayerCard(player, rankIndex) {
     const playerCard = document.createElement('div');
     playerCard.classList.add('playerCard');
+    console.log(rankIndex)
     playerCard.innerHTML = `
     <div class="playerImageContainer">
     <img src="https://cdn.discordapp.com/attachments/921447683846180976/1098996347065090240/sauda_avatar_large.png" class="playerCardImage" alt="${player.displayName} Avatar">
     </div>
     <div class="playerCardInfo">
-    <h3 class="playerCardName">${player.displayName}</h3>
+    <h3 class="playerCardName" id = "rank${rankIndex.toString()}"></h3>
     <p class="playerCardScore"><span class="playerCardScoreLabel playerCardLabel">Score:</span> ${player.score}</p>
     <p class="playerCardPlace"><span class="playerCardPlaceLabel playerCardLabel">Place:</span> ${rankIndex}</p>
     <a class="playerCardLink" href="../playerInfo/playerInfo.html?${player.profile}"><div class="playerCardProfileButton">Profile</div></a>
     </div>
     `;
     document.querySelector('.resultsOutput').appendChild(playerCard);
+    document.querySelector("#rank"+rankIndex.toString()).textContent = player.displayName;
     const playerImage = playerCard.querySelector('.playerCardImage');
     updatePlayerImages(player, playerImage)
 }

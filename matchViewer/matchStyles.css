@@ -34,13 +34,6 @@ body {
   flex-direction: column;
 }
 
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* header styles */
 
 .headerText {
@@ -243,12 +236,17 @@ tr.playerDataRow {
     margin: 10px;
 }
 .matchTableContainer {
+    width: 80%;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
 @media screen and (max-width: 768px) {
+    .matchTableContainer {
+        width: 100%;
+    }
     main {
       flex-direction: column;
       align-items: stretch;
