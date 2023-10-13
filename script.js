@@ -1,6 +1,6 @@
 //grab nodes
 const seasonTitle = document.querySelector('.seasonTitle');
-const seasonLeaederboardTitle = document.querySelector('.seasonLeaederboardTitle');
+const seasonLeaderboardTitle = document.querySelector('.seasonLeaderboardTitle');
 const seasonTimeLeft = document.querySelector('.seasonTimeLeft');
 const startDate = document.querySelector('.startDate');
 const endDate = document.querySelector('.endDate');
@@ -67,13 +67,15 @@ function updateText(json) {
     seasonTitle.textContent = json.body[0].name
     timeLeft = getTimeLeft(json);
     seasonTimeLeft.innerHTML = `<b>Time Left:</b> ${timeLeft.days} Days, ${timeLeft.hours} Hours, ${timeLeft.minutes} Minutes`
-    startDate.textContent = new Date(json.body[0].start);
-    endDate.textContent = new Date(json.body[0].end);
+    const seasonStart = new Date(json.body[0].start)
+    const seasonEnd = new Date(json.body[0].end)
+    startDate.textContent = seasonStart.toLocaleString()
+    endDate.textContent = seasonEnd.toLocaleString()
     playerCount.textContent = json.body[0].totalScores
 }
 
 function updateSeasonTitle(json) {
-    seasonLeaederboardTitle.textContent = json.body[0].name
+    seasonLeaderboardTitle.textContent = json.body[0].name
 }
 
 function getTimeLeft(json) {
