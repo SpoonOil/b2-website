@@ -115,15 +115,22 @@ table {
 
 .towerImg {
     /* width: 80px; */
-    width: 100%
+    width: 8vw;
 }
 
 .towerRow {
     display: flex;
+    align-items: stretch;
 }
 
 .tower {
     flex: 1;
+    border: goldenrod 3px solid;
+    background-color: gold;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .imgContainer {
@@ -136,7 +143,7 @@ table {
 
 .towerRowContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: stretch;
 }
 
 .towerRow {
