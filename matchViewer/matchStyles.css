@@ -113,6 +113,21 @@ table {
     border-radius: 5px;
 }
 
+.towerImg {
+    width: 80px;
+}
+
+.towerRowContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.towerRow {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+}
 
 .win {
     background-color: rgb(0, 167, 0);

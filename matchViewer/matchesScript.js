@@ -168,19 +168,31 @@ function generateMatchTable(matchHistory) {
         updatePlayerName(matchHistory[i].playerRight, playerRightHeader);
 
         //generate dataRows
+        let towerRowContainer = document.createElement("div");
+        towerRowContainer.classList.add("towerRowContainer");
+        let towerRowLeft = document.createElement("div")
+        towerRowLeft.classList.add("towerRow");
+        table.appendChild(towerRowLeft);
         for (key in matchHistory[i].playerLeft) {
-            let newRow = table.insertRow()
-            newRow.classList.add("playerDataRow");
             let isPrimary = false
             for (entry in primaryMatchData) {
                 if (key == primaryMatchData[entry]) {isPrimary = true}
             }
             if (isPrimary == false) {continue}
-            let cellLeft = newRow.insertCell();
+            let cellLeft = document.createElement("div");
+            towerRowLeft.appendChild(cellLeft);
             if (key == "towerone" || key == "towertwo" || key == "towerthree") {
-                cellLeft.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerLeft[key]);
+                towerImg = document.createElement("img");
+                towerImg.classList.add("towerImg");
+                towerImg.src = "../assets/images/towers/" + matchHistory[i].playerLeft[key] + ".png";
+                cellLeft.appendChild(towerImg);
+                // cellLeft.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerLeft[key]);
             } else if (key == "hero") {
-                cellLeft.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerLeft[key]);
+                heroImg = document.createElement("img");
+                heroImg.classList.add("heroImg");
+                heroImg.classList.add("towerImg");
+                heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerRight[key] + ".webp";
+                cellLeft.appendChild(heroImg);
             } else {
                 cellLeft.textContent = matchHistory[i].playerLeft[key];
             }
@@ -190,6 +202,12 @@ function generateMatchTable(matchHistory) {
             }
         }
         let j = 0;
+        let towerRowRight = document.createElement("div")
+        towerRowRight.classList.add("towerRow");
+        table.appendChild(towerRowRight);
+        towerRowContainer.appendChild(towerRowLeft);
+        towerRowContainer.appendChild(towerRowRight);
+        table.appendChild(towerRowContainer);
         for (key in matchHistory[i].playerRight) {
             j++
             let isPrimary = false
@@ -197,12 +215,22 @@ function generateMatchTable(matchHistory) {
                 if (key == primaryMatchData[entry]) {isPrimary = true}
             }
             if (isPrimary == false) {continue}
-            let currentRow = table.querySelector('tr:nth-child('+(j+2)+')')
-            let cellRight = currentRow.insertCell();
+            let cellRight = document.createElement("div");
+            cellRight.classList.add("tower");
+           towerRowRight.appendChild(cellRight);
             if (key == "towerone" || key == "towertwo" || key == "towerthree") {
-                cellRight.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerRight[key]);
+                towerImg = document.createElement("img");
+                towerImg.classList.add("towerImg");
+                towerImg.src = "../assets/images/towers/" + matchHistory[i].playerRight[key] + ".png";
+                cellRight.appendChild(towerImg);
+                // cellRight.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerRight[key]);
             } else if (key == "hero") {
-                cellRight.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerRight[key]);
+                heroImg = document.createElement("img");
+                heroImg.classList.add("heroImg");
+                heroImg.classList.add("towerImg");
+                heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerRight[key] + ".webp";
+                cellRight.appendChild(heroImg);
+                // cellRight.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerRight[key]);
             } else {
                 cellRight.textContent = matchHistory[i].playerRight[key];
             }
@@ -211,6 +239,7 @@ function generateMatchTable(matchHistory) {
                 cellRight.classList.add("currentUser");
             }
         }
+
         if (matchHistory[i].playerLeft.currentUser) {
             playerLeftHeader.classList.add("currentUser");
         } else {
@@ -288,7 +317,7 @@ function createExpansion(matchInfo, matchContainer) {
         } else if (key == "duration") {
             extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${matchInfo[key]} seconds</p>`;
         } else if (key == "endRound") {
-            extraInfo.innerHTML = `<h5>End Round</h5><p>${matchInfo[key]}</p>`;
+            extraInfo.innerHTML = `<h5>End Round</h5><p>${++matchInfo[key]}</p>`;
         } else {
             extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${matchInfo[key]}</p>`;
         }
