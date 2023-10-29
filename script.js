@@ -20,10 +20,9 @@ function updateSeasonInfo() {
         .then((response) => response.json())
         .then((json) => updateAll(json))
 }
-
 function updateAll(json) {
     getLeaderboardInfo(json.body[0].leaderboard);
-    updateText(json);
+    setInterval(updateText, 100, json);
     updateSeasonTitle(json);
 }
 
@@ -31,6 +30,7 @@ function getLeaderboardInfo(url) {
     fetch(url)
         .then((response) => response.json())
         .then((json) => createLeaderboard(json))
+        
 }
 
 function createLeaderboard(json) {
