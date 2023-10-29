@@ -133,6 +133,12 @@ table {
     align-items: center;
 }
 
+.tower>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .mapCell {
     width: 9.5vw;
     display: flex;
@@ -156,7 +162,8 @@ table {
 .towerRowContainer {
     display: flex;
     justify-content: stretch;
-    align-items: stretch
+    align-items: stretch;
+    height: 10vh;
 }
 
 .towerRow {
@@ -299,7 +306,7 @@ tr.playerDataRow {
     margin: 10px;
 }
 .matchTableContainer {
-    width: 90%;
+    width: 50%;
     min-width: fit-content;
     margin: auto;
     display: flex;
