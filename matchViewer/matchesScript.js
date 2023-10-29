@@ -202,11 +202,21 @@ function generateMatchTable(matchHistory) {
                 cellLeft.classList.add("currentUser");
             }
         }
+        // add map thumbnail
+
+        let mapCell = document.createElement("div");
+        mapCell.classList.add("mapCell");
+
+        let mapImg = document.createElement("img");
+        mapImg.classList.add("mapImg");
+        mapImg.src = matchHistory[i].mapURL
+        mapCell.appendChild(mapImg);
         let j = 0;
         let towerRowRight = document.createElement("div")
         towerRowRight.classList.add("towerRow");
         table.appendChild(towerRowRight);
         towerRowContainer.appendChild(towerRowLeft);
+        towerRowContainer.appendChild(mapCell);
         towerRowContainer.appendChild(towerRowRight);
         table.appendChild(towerRowContainer);
         for (key in matchHistory[i].playerRight) {
