@@ -113,14 +113,23 @@ function updateSummary(player) {
   }
 
   let winrateText = document.querySelector('.winrateNum');
-  let tower1Text = document.querySelector('.tower1')
-  let tower2Text = document.querySelector('.tower2')
-  let tower3Text = document.querySelector('.tower3')
+  let tower1 = document.querySelector('.tower1')
+  let tower2 = document.querySelector('.tower2')
+  let tower3 = document.querySelector('.tower3')
   winrateText.textContent = winrate + "%"
   winrateText.style.color = getColor((winrate/100))
-  tower1Text.textContent = favoriteTower1.type
-  tower2Text.textContent = favoriteTower2.type
-  tower3Text.textContent = favoriteTower3.type
+  tower1Image = document.createElement('img');
+  tower1Image.classList.add('towerImage');
+  tower1Image.src = `../assets/images/towers/${favoriteTower1.type}.png`;
+  tower1.appendChild(tower1Image);
+  tower2Image = document.createElement('img');
+  tower2Image.classList.add('towerImage');
+  tower2Image.src = `../assets/images/towers/${favoriteTower2.type}.png`;
+  tower2.appendChild(tower2Image);
+  tower3Image = document.createElement('img');
+  tower3Image.classList.add('towerImage');
+  tower3Image.src = `../assets/images/towers/${favoriteTower3.type}.png`;
+  tower3.appendChild(tower3Image);
 }
 
 function updateGeneralStats() {

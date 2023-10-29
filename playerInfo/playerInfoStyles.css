@@ -192,6 +192,16 @@ header {
     border-image-width: 6px 12px 20px  */
 }
 
+.mostUsedTowers {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.towerImage {
+    width: 100px;
+
+}
 /* player Rank History styles */
 
 .playerRankHistory, .summaryContent {
