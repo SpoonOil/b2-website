@@ -192,7 +192,7 @@ function generateMatchTable(matchHistory) {
                 heroImg = document.createElement("img");
                 heroImg.classList.add("heroImg");
                 heroImg.classList.add("towerImg");
-                heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerRight[key] + ".webp";
+                heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerLeft[key] + ".webp";
                 cellLeft.appendChild(heroImg);
             } else {
                 cellLeft.textContent = matchHistory[i].playerLeft[key];
