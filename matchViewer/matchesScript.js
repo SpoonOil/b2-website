@@ -180,6 +180,7 @@ function generateMatchTable(matchHistory) {
             }
             if (isPrimary == false) {continue}
             let cellLeft = document.createElement("div");
+            cellLeft.classList.add("tower");
             towerRowLeft.appendChild(cellLeft);
             if (key == "towerone" || key == "towertwo" || key == "towerthree") {
                 towerImg = document.createElement("img");

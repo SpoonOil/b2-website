@@ -114,7 +114,24 @@ table {
 }
 
 .towerImg {
+    /* width: 80px; */
+    width: 100%
+}
+
+.towerRow {
+    display: flex;
+}
+
+.tower {
+    flex: 1;
+}
+
+.imgContainer {
     width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .towerRowContainer {
