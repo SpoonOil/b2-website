@@ -134,7 +134,7 @@ table {
 }
 
 .mapCell {
-    width: 200px;
+    width: 9.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -299,7 +299,8 @@ tr.playerDataRow {
     margin: 10px;
 }
 .matchTableContainer {
-    width: 80%;
+    width: 90%;
+    min-width: fit-content;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -322,6 +323,11 @@ tr.playerDataRow {
 
     :root {
       font-size: 15px;
+    }
+
+    .towerRow {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     nav.toolsSection .toolList {
