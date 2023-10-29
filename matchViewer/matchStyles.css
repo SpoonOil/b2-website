@@ -220,22 +220,23 @@ tr.playerDataRow {
     justify-content: center;
 }
 #playerSideToggle {
-    height: 5vw;
-    width: 5vw;
+    width: 40px;
+    aspect-ratio: 1;
     margin-right: 10px;
 }
 .extraInfoContainer {
     margin: 10px;
-    display:flex;
+    display: flex;
+    flex-wrap: wrap;
     padding: 10px;
     background-color: #144272;
     border: 3px solid #2C74B3;
     border-radius: 5px;
+    gap: 36px
 }
 
-.extraInfo {
-    flex: 1;
-    text-align: center;
+.extraInfo * {
+    margin: 4px
 }
 
 .match {

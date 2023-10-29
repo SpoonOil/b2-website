@@ -1,5 +1,82 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.toolList');
+const primaryMatchData = ["hero", "towerone", "towertwo", "towerthree"]
+const secondaryMatchData = ["gametype", "duration", "map", "endRound"]
+const displayTerms = {
+    "maps": [
+        ["banana_depot_scene", "Banana Depot"],
+        ["basalt_columns", "Basalt Columns"],
+        ["building_site_scene", "Building Site"],
+        ["bloon_bot_factory", "Bloon Bot Factory"],
+        ["basalt_columns", "Basalt Columns"],
+        ["castle_ruins", "Castle Ruins"],
+        ["cobra_command", "Cobra Command"],
+        ["dino_graveyard", "Dino Graveyard"],
+        ["garden", "Garden"],
+        ["glade", "Glade"],
+        ["inflection", "Inflection"],
+        ["koru", "Koru"],
+        ["oasis", "Oasis"],
+        ["ports", "Ports"],
+        ["sands_of_time", "Sands Of Time"],
+        ["star", "Star"],
+        ["pirate_cove", "Pirate Cove"],
+        ["precious_space", "Precious Space"]
+    ],
+    "towers": [
+        ["DartMonkey", "Dart Monkey"],
+        ["BoomerangMonkey", "Boomerang Monkey"],
+        ["BombShooter", "Bomb Shooter"],
+        ["TackShooter", "Tack Shooter"],
+        ["IceMonkey", "Ice Monkey"],
+        ["GlueGunner", "Glue Gunner"],
+        ["SniperMonkey", "Sniper Monkey"],
+        ["MonkeySub", "Monkey Sub"],
+        ["MonkeyBuccaneer", "Monkey Buccaneer"],
+        ["MonkeyAce", "Monkey Ace"],
+        ["HeliPilot", "Heli Pilot"],
+        ["MortarMonkey", "Mortar Monkey"],
+        ["DartlingGunner", "Dartling Gunner"],
+        ["WizardMonkey", "Boomerang"],
+        ["SuperMonkey", "Boomerang"],
+        ["NinjaMonkey", "Boomerang"],
+        ["Alchemist", "Alchemist"],
+        ["Druid", "Druid"],
+        ["MonkeyVillage", "Monkey Village"],
+        ["BananaFarm", "Banana Farm"],
+        ["SpikeFactory", "Spike Factory"],
+        ["EngineerMonkey", "Engineer Monkey"],
+        ["BoomerangMonkey", "Boomerang"],
+        ["BoomerangMonkey", "Boomerang"],
+        ["BoomerangMonkey", "Boomerang"],
+        ["BoomerangMonkey", "Boomerang"],
+        ["BoomerangMonkey", "Boomerang"],
+        ["BoomerangMonkey", "Boomerang"],
+        ["BoomerangMonkey", "Boomerang"]
+    ],
+    "heroes": [
+        ["Quincy", "Quincy"],
+        ["Quincy_Cyber", "Cyber Quincy"],
+        ["Gwendolin", "Gwendolin"],
+        ["Gwendolin_Science", "Science Gwendolin"],
+        ["Obyn", "Obyn"],
+        ["Obyn_Ocean", "Ocean Obyn"],
+        ["StrikerJones", "Striker Jones"],
+        ["StrikerJones_Biker", "Biker Bones"],
+        ["Churchill", "Captain Churchill"],
+        ["Churchill_Sentai", "Sentai Churchill"],
+        ["Benjamin", "Benjamin"],
+        ["Benjamin_DJ", "DJ Benjammin'"],
+        ["Ezili", "Ezili"],
+        ["Ezili_SmudgeCat", "Smudge Catt Ezili"],
+        ["PatFusty", "Pat Fusty"],
+        ["PatFusty_Snowman", "Fusty The Snowman"],
+        ["Jericho", "Agent Jericho"],
+        ["Agent_Jericho", "Agent Jericho"],
+        ["Jericho_Highwayman", "Highwayman Jericho"],
+        ["Jericho_StarCaptain", "Star Captain Jericho"]
+    ]
+}
 
 hamburger.addEventListener("click", mobileMenu);
 
@@ -37,6 +114,7 @@ function getMatchInfo() {
 
 function processMatchInfo(json) {
     matchHistory = json.body
+    console.log(json)
     generateMatchTable(matchHistory);
 }
 function generateMatchTable(matchHistory) {
@@ -93,11 +171,19 @@ function generateMatchTable(matchHistory) {
         for (key in matchHistory[i].playerLeft) {
             let newRow = table.insertRow()
             newRow.classList.add("playerDataRow");
-            if (key == "profileURL" || key == "currentUser" || key == "result") {
-                continue;
+            let isPrimary = false
+            for (entry in primaryMatchData) {
+                if (key == primaryMatchData[entry]) {isPrimary = true}
             }
+            if (isPrimary == false) {continue}
             let cellLeft = newRow.insertCell();
-            cellLeft.textContent = matchHistory[i].playerLeft[key];
+            if (key == "towerone" || key == "towertwo" || key == "towerthree") {
+                cellLeft.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerLeft[key]);
+            } else if (key == "hero") {
+                cellLeft.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerLeft[key]);
+            } else {
+                cellLeft.textContent = matchHistory[i].playerLeft[key];
+            }
             cellLeft.classList.add("playerDataLeft");
             if (matchHistory[i].playerLeft.currentUser) {
                 cellLeft.classList.add("currentUser");
@@ -106,12 +192,20 @@ function generateMatchTable(matchHistory) {
         let j = 0;
         for (key in matchHistory[i].playerRight) {
             j++
-            if (key == "profileURL" || key == "currentUser" || key == "result") {
-                continue;
+            let isPrimary = false
+            for (entry in primaryMatchData) {
+                if (key == primaryMatchData[entry]) {isPrimary = true}
             }
+            if (isPrimary == false) {continue}
             let currentRow = table.querySelector('tr:nth-child('+(j+2)+')')
             let cellRight = currentRow.insertCell();
-            cellRight.textContent = matchHistory[i].playerRight[key];
+            if (key == "towerone" || key == "towertwo" || key == "towerthree") {
+                cellRight.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerRight[key]);
+            } else if (key == "hero") {
+                cellRight.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerRight[key]);
+            } else {
+                cellRight.textContent = matchHistory[i].playerRight[key];
+            }
             cellRight.classList.add("playerDataRight");
             if (matchHistory[i].playerRight.currentUser) {
                 cellRight.classList.add("currentUser");
@@ -123,7 +217,6 @@ function generateMatchTable(matchHistory) {
             playerRightHeader.classList.add("currentUser");
         }
     }
-
 }
 
 function updatePlayerName(player, slot) {
@@ -176,12 +269,29 @@ function createExpansion(matchInfo, matchContainer) {
     let extraInfoContainer = document.createElement("div");
     extraInfoContainer.classList.add("extraInfoContainer");
     for (key in matchInfo) {
-        if (!(key == "duration" || key == "endRound" || key == "map" || key == "gametype")) {
-            continue;
+        let isPrimary = false
+        for (entry in primaryMatchData) {
+            if (key == primaryMatchData[entry]) {isPrimary = true}
         }
-        let extraInfo = document.createElement("span");
+        if (isPrimary == true) {continue}
+        let isSecondary = false
+        for (entry in secondaryMatchData) {
+            if (key == secondaryMatchData[entry]) {isSecondary = true}
+        }
+        if (isSecondary == false) {continue}
+        let extraInfo = document.createElement("div");
         extraInfo.classList.add("extraInfo");
-        extraInfo.textContent = capitalizeFirstLetter(key) + ": " + matchInfo[key] + " ";
+        if (key == "map") {
+            let value = matchInfo[key]
+            value = replaceWithDisplayTerm("maps", value)
+            extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${value}</p>`;
+        } else if (key == "duration") {
+            extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${matchInfo[key]} seconds</p>`;
+        } else if (key == "endRound") {
+            extraInfo.innerHTML = `<h5>End Round</h5><p>${matchInfo[key]}</p>`;
+        } else {
+            extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${matchInfo[key]}</p>`;
+        }
         extraInfoContainer.appendChild(extraInfo);
     }
     matchContainer.appendChild(extraInfoContainer);
@@ -199,4 +309,13 @@ function toggleExpansionState(matchContainer) {
 function setExpansionStateToExpanded(matchContainer, expanderButton) {
     matchContainer.classList.remove("expanded");
     expanderButton.textContent = "More Info";
+}
+
+function replaceWithDisplayTerm(category, term) {
+    for (mapNumber in displayTerms[category]) {
+        if (term == displayTerms[category][mapNumber][0]) {
+            return displayTerms[category][mapNumber][1]
+        }
+    }
+    return term
 }
