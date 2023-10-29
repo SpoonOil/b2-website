@@ -78,6 +78,12 @@ function generateMatchTable(matchHistory) {
         } else if (matchHistory[i].playerLeft.result == "draw") {
             playerLeftHeader.classList.add("draw");
             playerRightHeader.classList.add("draw");
+        } else if (matchHistory[i].playerLeft.result == "lobbyDC") {
+            playerLeftHeader.classList.add("lobbyDC");
+            playerRightHeader.classList.add("opponentLobbyDC");
+        } else if (matchHistory[i].playerLeft.result == "opponentLobbyDC") {
+            playerLeftHeader.classList.add("opponentLobbyDC");
+            playerRightHeader.classList.add("lobbyDC");
         }
 
         updatePlayerName(matchHistory[i].playerLeft, playerLeftHeader);

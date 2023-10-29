@@ -129,6 +129,16 @@ table {
     color: white;
 }
 
+.lobbyDC {
+    background-color: rgb(138, 75, 75);
+    color: white;
+}
+
+.opponentLobbyDC {
+    background-color: rgb(67, 150, 47);
+    color: white;
+}
+
 .playerHeaderRow {
     cursor: pointer;
     padding: 5px;
