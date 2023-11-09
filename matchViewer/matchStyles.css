@@ -113,11 +113,6 @@ table {
     border-radius: 5px;
 }
 
-.towerImg {
-    /* width: 80px; */
-    width: 8vw;
-}
-
 .towerRow {
     display: flex;
     align-items: stretch;
@@ -127,7 +122,10 @@ table {
     flex: 1;
     border: goldenrod 3px solid;
     background-color: gold;
-    height: 100%;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 120px;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,20 +133,20 @@ table {
 
 .tower>img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     object-fit: contain;
 }
 
 .mapCell {
-    width: 9.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 0.5
 }
 
 .mapImg {
     width: 100%;
-    height: 100%;
+    max-width: 400px;
     object-fit: contain;
 }
 .imgContainer {
@@ -163,7 +161,6 @@ table {
     display: flex;
     justify-content: stretch;
     align-items: stretch;
-    height: 10vh;
 }
 
 .towerRow {
@@ -338,7 +335,7 @@ tr.playerDataRow {
 
     .mapCell {
         display: none;
-    }
+        }
     .towerRow {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
