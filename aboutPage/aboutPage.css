@@ -1,0 +1,147 @@
+.twitchLogo {
+    height: 18px;
+    width: 18px;
+}
+
+.headers {
+    margin-bottom: 0px;
+    color: white;
+    font-size: x-large;
+    margin-left: 20px;
+}
+
+p {
+    margin-top: 5px;
+    margin-left: 30px;
+    color: lightgray;
+    font-size: large;
+}
+
+
+html {
+
+    background-color: #0A2647;
+}
+
+.list-item {
+    color: lightgray;
+    margin-left: 30px;
+}
+
+body {
+    /* border: 3px solid #2C74B3; */
+    /* padding: 50px; */
+    /* border-radius: 5px; */
+    /* background-color: #205295; */
+    /* margin: 80px; */
+    min-height: 650px;
+}
+
+.inner-div {
+    border: 3px solid #2C74B3;
+    border-radius: 5px;
+    background-color: #205295;
+    margin: 70px;
+    min-height: 600px;
+
+}
+
+.pageHeader {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
+
+a:active {
+    color: darkblue;
+}
+
+a:visited {
+    color:  rgb(103, 151, 255);
+}
+
+a {
+    color: rgb(103, 151, 255);
+}
+
+.toolList {
+    margin: 0;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: space-around;
+    font-size: 1em;
+    border-radius: 4px;
+  }
+
+  .toolList>li>a, .toolList>li>span {
+    box-sizing: border-box;
+    padding: 15px;
+    display:block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .toolList > li {
+    font-weight: 300;
+    transition: all 0.25s ease;
+    background-color: #144272;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 3px 0px black;
+    border-bottom: 3px solid #2c74b3;
+  }
+
+  .toolList > li:hover {
+    transition: all 0.25s ease;
+    filter: brightness(105%);
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .toolList > li:active {
+    filter: brightness(95%);
+    position: relative;
+    top: 1px;
+  }
+
+  .toolList a {
+    text-decoration: none;
+    color: #c8d0db;
+  }
+
+  .toolList a:visited {
+    text-decoration: inherit;
+    color: #c8d0db;
+    cursor: auto;
+  }
+
+  .toolList > li.currentPage {
+    filter: brightness(120%);
+    font-weight: 600;
+    box-shadow: none;
+  }
+
+  .toolList > li.currentPage:hover {
+    cursor: initial;
+  }
+
+  .toolList > li.currentPage:active {
+    position: initial;
+  }
+
+
+  .headerText {
+    background-color: #03162c;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0 0 0;
+    font-size: 2.5em;
+    color: #ffbb00;
+    font-family: "Luckiest Guy";
+    font-weight: 100;
+    text-shadow: 0px 3px 2px black;
+  }
