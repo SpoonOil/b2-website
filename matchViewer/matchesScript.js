@@ -328,7 +328,7 @@ function createExpansion(matchInfo, matchContainer) {
         } else if (key == "duration") {
             extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${matchInfo[key]} seconds</p>`;
         } else if (key == "endRound") {
-            extraInfo.innerHTML = `<h5>End Round</h5><p>${matchInfo[key]}</p>`;
+            extraInfo.innerHTML = `<h5>End Round</h5><p>${matchInfo[key]+1}</p>`;
         } else {
             extraInfo.innerHTML = `<h5>${capitalizeFirstLetter(key)}</h5><p>${matchInfo[key]}</p>`;
         }
