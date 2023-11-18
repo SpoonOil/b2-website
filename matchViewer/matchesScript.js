@@ -172,6 +172,15 @@ function generateMatchTable(matchHistory) {
         towerRowContainer.classList.add("towerRowContainer");
         let towerRowLeft = document.createElement("div")
         towerRowLeft.classList.add("towerRow");
+
+        //add classes for side swap handling
+        if (matchHistory[i].playerLeft.currentUser) {
+            towerRowLeft.classList.add("currentUser");
+        }
+        else {
+            towerRowLeft.classList.add("opposingUser");
+        }
+        
         table.appendChild(towerRowLeft);
         for (key in matchHistory[i].playerLeft) {
             let isPrimary = false
@@ -186,6 +195,7 @@ function generateMatchTable(matchHistory) {
                 towerImg = document.createElement("img");
                 towerImg.classList.add("towerImg");
                 towerImg.src = "../assets/images/towers/" + matchHistory[i].playerLeft[key] + ".png";
+                towerImg.alt = matchHistory[i].playerLeft[key];
                 cellLeft.appendChild(towerImg);
                 // cellLeft.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerLeft[key]);
             } else if (key == "hero") {
@@ -193,14 +203,12 @@ function generateMatchTable(matchHistory) {
                 heroImg.classList.add("heroImg");
                 heroImg.classList.add("towerImg");
                 heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerLeft[key] + ".webp";
+                heroImg.alt = matchHistory[i].playerLeft[key];
                 cellLeft.appendChild(heroImg);
             } else {
                 cellLeft.textContent = matchHistory[i].playerLeft[key];
             }
             cellLeft.classList.add("playerDataLeft");
-            if (matchHistory[i].playerLeft.currentUser) {
-                cellLeft.classList.add("currentUser");
-            }
         }
         // add map thumbnail
 
@@ -210,10 +218,20 @@ function generateMatchTable(matchHistory) {
         let mapImg = document.createElement("img");
         mapImg.classList.add("mapImg");
         mapImg.src = matchHistory[i].mapURL
+        mapImg.alt = matchHistory[i].mapURL;
         mapCell.appendChild(mapImg);
         let j = 0;
         let towerRowRight = document.createElement("div")
         towerRowRight.classList.add("towerRow");
+
+        //add classes for side swap handling
+        if (matchHistory[i].playerRight.currentUser) {
+            towerRowRight.classList.add("currentUser");
+        }
+        else {
+            towerRowRight.classList.add("opposingUser");
+        }
+        
         table.appendChild(towerRowRight);
         towerRowContainer.appendChild(towerRowLeft);
         towerRowContainer.appendChild(mapCell);
@@ -233,6 +251,7 @@ function generateMatchTable(matchHistory) {
                 towerImg = document.createElement("img");
                 towerImg.classList.add("towerImg");
                 towerImg.src = "../assets/images/towers/" + matchHistory[i].playerRight[key] + ".png";
+                towerImg.alt = matchHistory[i].playerRight[key];
                 cellRight.appendChild(towerImg);
                 // cellRight.textContent = replaceWithDisplayTerm("towers", matchHistory[i].playerRight[key]);
             } else if (key == "hero") {
@@ -240,15 +259,13 @@ function generateMatchTable(matchHistory) {
                 heroImg.classList.add("heroImg");
                 heroImg.classList.add("towerImg");
                 heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerRight[key] + ".webp";
+                heroImg.alt = matchHistory[i].playerRight[key];
                 cellRight.appendChild(heroImg);
                 // cellRight.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerRight[key]);
             } else {
                 cellRight.textContent = matchHistory[i].playerRight[key];
             }
             cellRight.classList.add("playerDataRight");
-            if (matchHistory[i].playerRight.currentUser) {
-                cellRight.classList.add("currentUser");
-            }
         }
 
         if (matchHistory[i].playerLeft.currentUser) {
@@ -277,7 +294,7 @@ let playerSideToggle = document.querySelector("#playerSideToggle");
 playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
 
 function togglePlayerSide() {
-    currentPlayers = document.getElementsByClassName("currentUser");
+    let currentPlayers = document.getElementsByClassName("currentUser");
 
     for(i = 0; i < currentPlayers.length; i++) {
         if (currentPlayers[i].classList.contains('playerLeft') === false) {
@@ -285,6 +302,18 @@ function togglePlayerSide() {
                 currentPlayers[i].classList.remove('forceLeft');
             } else {
                 currentPlayers[i].classList.add('forceLeft');
+            }
+        }
+    }
+    
+    let opposingPlayers = document.getElementsByClassName("opposingUser");
+    
+    for(i = 0; i < opposingPlayers.length; i++) {
+        if (opposingPlayers[i].classList.contains('playerRight') === false) {
+            if (opposingPlayers[i].classList.contains('forceRight')) {
+                opposingPlayers[i].classList.remove('forceRight');
+            } else {
+                opposingPlayers[i].classList.add('forceRight');
             }
         }
     }
