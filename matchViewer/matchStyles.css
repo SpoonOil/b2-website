@@ -264,8 +264,13 @@ tr.playerDataRow {
 .expanderButton:hover {
     filter: brightness(105%);
 }
+
 .forceLeft {
     order: -1;
+}
+
+.forceRight {
+    order: 1;
 }
 
 .playerToggleContainer {
