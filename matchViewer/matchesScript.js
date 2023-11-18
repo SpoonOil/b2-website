@@ -172,6 +172,15 @@ function generateMatchTable(matchHistory) {
         towerRowContainer.classList.add("towerRowContainer");
         let towerRowLeft = document.createElement("div")
         towerRowLeft.classList.add("towerRow");
+
+        //add classes for side swap handling
+        if (matchHistory[i].playerLeft.currentUser) {
+            towerRowLeft.classList.add("currentUser");
+        }
+        else {
+            towerRowLeft.classList.add("opposingUser");
+        }
+        
         table.appendChild(towerRowLeft);
         for (key in matchHistory[i].playerLeft) {
             let isPrimary = false
@@ -198,9 +207,6 @@ function generateMatchTable(matchHistory) {
                 cellLeft.textContent = matchHistory[i].playerLeft[key];
             }
             cellLeft.classList.add("playerDataLeft");
-            if (matchHistory[i].playerLeft.currentUser) {
-                cellLeft.classList.add("currentUser");
-            }
         }
         // add map thumbnail
 
@@ -214,6 +220,15 @@ function generateMatchTable(matchHistory) {
         let j = 0;
         let towerRowRight = document.createElement("div")
         towerRowRight.classList.add("towerRow");
+
+        //add classes for side swap handling
+        if (matchHistory[i].playerRight.currentUser) {
+            towerRowRight.classList.add("currentUser");
+        }
+        else {
+            towerRowRight.classList.add("opposingUser");
+        }
+        
         table.appendChild(towerRowRight);
         towerRowContainer.appendChild(towerRowLeft);
         towerRowContainer.appendChild(mapCell);
@@ -246,9 +261,6 @@ function generateMatchTable(matchHistory) {
                 cellRight.textContent = matchHistory[i].playerRight[key];
             }
             cellRight.classList.add("playerDataRight");
-            if (matchHistory[i].playerRight.currentUser) {
-                cellRight.classList.add("currentUser");
-            }
         }
 
         if (matchHistory[i].playerLeft.currentUser) {
@@ -277,7 +289,7 @@ let playerSideToggle = document.querySelector("#playerSideToggle");
 playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
 
 function togglePlayerSide() {
-    currentPlayers = document.getElementsByClassName("currentUser");
+    let currentPlayers = document.getElementsByClassName("currentUser");
 
     for(i = 0; i < currentPlayers.length; i++) {
         if (currentPlayers[i].classList.contains('playerLeft') === false) {
@@ -285,6 +297,18 @@ function togglePlayerSide() {
                 currentPlayers[i].classList.remove('forceLeft');
             } else {
                 currentPlayers[i].classList.add('forceLeft');
+            }
+        }
+    }
+    
+    let opposingPlayers = document.getElementsByClassName("opposingUser");
+    
+    for(i = 0; i < opposingPlayers.length; i++) {
+        if (opposingPlayers[i].classList.contains('playerRight') === false) {
+            if (opposingPlayers[i].classList.contains('forceRight')) {
+                opposingPlayers[i].classList.remove('forceRight');
+            } else {
+                opposingPlayers[i].classList.add('forceRight');
             }
         }
     }
