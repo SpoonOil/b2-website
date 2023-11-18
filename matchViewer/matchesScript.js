@@ -203,7 +203,7 @@ function generateMatchTable(matchHistory) {
                 heroImg.classList.add("heroImg");
                 heroImg.classList.add("towerImg");
                 heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerLeft[key] + ".webp";
-                towerImg.alt = matchHistory[i].playerLeft[key];
+                heroImg.alt = matchHistory[i].playerLeft[key];
                 cellLeft.appendChild(heroImg);
             } else {
                 cellLeft.textContent = matchHistory[i].playerLeft[key];
@@ -259,7 +259,7 @@ function generateMatchTable(matchHistory) {
                 heroImg.classList.add("heroImg");
                 heroImg.classList.add("towerImg");
                 heroImg.src = "../assets/images/heroes/" + matchHistory[i].playerRight[key] + ".webp";
-                towerImg.alt = matchHistory[i].playerRight[key];
+                heroImg.alt = matchHistory[i].playerRight[key];
                 cellRight.appendChild(heroImg);
                 // cellRight.textContent = replaceWithDisplayTerm("heroes", matchHistory[i].playerRight[key]);
             } else {
