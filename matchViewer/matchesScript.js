@@ -46,13 +46,6 @@ const displayTerms = {
         ["BananaFarm", "Banana Farm"],
         ["SpikeFactory", "Spike Factory"],
         ["EngineerMonkey", "Engineer Monkey"],
-        ["BoomerangMonkey", "Boomerang"],
-        ["BoomerangMonkey", "Boomerang"],
-        ["BoomerangMonkey", "Boomerang"],
-        ["BoomerangMonkey", "Boomerang"],
-        ["BoomerangMonkey", "Boomerang"],
-        ["BoomerangMonkey", "Boomerang"],
-        ["BoomerangMonkey", "Boomerang"]
     ],
     "heroes": [
         ["Quincy", "Quincy"],

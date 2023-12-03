@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Viewer</title>
+    <script src="clan.js" defer></script>
+    <link rel="stylesheet" href="clan.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+    <header>
+        <h1 class="headerText"><img class = "logoImg" src="../assets/images/logo.png" alt=""></h1>
+        <nav class = "toolsSection">
+            <ul class="toolList">
+                <li><a href="../index.html">Home</a></li>
+                <li class='navItem'><a class = 'navLink' href="../playerSearch/playerSearch.html">Player Search</a></li>
+                <li><a class = 'navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
+                <li class='navItem'><a class = 'navLink' href="../ecoSim/ecoSim.html">Eco Simulator</a></li>
+                <li><a href="https://b2popology.com/index.html">Battles 2 Popology</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="loadingContainer loading">
+            <div class="loadingContent">
+                <h4>Loading clan content</h4>
+                <div class="ring"></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="clanInfo">
+                <div class="clanBannerContainer" id="clanBanner"></div>
+                <div class="clanMain">
+                    <section class="clanBasics">
+                        <div class="clanStat">
+                            <h4>Members</h4>
+                            <p id="memberCount"></p>
+                        </div>
+                        <div class="clanStat">
+                            <h4>Status</h4>
+                            <p id="clanStatus"></p>
+                        </div>
+                        <div class="clanStat">
+                            <h4>Owner</h4>
+                            <p id="owner"></p>
+                        </div>
+                        <button id="ownerButton" class="buttonStyle">View Leader Profile</button>
+                    </section>
+                    <section>
+                        <p id="clanDescription"></p>
+                    </section>
+                    <section id="warSection">
+                        <h2 id="warTitle" class="wartitle">Wars</h2>
+                        <div class="loadingWars loading">
+                            <h4>Loading Wars</h4>
+                            <div class="ring"></div>
+                        </div>
+                        <div id="wars" class="wars">
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
