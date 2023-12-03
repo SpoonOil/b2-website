@@ -180,6 +180,15 @@ header {
     text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
 }
 
+.clanName {
+    margin: 0;
+    font-weight: 100;
+    font-size: 2em;
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+}
+
 .playerBanner {
     width: min(600px, 70%);
     aspect-ratio: 1419/178; /* 1419px by 178px is the default banner size */
@@ -192,33 +201,58 @@ header {
     border-image-width: 6px 12px 20px  */
 }
 
-.mostUsedTowers {
+.clanBannerContainer {
     display: flex;
-    gap: 10px;
+    justify-content: center;
+}
+
+.clanBanner {
+    width: 600px;
+    aspect-ratio: 8;
+    background-position: center;
+    background-size: cover;
+    border-radius: 24px;
+    display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .towerImage {
     width: 100px;
-
+    margin: 0 16px;
 }
+
 /* player Rank History styles */
 
-.playerRankHistory, .summaryContent {
+.playerRankHistory, .summaryContent, .clanContent {
     padding: 30px;
     font-weight: 500;
     background-color: #144272;
     flex: 1;
     text-align: center;
     border: 3px solid #2C74B3;
+    width: 100%;
+}
+
+.clanStats > * {
+    margin: 4px;
+}
+
+.clanInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    margin: 24px 0 0 0;
 }
 
 .playerRankHistory h4 {
     display: inline;
 }
 
-.playerRankHistory .matchHistoryButton {
+.matchHistoryButton {
     margin-left: 20px;
+}
+
+.playerRankHistory .matchHistoryButton, .clanButton {
     font-size: 1em;
     background-color: #144272;
     color: white;
@@ -230,17 +264,21 @@ header {
     box-shadow: 0px 5px 3px #0A2647;
 }
 
-.matchHistoryButton {
+.matchHistoryButton, .clanButton {
     transition: transform 0.1s ease, filter 0.25s ease-in-out;
 }
 
-.playerRankHistory .matchHistoryButton:active {
+.playerRankHistory .matchHistoryButton:active, .clanButton:active {
     transform: translateY(3px);
     box-shadow: 0px 2px 3px #0A2647;
 }
 
-.playerRankHistory .matchHistoryButton:hover {
+.playerRankHistory .matchHistoryButton:hover, .clanButton:hover {
     filter: brightness(105%);
+}
+
+.clanButton {
+    margin-top: 24px;
 }
 
 .lastMatchResult.win {
@@ -258,7 +296,6 @@ header {
 
 section.summaryContent {
     display: flex;
-    width:90%
 }
 
 .winrateContainer {
@@ -272,11 +309,11 @@ section.summaryContent {
 .mostUsedTowers {
     display: flex;
     gap: 10px;
-}
-
-.mostUsedTowers {
+    align-items: center;
+    justify-content: center;
     flex: 1;
 }
+
 /* Stat styles */
 
 .statHeader {
@@ -308,6 +345,7 @@ section.summaryContent {
     padding: 30px;
     background-color: #144272;
     border: 3px solid #2C74B3;
+    width: 80%;
 }
 
 .tablesContainer {
@@ -390,7 +428,7 @@ section.summaryContent {
         position:absolute;
     }
 
-    body .playerName {
+    body .playerName, .clanName {
         display: inline-block;
         position: relative;
         text-align: left;
@@ -419,7 +457,7 @@ section.summaryContent {
     }
 
     .panel {
-        width:100%;
+        width:90%;
     }
 
     .tablesContainer {

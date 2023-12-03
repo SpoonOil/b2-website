@@ -12,8 +12,6 @@ function mobileMenu() {
     navMenu.classList.toggle("active");
 }
 
-
-
 function fetchResults() {
 
   // Assemble the full URL
@@ -24,15 +22,18 @@ function fetchResults() {
     .then((json) => displayResults(json))
     .catch((error) => console.error(`Error fetching data: ${error.message}`));
 }
+
 function displayResults(json) {
   player = json.body;
+  console.log(player)
   generateBanner(player)
   updateRankedStats(player);
   updateSummary(player);
   updateGeneralStats(player);
   updateMedals(player);
   updateRankHistory(player);
-  updateLastMatch(player)
+  updateLastMatch(player);
+  updateClans(player);
   matchHistoryButton.addEventListener('click', () => {
     window.location.href = '../matchViewer/matches.html?' + player.matches;
   })
@@ -64,7 +65,6 @@ function updateRankedStats(player) {
 
 function updateSummary(player) {
   function getColor(value){
-    console.log(value)
     //value from 0 to 1
     if (value >= 0.5) {
       value = 1-value
@@ -195,6 +195,7 @@ function generateTowerRow(tower, heroTable, primaryTable, militaryTable, magicTa
       break;
   }
 }
+
 function generateBloonRow(bloon, bloonTable, moabTable) {
   let row = document.createElement('tr');
   let name = document.createElement('th');
@@ -212,7 +213,6 @@ function generateBloonRow(bloon, bloonTable, moabTable) {
     moabTable.appendChild(row);
   }
 }
-
 
 function updateRankHistory(player) {
   fetch(player.homs)
@@ -298,6 +298,59 @@ function updateLastMatch(player) {
     }
   }
 }
+
+function updateClans(player) {
+  if (player.inGuild == true) {
+    fetch(player.guild)
+      .then((response) => response.json())
+      .then((json) => showClanStats(json))
+      .catch((error) => console.error(`Error fetching data: ${error.message}`));
+  }
+
+  function showClanStats(json) {
+    clan = json.body
+    console.log(clan)
+    document.getElementById("clanTitle").innerHTML = `<h3 class="summaryHeader">Clan Stats</h3>`
+    let clanContainer = document.getElementById("clanContent")
+    clanContainer.classList.add("clanContent")
+    let clanFilterStatus;
+    switch (clan.status) {
+      case "OPEN": 
+        clanFilterStatus = "Public"
+        break;
+      case "FILTERED": 
+        clanFilterStatus = "Private"
+        break;
+      default:
+        clanFilterStatus = "Unknown"
+        break;
+    }
+    clanContainerContent = `
+      <div class="clanBannerContainer">
+        <div class="clanBanner" style="background-image:url('${clan.bannerURL}')">
+          <h1 class="clanName">${clan.name}</h1>
+        </div>
+      </div>
+      <div class="clanInfo">
+        <div class="clanStats">
+          <h4>Members</h4><p>${clan.numMembers}/25</p>
+        </div>
+        <div class="clanStats">
+          <h4>Status</h4><p>${clanFilterStatus}</p>
+        </div>
+        <div class="clanDescription">
+          ${clan.tagline}
+        </div>
+      </div>
+      <button type="button" class="clanButton" id="clanButton">View Clan</button>
+    `
+    clanContainer.insertAdjacentHTML("beforeend", clanContainerContent)
+    document.getElementById("clanButton").addEventListener('click', () => {
+      window.location.href = '../clanViewer/clan.html?' + player.guild;
+    })
+  }
+}
+
 window.onload = function () {
   // Call the fetchResults() function when the page loads
   fetchResults();
