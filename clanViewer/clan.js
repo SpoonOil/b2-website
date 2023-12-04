@@ -57,7 +57,7 @@ function clanData(json) {
     .then((json) => console.log(document.getElementById("owner").innerText = json.body.displayName))
     .then(
       document.getElementById("ownerButton").addEventListener('click', () => {
-        window.location.href = '../playerInfo/playerinfo.html?' + clan.owner;
+        window.location.href = '../playerInfo/playerInfo.html?' + clan.owner;
       })
     )
     .catch((error) => console.error(`Error fetching data: ${error.message}`));
