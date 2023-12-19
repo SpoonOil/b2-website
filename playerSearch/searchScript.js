@@ -1,4 +1,4 @@
-let resultFound = false;
+let resultsFound = 0;
 
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".toolList");
@@ -53,7 +53,7 @@ function searchPlayers(e) {
     const searchMode = document.querySelector('input[name="searchMode"]:checked').value
     const searchSeason = document.querySelector('input[name="searchSeason"]:checked').value
     clearChildren(document.querySelector('.resultsOutput'))
-    resultFound = false;
+    resultsFound = 0;
     rankIndex = 1;
     searchAPI(searchValue, searchMode, 'https://data.ninjakiwi.com/battles2/homs/'+searchSeason+'/leaderboard');
 }
@@ -76,18 +76,19 @@ function searchAPI(searchValue, searchMode, url) {
 
 function processData(json, searchMode, searchValue) {
     const players = json.body;
+    let resultsFound = 0;
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
         if (searchMode == "name") {
             if (player.displayName.toLowerCase().includes(searchValue.toLowerCase())) {
-                resultFound = true;
-                generatePlayerCard(player, rankIndex);
+                resultsFound++;
+                generatePlayerCard(player, rankIndex, resultsFound<10);
             }
         }  else if (searchMode == "score") {
             if (searchValue.match(/^\d+$/) ) {//match numbers)
                 if (player.score.toString().includes(searchValue)) {
-                    resultFound = true;
-                    generatePlayerCard(player, rankIndex);
+                    resultsFound++;
+                    generatePlayerCard(player, rankIndex, resultsFound<10);
                 }
             } else {
                 let evalValue = searchValue;
@@ -98,16 +99,15 @@ function processData(json, searchMode, searchValue) {
                 // evalValue = evalValue.replace('==', '== player.score.toString()')
                 // evalValue = evalValue.replace('!=', '!= player.score.toString()')
                 if (eval(player.score.toString() + evalValue)) {
-                    resultFound = true;
-                    generatePlayerCard(player, rankIndex);
-
+                    resultsFound++;
+                    generatePlayerCard(player, rankIndex, resultsFound<10);
                 }
             }
         } else if (searchMode == "place") {
             if (searchValue.match(/^\d+$/) ) {//match numbers)
                 if (rankIndex == searchValue) {
-                    resultFound = true;
-                    generatePlayerCard(player, rankIndex);
+                    resultsFound++;
+                    generatePlayerCard(player, rankIndex, resultsFound<10);
                 }
             } else {
                 let evalValue = searchValue;
@@ -118,8 +118,8 @@ function processData(json, searchMode, searchValue) {
                 // evalValue = evalValue.replace('==', '== player.score.toString()')
                 // evalValue = evalValue.replace('!=', '!= player.score.toString()')
                 if (eval(rankIndex + evalValue)) {
-                    resultFound = true;
-                    generatePlayerCard(player, rankIndex);
+                    resultsFound++;
+                    generatePlayerCard(player, rankIndex, resultsFound<10);
 
                 }
             }
@@ -128,12 +128,12 @@ function processData(json, searchMode, searchValue) {
     }
     if (json.next) {
         searchAPI(searchValue, searchMode, json.next)
-    } else if (!resultFound) {
+    } else if (resultsFound == 0) {
         document.querySelector('.resultsOutput').innerHTML = 'No results found';
     }
 }
 
-function generatePlayerCard(player, rankIndex) {
+function generatePlayerCard(player, rankIndex, portraitRetrieval = true) {
     const playerCard = document.createElement('div');
     playerCard.classList.add('playerCard');
     console.log(rankIndex)
@@ -150,8 +150,11 @@ function generatePlayerCard(player, rankIndex) {
     `;
     document.querySelector('.resultsOutput').appendChild(playerCard);
     document.querySelector("#rank"+rankIndex.toString()).textContent = player.displayName;
-    const playerImage = playerCard.querySelector('.playerCardImage');
-    updatePlayerImages(player, playerImage)
+    
+    if(portraitRetrieval){
+        const playerImage = playerCard.querySelector('.playerCardImage');
+        updatePlayerImages(player, playerImage)
+    }
 }
 
 async function updatePlayerImages(player, playerImage) {
