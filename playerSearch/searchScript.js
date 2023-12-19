@@ -1,3 +1,4 @@
+const MAX_PORTRAITS = 10;
 let resultsFound = 0;
 
 const hamburger = document.querySelector(".hamburger");
@@ -87,13 +88,13 @@ function processData(json, searchMode, searchValue) {
         if (searchMode == "name") {
             if (player.displayName.toLowerCase().includes(searchValue.toLowerCase())) {
                 resultsFound++;
-                generatePlayerCard(player, rankIndex, resultsFound<10);
+                generatePlayerCard(player, rankIndex, resultsFound<MAX_PORTRAITS);
             }
         }  else if (searchMode == "score") {
             if (searchValue.match(/^\d+$/) ) {//match numbers)
                 if (player.score.toString().includes(searchValue)) {
                     resultsFound++;
-                    generatePlayerCard(player, rankIndex, resultsFound<10);
+                    generatePlayerCard(player, rankIndex, resultsFound<MAX_PORTRAITS);
                 }
             } else {
                 let evalValue = searchValue;
@@ -105,14 +106,14 @@ function processData(json, searchMode, searchValue) {
                 // evalValue = evalValue.replace('!=', '!= player.score.toString()')
                 if (eval(player.score.toString() + evalValue)) {
                     resultsFound++;
-                    generatePlayerCard(player, rankIndex, resultsFound<10);
+                    generatePlayerCard(player, rankIndex, resultsFound<MAX_PORTRAITS);
                 }
             }
         } else if (searchMode == "place") {
             if (searchValue.match(/^\d+$/) ) {//match numbers)
                 if (rankIndex == searchValue) {
                     resultsFound++;
-                    generatePlayerCard(player, rankIndex, resultsFound<10);
+                    generatePlayerCard(player, rankIndex, resultsFound<MAX_PORTRAITS);
                 }
             } else {
                 let evalValue = searchValue;
@@ -124,7 +125,7 @@ function processData(json, searchMode, searchValue) {
                 // evalValue = evalValue.replace('!=', '!= player.score.toString()')
                 if (eval(rankIndex + evalValue)) {
                     resultsFound++;
-                    generatePlayerCard(player, rankIndex, resultsFound<10);
+                    generatePlayerCard(player, rankIndex, resultsFound<MAX_PORTRAITS);
 
                 }
             }
