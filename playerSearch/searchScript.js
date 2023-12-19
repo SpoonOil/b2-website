@@ -48,6 +48,10 @@ function updateModeSegment(e) {
 
 function searchPlayers(e) {
     e.preventDefault();
+    
+    const searchButton = document.querySelector('.searchSubmit')
+    searchButton.disabled = true
+    
     const searchInput = document.querySelector('#searchBar');
     const searchValue = searchInput.value;
     const searchMode = document.querySelector('input[name="searchMode"]:checked').value
@@ -56,6 +60,8 @@ function searchPlayers(e) {
     resultsFound = 0;
     rankIndex = 1;
     searchAPI(searchValue, searchMode, 'https://data.ninjakiwi.com/battles2/homs/'+searchSeason+'/leaderboard');
+    
+    searchButton.disabled = false
 }
 
 function searchAPI(searchValue, searchMode, url) {
