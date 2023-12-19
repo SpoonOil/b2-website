@@ -76,7 +76,6 @@ function searchAPI(searchValue, searchMode, url) {
 
 function processData(json, searchMode, searchValue) {
     const players = json.body;
-    let resultsFound = 0;
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
         if (searchMode == "name") {
