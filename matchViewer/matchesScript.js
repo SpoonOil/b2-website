@@ -286,6 +286,8 @@ function updatePlayerName(player, slot) {
 }
 
 let playerSideToggle = document.querySelector("#playerSideToggle");
+//prevents certain browsers from saving the checkbox state on refresh, desyncing the checkbox
+playerSideToggle.checked = false
 playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
 
 function togglePlayerSide() {
