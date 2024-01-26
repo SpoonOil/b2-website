@@ -18,7 +18,7 @@ async function showContent() {
   document.querySelector(".loadingContainer").classList.remove("loading")
   document.querySelector(".content").classList.add("contentShow")
 }
-
+ 
 async function generateClanContent(json) {
   clanBanner(json)
   clanData(json)
