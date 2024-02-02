@@ -21,7 +21,8 @@ const displayTerms = {
         ["sands_of_time", "Sands Of Time"],
         ["star", "Star"],
         ["pirate_cove", "Pirate Cove"],
-        ["precious_space", "Precious Space"]
+        ["precious_space", "Precious Space"],
+        ["sun_palace", "Sun Palace"]
     ],
     "towers": [
         ["DartMonkey", "Dart Monkey"],
@@ -67,7 +68,8 @@ const displayTerms = {
         ["Jericho", "Agent Jericho"],
         ["Agent_Jericho", "Agent Jericho"],
         ["Jericho_Highwayman", "Highwayman Jericho"],
-        ["Jericho_StarCaptain", "Star Captain Jericho"]
+        ["Jericho_StarCaptain", "Star Captain Jericho"],
+        ["Adora", "Adora"]
     ]
 }
 
@@ -284,6 +286,8 @@ function updatePlayerName(player, slot) {
 }
 
 let playerSideToggle = document.querySelector("#playerSideToggle");
+//prevents certain browsers from saving the checkbox state on refresh, desyncing the checkbox
+playerSideToggle.checked = false
 playerSideToggle.addEventListener("click", () => {togglePlayerSide()});
 
 function togglePlayerSide() {

@@ -1,3 +1,7 @@
+//note: 2 names exist for agent and highwayman jericho, the old ones shouldn't show up anywhere anymore but were left just in case
+const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman', 'Agent_Jericho', 'Highwayman_Jericho', 'Jericho', 'Jericho_Highwayman', 'Jericho_StarCaptain', 'Adora']
+
+
 const submit = document.querySelector('.submit');
 const matchHistoryButton = document.querySelector('.matchHistoryButton');
 
@@ -90,8 +94,8 @@ function updateSummary(player) {
     'used': 0
   }
   for (let i = 0; i < towers.length; i++) {
-    tower = towers[i]
-    const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman', 'Agent_Jericho', 'Highwayman_Jericho']
+    tower = towers[i] 
+    //heroTowers moved to global scope
     if (tower == favoriteTower1 || tower == favoriteTower2 || tower == favoriteTower3) {
       continue
     }
@@ -154,7 +158,7 @@ function generateTowerRow(tower, heroTable, primaryTable, militaryTable, magicTa
   const magicTowers = ['Alchemist', 'SuperMonkey', 'NinjaMonkey', 'Druid', 'WizardMonkey']
   const militaryTowers = ['MonkeySub', 'MonkeyAce', 'HeliPilot', 'SniperMonkey', 'DartlingGunner', 'MonkeyBuccaneer', 'MortarMonkey']
   const supportTowers = ['BananaFarm', 'SpikeFactory', 'MonkeyVillage', 'EngineerMonkey', 'BeastHandler']
-  const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman', 'Agent_Jericho', 'Highwayman_Jericho']
+  //heroTowers moved to global scope
 
   //set tower class based on what list its in
   if (primaryTowers.includes(tower.type)) {
