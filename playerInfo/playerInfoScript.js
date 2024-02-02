@@ -23,11 +23,11 @@ function fetchResults() {
   // Use fetch() to make the request to the API
   fetch(url)
     .then((response) => response.json())
-    .then((json) => displayResults(json))
+    .then((json) => displayResults(json, url))
     .catch((error) => console.error(`Error fetching data: ${error.message}`));
 }
 
-function displayResults(json) {
+async function displayResults(json, playerURL) {
   player = json.body;
   console.log(player)
   generateBanner(player)
@@ -41,6 +41,7 @@ function displayResults(json) {
   matchHistoryButton.addEventListener('click', () => {
     window.location.href = '../matchViewer/matches.html?' + player.matches;
   })
+  await updateSeasonalWinrate(player, playerURL);
 };
 
 function generateBanner(player) {
@@ -67,17 +68,18 @@ function updateRankedStats(player) {
   }
 }
 
-function updateSummary(player) {
-  function getColor(value){
-    //value from 0 to 1
-    if (value >= 0.5) {
-      value = 1-value
-      var hue=((1-value)*150).toString(10);
-    } else if (value < 0.5) {
-      var hue=((1-value)*50).toString(10);
-    }
-    return ["hsl(",hue,",100%,45%)"].join("");
+function getColor(value){
+  //value from 0 to 1
+  if (value >= 0.5) {
+    value = 1-value
+    var hue=((1-value)*150).toString(10);
+  } else if (value < 0.5) {
+    var hue=((1-value)*50).toString(10);
   }
+  return ["hsl(",hue,",100%,45%)"].join("");
+}
+
+function updateSummary(player) {
   const towers = player._towers
   let winrate = (player.rankedStats['wins']/(player.rankedStats['wins']+player.rankedStats['losses']))*100
   winrate = Math.floor(winrate*10)/10
@@ -352,6 +354,45 @@ function updateClans(player) {
     document.getElementById("clanButton").addEventListener('click', () => {
       window.location.href = '../clanViewer/clan.html?' + player.guild;
     })
+  }
+}
+
+async function updateSeasonalWinrate(json, playerURL) {
+  const response = await fetch("https://raw.githubusercontent.com/emilplane/b2popology/main/json/seasons/season16Players.json");
+  const data = await response.json();
+  const players = data.players
+  let playerDataForWinrate;
+  let currentDataForWinrate = json.rankedStats;
+  console.log(players)
+  for (let playerIndex in players) {
+    if (players[playerIndex].url == playerURL) {
+      playerDataForWinrate = players[playerIndex].playerStats.rankedStats
+    }
+  }
+  if (playerDataForWinrate != undefined) {
+    let seasonalWins = currentDataForWinrate.wins-playerDataForWinrate.wins
+    let seasonalLosses = currentDataForWinrate.losses-playerDataForWinrate.losses
+    let winrate = (seasonalWins/(seasonalWins+seasonalLosses))*100
+    winrate = Math.floor(winrate*10)/10
+    if (typeof winrate == "number") {
+      winrate = "--- "
+    }
+
+    let seasonalWinrateContainer = document.createElement("div")
+    seasonalWinrateContainer.classList.add("winrate")
+
+    let seasonalWinrateHeader = document.createElement("h4")
+    seasonalWinrateHeader.classList.add("winrateHeader")
+    seasonalWinrateHeader.innerText = "Seasonal Winrate"
+    seasonalWinrateContainer.insertAdjacentElement("beforeend", seasonalWinrateHeader)
+
+    let seasonalWinrateText = document.createElement("p")
+    seasonalWinrateText.classList.add("winrateNum")
+    seasonalWinrateText.innerText = `${winrate}%`
+    seasonalWinrateText.style.color = getColor((winrate/100))
+    seasonalWinrateContainer.insertAdjacentElement("beforeend", seasonalWinrateText)
+
+    document.querySelector(".winrateContainer").insertAdjacentElement("beforeend", seasonalWinrateContainer)
   }
 }
 

@@ -300,10 +300,18 @@ section.summaryContent {
 
 .winrateContainer {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+}
+
+.winrate {
+
 }
 
 .mostUsedContainer {
-    flex: 2;
+    flex: 1.5;
 }
 
 .mostUsedTowers {
