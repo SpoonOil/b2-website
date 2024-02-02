@@ -374,7 +374,7 @@ async function updateSeasonalWinrate(json, playerURL) {
     let seasonalLosses = currentDataForWinrate.losses-playerDataForWinrate.losses
     let winrate = (seasonalWins/(seasonalWins+seasonalLosses))*100
     winrate = Math.floor(winrate*10)/10
-    if (typeof winrate == "number") {
+    if (typeof winrate != "number") {
       winrate = "--- "
     }
 
