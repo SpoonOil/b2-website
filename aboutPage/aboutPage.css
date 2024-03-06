@@ -23,6 +23,11 @@ html {
     background-color: #0A2647;
 }
 
+:root {
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
 .list-item {
     color: lightgray;
     margin-left: 30px;
