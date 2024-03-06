@@ -56,7 +56,9 @@ function searchPlayers(e) {
     const searchInput = document.querySelector('#searchBar');
     const searchValue = searchInput.value;
     const searchMode = document.querySelector('input[name="searchMode"]:checked').value
-    const searchSeason = document.querySelector('input[name="searchSeason"]:checked').value
+    // const searchSeason = document.querySelector('input[name="searchSeason"]:checked').value
+    const searchSeason = 'season_16'
+    //EPIC HARDCODE MOMENT!
     clearChildren(document.querySelector('.resultsOutput'))
     resultsFound = 0;
     rankIndex = 1;
