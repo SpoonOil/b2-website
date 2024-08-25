@@ -41,7 +41,7 @@ async function displayResults(json, playerURL) {
   matchHistoryButton.addEventListener('click', () => {
     window.location.href = '../matchViewer/matches.html?' + player.matches;
   })
-  await updateSeasonalWinrate(player, playerURL);
+  // await updateSeasonalWinrate(player, playerURL);
 };
 
 function generateBanner(player) {
@@ -357,45 +357,45 @@ function updateClans(player) {
   }
 }
 
-async function updateSeasonalWinrate(json, playerURL) {
-  const response = await fetch("https://raw.githubusercontent.com/emilplane/b2popology/main/json/seasons/season16Players.json");
-  const data = await response.json();
-  const players = data.players
-  let playerDataForWinrate;
-  let currentDataForWinrate = json.rankedStats;
-  console.log(players)
-  for (let playerIndex in players) {
-    if (players[playerIndex].url == playerURL) {
-      playerDataForWinrate = players[playerIndex].playerStats.rankedStats
-    }
-  }
-  if (playerDataForWinrate != undefined) {
-    let seasonalWins = currentDataForWinrate.wins-playerDataForWinrate.wins
-    let seasonalLosses = currentDataForWinrate.losses-playerDataForWinrate.losses
-    let winrate = (seasonalWins/(seasonalWins+seasonalLosses))*100
-    winrate = Math.floor(winrate*10)/10
-    console.log(winrate)
-    if (Number.isNaN(winrate)) {
-      winrate = "--- "
-    }
+// async function updateSeasonalWinrate(json, playerURL) {
+//   const response = await fetch("https://raw.githubusercontent.com/emilplane/b2popology/main/json/seasons/season16Players.json");
+//   const data = await response.json();
+//   const players = data.players
+//   let playerDataForWinrate;
+//   let currentDataForWinrate = json.rankedStats;
+//   console.log(players)
+//   for (let playerIndex in players) {
+//     if (players[playerIndex].url == playerURL) {
+//       playerDataForWinrate = players[playerIndex].playerStats.rankedStats
+//     }
+//   }
+//   if (playerDataForWinrate != undefined) {
+//     let seasonalWins = currentDataForWinrate.wins-playerDataForWinrate.wins
+//     let seasonalLosses = currentDataForWinrate.losses-playerDataForWinrate.losses
+//     let winrate = (seasonalWins/(seasonalWins+seasonalLosses))*100
+//     winrate = Math.floor(winrate*10)/10
+//     console.log(winrate)
+//     if (Number.isNaN(winrate)) {
+//       winrate = "--- "
+//     }
 
-    let seasonalWinrateContainer = document.createElement("div")
-    seasonalWinrateContainer.classList.add("winrate")
+//     let seasonalWinrateContainer = document.createElement("div")
+//     seasonalWinrateContainer.classList.add("winrate")
 
-    let seasonalWinrateHeader = document.createElement("h4")
-    seasonalWinrateHeader.classList.add("winrateHeader")
-    seasonalWinrateHeader.innerText = "Seasonal Winrate"
-    seasonalWinrateContainer.insertAdjacentElement("beforeend", seasonalWinrateHeader)
+//     let seasonalWinrateHeader = document.createElement("h4")
+//     seasonalWinrateHeader.classList.add("winrateHeader")
+//     seasonalWinrateHeader.innerText = "Seasonal Winrate"
+//     seasonalWinrateContainer.insertAdjacentElement("beforeend", seasonalWinrateHeader)
 
-    let seasonalWinrateText = document.createElement("p")
-    seasonalWinrateText.classList.add("winrateNum")
-    seasonalWinrateText.innerText = `${winrate}%`
-    seasonalWinrateText.style.color = getColor((winrate/100))
-    seasonalWinrateContainer.insertAdjacentElement("beforeend", seasonalWinrateText)
+//     let seasonalWinrateText = document.createElement("p")
+//     seasonalWinrateText.classList.add("winrateNum")
+//     seasonalWinrateText.innerText = `${winrate}%`
+//     seasonalWinrateText.style.color = getColor((winrate/100))
+//     seasonalWinrateContainer.insertAdjacentElement("beforeend", seasonalWinrateText)
 
-    document.querySelector(".winrateContainer").insertAdjacentElement("beforeend", seasonalWinrateContainer)
-  }
-}
+//     document.querySelector(".winrateContainer").insertAdjacentElement("beforeend", seasonalWinrateContainer)
+//   }
+// }
 
 window.onload = function () {
   // Call the fetchResults() function when the page loads
