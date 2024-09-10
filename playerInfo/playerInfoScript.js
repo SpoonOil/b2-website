@@ -274,7 +274,7 @@ function updateMedals(player) {
     badgeImage = document.createElement('img');
     badgeImage.classList.add('badgeImage');
     badgeImage.src = player.badges_all[badge].iconURL;
-    let badgeDisplay = document.querySelector('.badgeDisplay');
+    let badgeDisplay = document.querySelector('.badgeContainer');
     badgeDisplay.appendChild(badgeImage);
   }
 }
