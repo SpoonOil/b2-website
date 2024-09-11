@@ -1,76 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Search - b2.lol</title>
-    <link rel="stylesheet" href="searchStyles.css">
-    <script defer src="searchScript.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Search - b2.lol</title>
+  <link rel="stylesheet" href="searchStyles.css">
+  <script defer src="searchScript.js"></script>
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap"
+    rel="stylesheet">
 
-    <!-- icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <!-- icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
-<body>
-    <header>
-        <h1 class="headerText"><img class = "logoImg" src="../assets/images/logo.png" alt=""></h1>
-        <nav class = "toolsSection">
-            <ul class="toolList">
-                <li><a href="../index.html">Home</a></li>
-                <li class="currentPage"><span>Player Search</span></li>
-                <li><a class = 'navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
-                <li><a class = 'navLink' href="../ecoSim/ecoSim.html">Eco Simulator</a></li>
-                <li><a href="https://b2popology.com/index.html">Battles 2 Popology</a></li>
-                <li><a class="navLink" href="../aboutPage/aboutPage.html">About</a></li>
 
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <div class="searchContainer">
-            <section class="searchInputSection">
-                <h2 class="pageHeader">Player Search</h2>
-                <form class= 'searchForm' action="">
-                    <div class="searchSubmitContainer">
-                        <input title="player search" placeholder="Player" required="true" type="search" name="searchValue" id="searchBar">
-                        <button type="submit" class="searchSubmit"><span class="material-symbols-outlined">
-                            search
-                        </span></button>
-                    </div>
-                    <label for="segmentContainer" class = "segmentContainerLabel">Search For</label>
-                    <div class="segmentContainer">
-                        <input title="search mode" type="radio" name="searchMode" checked="true" value="name" class ="searchRadio" id="modeRadioName">
-                        <label for="modeRadioName" class="segmentLabel pressed">Name</label>
-                        <input title="search mode" type="radio" name="searchMode" value = "place" class ="searchRadio" id="modeRadioPlace">
-                        <label for="modeRadioPlace" class="segmentLabel">Place</label>
-                        <input title="search mode" type="radio" name="searchMode" value = "score" class ="searchRadio" id="modeRadioScore">
-                        <label for="modeRadioScore" class="segmentLabel">Score</label>
-                        <input title="search mode" type="radio" name="searchMode" value = "oak" class ="searchRadio" id="modeRadioID">
-                        <label for="modeRadioID" class="segmentLabel">OAK ID</label>
-                    </div>
-                    <!-- <div class="segmentContainer">
+<body>
+  <header>
+    <h1 class="headerText"><img class="logoImg" src="../assets/images/logo.png" alt=""></h1>
+    <nav class="toolsSection">
+      <ul class="toolList">
+        <li><a href="../index.html">Home</a></li>
+        <li class="currentPage"><span>Player Search</span></li>
+        <li><a class='navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
+        <li><a href="https://b2popology.com/index.html">Battles 2 Popology</a></li>
+        <li><a class="navLink" href="../aboutPage/aboutPage.html">About</a></li>
+
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="searchContainer">
+      <section class="searchInputSection">
+        <h2 class="pageHeader">Player Search</h2>
+        <form class='searchForm' action="">
+          <div class="searchSubmitContainer">
+            <input title="player search" placeholder="Player" required="true" type="search" name="searchValue"
+              id="searchBar">
+            <button type="submit" class="searchSubmit"><span class="material-symbols-outlined">
+                search
+              </span></button>
+          </div>
+          <label for="segmentContainer" class="segmentContainerLabel">Search For</label>
+          <div class="segmentContainer">
+            <input title="search mode" type="radio" name="searchMode" checked="true" value="name" class="searchRadio"
+              id="modeRadioName">
+            <label for="modeRadioName" class="segmentLabel pressed">Name</label>
+            <input title="search mode" type="radio" name="searchMode" value="place" class="searchRadio"
+              id="modeRadioPlace">
+            <label for="modeRadioPlace" class="segmentLabel">Place</label>
+            <input title="search mode" type="radio" name="searchMode" value="score" class="searchRadio"
+              id="modeRadioScore">
+            <label for="modeRadioScore" class="segmentLabel">Score</label>
+            <input title="search mode" type="radio" name="searchMode" value="oak" class="searchRadio" id="modeRadioID">
+            <label for="modeRadioID" class="segmentLabel">OAK ID</label>
+          </div>
+          <!-- <div class="segmentContainer">
                         <input title="season" type="radio" name="searchSeason" checked="true" value="season_14" class ="seasonRadio" id="season14Radio">
                         <label for="season14Radio" class="seasonLabel pressed">Season 15</label>
                         <input title="season" type="radio" name="searchSeason" value="season_13" class ="seasonRadio" id="season13Radio">
@@ -80,19 +89,21 @@
                         <input title="season" type="radio" name="searchSeason" value = "season_11" class ="seasonRadio" id="season11Radio">
                         <label for="season11Radio" class="seasonLabel">Season 12</label>
                     </div> -->
-                </form>
-                <p>Note: if you are not in Hall of Masters you will need to input your OAK ID.
-                </p>
-                <span class="oakInfo">More Info <a class='oakIDLink' href="https://support.ninjakiwi.com/hc/en-us/articles/13438499873937">Here</a></span>
-            </section>
-            <section class="resultsSection">
-                <h3 class="resultsHeader" hidden>Results</h3>
-                <div class="resultsOutput">
+        </form>
+        <p>Note: if you are not in Hall of Masters you will need to input your OAK ID.
+        </p>
+        <span class="oakInfo">More Info <a class='oakIDLink'
+            href="https://support.ninjakiwi.com/hc/en-us/articles/13438499873937">Here</a></span>
+      </section>
+      <section class="resultsSection">
+        <h3 class="resultsHeader" hidden>Results</h3>
+        <div class="resultsOutput">
 
-                </div>
-            </section>
         </div>
-    </main>
+      </section>
+    </div>
+  </main>
 </body>
+
 </html>
 <script src="/all.js"></script>

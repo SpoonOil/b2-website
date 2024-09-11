@@ -1,100 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <script defer src="leaderboardScript.js"></script>
-    <link rel="stylesheet" href="leaderboardStyles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <script defer src="leaderboardScript.js"></script>
+  <link rel="stylesheet" href="leaderboardStyles.css">
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300&family=Luckiest+Guy&display=swap"
+    rel="stylesheet">
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
+
 <body>
-    <header>
-        <h1 class="headerText"><img class = "logoImg" src="../assets/images/logo.png" alt=""></h1>
-        <nav class = "toolsSection">
-            <ul class="toolList">
-                <li><a href="../index.html">Home</a></li>
-                <li class='navItem'><a class = 'navLink' href="../playerSearch/playerSearch.html">Player Search</a></li>
-                <li><a class = 'navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
-                <li class='navItem'><a class = 'navLink' href="../ecoSim/ecoSim.html">Eco Simulator</a></li>
-                <li><a href="https://b2popology.com/index.html">Battles 2 Popology</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-    <section class = "leaderboardDisplay">
-        <h2 class="leaderboardInfoHeader">Current Leaderboard</h2>
-        <div class="leaderboardContainer">
-            <h3 class="seasonTitle">Season 15</h3>
-            <table class = "leaderboard leaderboardLatest1">
-                <thead>
-                    <tr class="leaderboardHeaderRow">
-                        <th>Player</th>
-                        <th>Score</th>
-                        <th>Placing</th>
-                    </tr>
-                </thead>
-                <tbody>
+  <header>
+    <h1 class="headerText"><img class="logoImg" src="../assets/images/logo.png" alt=""></h1>
+    <nav class="toolsSection">
+      <ul class="toolList">
+        <li><a href="../index.html">Home</a></li>
+        <li class='navItem'><a class='navLink' href="../playerSearch/playerSearch.html">Player Search</a></li>
+        <li><a class='navLink' href="../microPractice/practice.html">Micro Practice Tool</a></li>
+        <li><a href="https://b2popology.com/index.html">Battles 2 Popology</a></li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+  </header>
+  <section class="leaderboardDisplay">
+    <h2 class="leaderboardInfoHeader">Current Leaderboard</h2>
+    <div class="leaderboardContainer">
+      <h3 class="seasonTitle">Season 15</h3>
+      <table class="leaderboard leaderboardLatest1">
+        <thead>
+          <tr class="leaderboardHeaderRow">
+            <th>Player</th>
+            <th>Score</th>
+            <th>Placing</th>
+          </tr>
+        </thead>
+        <tbody>
 
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <section class="leaderboardDisplay">
-        <h2 class="leaderboardInfoHeader">Old Leaderboards</h2>
-        <div class="leaderboardContainer">
-            <h3 class="seasonTitle">Season 14</h3>
-            <table class = "leaderboardLatest2 leaderboard">
-                <thead>
-                    <tr class="leaderboardHeaderRow">
-                        <th>Player</th>
-                        <th>Score</th>
-                        <th>Placing</th>
-                    </tr>
-                </thead>
-                <tbody>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="leaderboardDisplay">
+    <h2 class="leaderboardInfoHeader">Old Leaderboards</h2>
+    <div class="leaderboardContainer">
+      <h3 class="seasonTitle">Season 14</h3>
+      <table class="leaderboardLatest2 leaderboard">
+        <thead>
+          <tr class="leaderboardHeaderRow">
+            <th>Player</th>
+            <th>Score</th>
+            <th>Placing</th>
+          </tr>
+        </thead>
+        <tbody>
 
-                </tbody>
-            </table>
-        </div>
-        <div style="height:25px"></div>
-        <div class="leaderboardContainer">
-            <h3 class="seasonTitle">Season 13</h3>
-            <table class = "leaderboardLatest3 leaderboard">
-                <thead>
-                    <tr class="leaderboardHeaderRow">
-                        <th>Player</th>
-                        <th>Score</th>
-                        <th>Placing</th>
-                    </tr>
-                </thead>
-                <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div style="height:25px"></div>
+    <div class="leaderboardContainer">
+      <h3 class="seasonTitle">Season 13</h3>
+      <table class="leaderboardLatest3 leaderboard">
+        <thead>
+          <tr class="leaderboardHeaderRow">
+            <th>Player</th>
+            <th>Score</th>
+            <th>Placing</th>
+          </tr>
+        </thead>
+        <tbody>
 
-                </tbody>
-            </table>
-        </div>
-    </section>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </body>
+
 </html>
 <script src="/all.js"></script>
