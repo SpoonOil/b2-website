@@ -63,7 +63,7 @@ async function searchPlayers(e) {
   const searchSeasonURL = await getCurrentSeasonURL();
   clearChildren(document.querySelector(".resultsOutput"));
   resultsFound = 0;
-  let rankIndex = 1; // TODO: Figure out if I need this
+  rankIndex = 1; // keeps the number used in player ranking accurate, uses VAR scoping magic so it cant be `let` sorry!
   searchAPI(searchValue, searchMode, searchSeasonURL);
 
   searchButton.disabled = false;
@@ -72,16 +72,19 @@ async function searchPlayers(e) {
 async function getCurrentSeasonURL() {
   const url = "https://data.ninjakiwi.com/battles2/homs/";
 
-  fetch(url)
+  return fetch(url)
     .then((response) => response.json())
     .then((json) => {
       let leaderboardURL = json.body[0].leaderboard;
-      return leaderboardURL;
+      return leaderboardURL
     })
     .catch((error) => console.error(error));
 }
 
 function searchAPI(searchValue, searchMode, url) {
+  if (!url) {
+    throw new Error ('UNDEFINED URL '+ url)
+  }
   console.log(url);
   if (searchMode != "oak") {
     fetch(url)
