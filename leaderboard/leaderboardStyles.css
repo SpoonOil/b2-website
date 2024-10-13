@@ -108,10 +108,11 @@ body {
 .selectSeasonContainer {
   display: flex;
   align-items: center;
+  justify-items: center;
   gap: 10px;
   overflow-x: scroll;
   margin: 12px 0;
-  width: 90%;
+  min-width: 80%;
   background-color: #205295;
   border-radius: 15px;
   border: 3px solid #2C74B3;
@@ -153,22 +154,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 80%;
   background-color: #205295;
   border-radius: 15px;
   border: 3px solid #2C74B3;
-  padding: 15px;
+  padding: 15px 5px;
   box-sizing: border-box;
 }
 
 .leaderboard, .leaderboardS11, .leaderboardS10{
   flex: 1 1 50%;
-  min-width: 400px;
+  /* min-width: 400px; */
   background-color: #ffcc66;
   color: black;
   border: 1px solid  #ffaa00;
   border-radius: 10px;
-  width: 90%;
+  width: 80%;
 }
 
 .leaderboard>tbody>tr:hover {
