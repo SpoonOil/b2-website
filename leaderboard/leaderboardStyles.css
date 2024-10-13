@@ -107,12 +107,13 @@ body {
 /* leaderboard Styles */
 .selectSeasonContainer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   margin: 12px 0;
-  min-width: 80%;
+  width: 80%;
   background-color: #205295;
   border-radius: 15px;
   border: 3px solid #2C74B3;

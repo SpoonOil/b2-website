@@ -143,7 +143,7 @@ function processData(json, searchMode, searchValue) {
         if (rankIndex == searchValue) {
           resultsFound++;
           generatePlayerCard(player, rankIndex, resultsFound < MAX_PORTRAITS);
-        }
+        } 
       } else {
         let evalValue = searchValue;
         evalValue = evalValue.replace("||", "|| rankIndex");
