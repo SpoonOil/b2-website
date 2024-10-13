@@ -112,13 +112,23 @@ body {
   justify-content: center;
   gap: 10px;
   /* overflow-x: scroll; */
+  min-width: 80%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.selectSeasonWrapper {
   margin: 12px 0;
-  width: 80%;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
   background-color: #205295;
   border-radius: 15px;
   border: 3px solid #2C74B3;
-  padding: 15px;
-  box-sizing: border-box;
+}
+.selectSeasonTitle {
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .seasonButton {
@@ -139,7 +149,7 @@ body {
   filter: brightness(105%);
 }
 
-.seasonButtonSelected {
+.seasonButton:active, .seasonButtonSelected {
   position: relative;
   top:3px;
   box-shadow: 0px 2px 3px #0A2647;
@@ -252,6 +262,15 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
+  .selectSeasonContainer {
+    gap: 5px;
+    min-width: 100%
+  }
+
+  .selectSeasonWrapper {
+    min-width: 95%;
+  }
   main {
     flex-direction: column;
     align-items: stretch;
