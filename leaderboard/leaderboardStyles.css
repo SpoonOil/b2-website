@@ -108,6 +108,7 @@ body {
 .selectSeasonContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   overflow-x: scroll;
   margin: 12px 0;
