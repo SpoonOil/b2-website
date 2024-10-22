@@ -1,3 +1,5 @@
+import ApiUtilities from "/utilities.js";
+
 const navMenu = document.querySelector(".toolList");
 
 const hamburger = document.querySelector(".hamburger");
@@ -20,12 +22,12 @@ function updateSeasonInfo() {
 }
 
 function updateAll(json) {
-  console.log(json);
   clearLeaderboard();
   navBarLoading();
-  document.querySelector(".seasonTitle").textContent = json.body[0].name;
+  const activeLeaderboard = ApiUtilities.getActiveLeaderboard(json.body).activelb
+  document.querySelector(".seasonTitle").textContent = activeLeaderboard.name;
   getLeaderboardInfo(
-    json.body[0].leaderboard,
+    activeLeaderboard.leaderboard,
     1,
     document.querySelector(".leaderboard"),
     json.body,
@@ -35,7 +37,9 @@ function updateAll(json) {
 function createNavBar(leaderboardList) {
   document.querySelector(".selectSeasonContainer").innerHTML = "";
   leaderboardList.forEach((leaderboard, index) => {
-    addLeaderboardButton(leaderboardList, index, selectedSeasonIndex == index);
+    if (leaderboard.totalScores !== 0) {
+      addLeaderboardButton(leaderboardList, index, selectedSeasonIndex == index);
+    }
   });
 }
 
@@ -72,6 +76,8 @@ function addLeaderboardButton(leaderboardList, index, selected) {
     navBarLoading();
     document.querySelector(".seasonTitle").textContent =
       leaderboardList[index].name;
+    
+      
     getLeaderboardInfo(
       leaderboardList[index].leaderboard,
       1,
