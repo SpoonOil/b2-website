@@ -75,15 +75,17 @@ async function getCurrentSeasonURL() {
   return fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      let leaderboardURL = json.body[0].leaderboard;
-      return leaderboardURL
+      //live only
+      let leaderboardURL = json.body.filter((board) => board.live)[0]
+        .leaderboard;
+      return leaderboardURL;
     })
     .catch((error) => console.error(error));
 }
 
 function searchAPI(searchValue, searchMode, url) {
   if (!url) {
-    throw new Error ('UNDEFINED URL '+ url)
+    throw new Error("UNDEFINED URL " + url);
   }
   console.log(url);
   if (searchMode != "oak") {
@@ -143,7 +145,7 @@ function processData(json, searchMode, searchValue) {
         if (rankIndex == searchValue) {
           resultsFound++;
           generatePlayerCard(player, rankIndex, resultsFound < MAX_PORTRAITS);
-        } 
+        }
       } else {
         let evalValue = searchValue;
         evalValue = evalValue.replace("||", "|| rankIndex");
