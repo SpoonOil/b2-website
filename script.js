@@ -1,4 +1,7 @@
+import ApiUtilities from "./utilities.js";
+
 //grab nodes
+const notificationSection = document.querySelector('.notificationSection');
 const seasonTitle = document.querySelector('.seasonTitle');
 const seasonLeaderboardTitle = document.querySelector('.seasonLeaderboardTitle');
 const seasonTimeLeft = document.querySelector('.seasonTimeLeft');
@@ -21,19 +24,34 @@ function updateSeasonInfo() {
         .then((json) => updateAll(json))
 }
 function updateAll(json) {
-    getLeaderboardInfo(json.body[0].leaderboard);
-    setInterval(updateText, 100, json);
-    updateSeasonTitle(json);
+    const leaderboardData = ApiUtilities.getActiveLeaderboard(json.body);
+    console.log(leaderboardData)
+    // Display no live season popup if there is no live season on the api
+    !leaderboardData.liveLbExists ? seasonNotLivePopup(leaderboardData.activelb.name) : null
+    getLeaderboardInfo(leaderboardData.activelb.leaderboard);
+    setInterval(updateText, 100, leaderboardData.activelb);
+    updateSeasonTitle(leaderboardData.activelb);
 }
 
 function getLeaderboardInfo(url) {
     fetch(url)
         .then((response) => response.json())
         .then((json) => createLeaderboard(json))
-        
+}
+
+function seasonNotLivePopup(replacementSeasonName) {
+    let notificationContainer = document.createElement('div');
+    notificationContainer.classList.add('notification');
+    let notificationText = document.createElement('p');
+    notificationText.textContent = 
+        `Note: there's currently no active leaderboard on Ninja Kiwi's API! For now, here's ${replacementSeasonName}!`
+    notificationContainer.appendChild(notificationText);
+    notificationSection.appendChild(notificationContainer);
 }
 
 function createLeaderboard(json) {
+    const leaderboardBody = document.querySelector('.leaderboard>tbody');
+    leaderboardBody.innerHTML = '';
     for (let i = 0; i < 20; i++) {
         let player = json.body[i];
         let playerRow = document.createElement('tr');
@@ -59,37 +77,37 @@ function createLeaderboard(json) {
         playerRow.addEventListener('click', () => {
             window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
         });
-        document.querySelector('.leaderboard>tbody').appendChild(playerRow);
+        leaderboardBody.appendChild(playerRow);
     }
 }
 
-function updateText(json) {
-    seasonTitle.textContent = json.body[0].name
-    timeLeft = getTimeLeft(json);
+function updateText(data) {
+    seasonTitle.textContent = data.name
+    let timeLeft = getTimeLeft(data);
     seasonTimeLeft.innerHTML = `<b>Time Left:</b> ${timeLeft.days} Days, ${timeLeft.hours} Hours, ${timeLeft.minutes} Minutes`
-    const seasonStart = new Date(json.body[0].start)
-    const seasonEnd = new Date(json.body[0].end)
+    const seasonStart = new Date(data.start)
+    const seasonEnd = new Date(data.end)
     startDate.textContent = seasonStart.toLocaleString()
     endDate.textContent = seasonEnd.toLocaleString()
-    playerCount.textContent = json.body[0].totalScores
+    playerCount.textContent = data.totalScores
 }
 
-function updateSeasonTitle(json) {
-    seasonLeaderboardTitle.textContent = json.body[0].name
+function updateSeasonTitle(data) {
+    seasonLeaderboardTitle.textContent = data.name
 }
 
-function getTimeLeft(json) {
+function getTimeLeft(data) {
     const todayDate = new Date()
     // console.log(todayDate.toLocaleDateString());
-    let endDate = new Date(json.body[0].end);
+    let endDate = new Date(data.end);
     // console.log(endDate.toLocaleDateString());
     let timeToEnd = (endDate - todayDate) /1000
     timeToEnd/=60 //seconds to minutes
     timeToEnd/=60 //minutes to hours
-    daysLeft = timeToEnd / 24 //hours to days
+    let daysLeft = timeToEnd / 24 //hours to days
     daysLeft = Math.floor(daysLeft)
-    hoursLeft = timeToEnd % 24 //take remainder hours
-    minutesLeft = (hoursLeft*60)%60;
+    let hoursLeft = timeToEnd % 24 //take remainder hours
+    let minutesLeft = (hoursLeft*60)%60;
     minutesLeft = Math.floor(minutesLeft)
     hoursLeft = Math.floor(hoursLeft)
     // console.log(daysLeft, hoursLeft, minutesLeft);

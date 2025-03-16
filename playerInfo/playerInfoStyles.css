@@ -485,3 +485,14 @@ section.summaryContent {
         flex-direction: column;
     }
   }
+
+  
+.badgeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.badgeDisplay {
+    width: calc(80% + 60px);
+}

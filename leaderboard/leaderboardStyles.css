@@ -105,6 +105,56 @@ body {
 
 
 /* leaderboard Styles */
+.selectSeasonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* overflow-x: scroll; */
+  min-width: 80%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.selectSeasonWrapper {
+  margin: 12px 0;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  background-color: #205295;
+  border-radius: 15px;
+  border: 3px solid #2C74B3;
+}
+.selectSeasonTitle {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.seasonButton {
+  transition: all 0.25s ease;
+  background-color: #144272;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid #0e3763;
+  box-shadow: 0px 5px 3px #0A2647;
+  min-width: max-content;
+  cursor: pointer;
+}
+
+.seasonButton:hover {
+  filter: brightness(105%);
+}
+
+.seasonButton:active, .seasonButtonSelected {
+  position: relative;
+  top:3px;
+  box-shadow: 0px 2px 3px #0A2647;
+}
+
 .leaderboardDisplay {
   display: flex;
   flex-direction: column;
@@ -119,17 +169,18 @@ body {
   background-color: #205295;
   border-radius: 15px;
   border: 3px solid #2C74B3;
-  padding: 15px;
+  padding: 15px 5px;
+  box-sizing: border-box;
 }
 
 .leaderboard, .leaderboardS11, .leaderboardS10{
   flex: 1 1 50%;
-  min-width: 400px;
+  /* min-width: 400px; */
   background-color: #ffcc66;
   color: black;
   border: 1px solid  #ffaa00;
   border-radius: 10px;
-  width: 90%;
+  width: 80%;
 }
 
 .leaderboard>tbody>tr:hover {
@@ -151,7 +202,8 @@ body {
 }
 
 
-.playerName{
+.playerName {
+  cursor: pointer;
   font-weight: bolder;
   text-transform: uppercase;
 }
@@ -210,6 +262,15 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
+  .selectSeasonContainer {
+    gap: 5px;
+    min-width: 100%
+  }
+
+  .selectSeasonWrapper {
+    min-width: 95%;
+  }
   main {
     flex-direction: column;
     align-items: stretch;
@@ -262,8 +323,48 @@ body {
       transform: translateY(-8px) rotate(-45deg);
   }
 
-  body .leaderboardContainer {
-    width: 100%;
+  .selectSeasonContainer {
+    width: calc(100% - 20px);
+  }
+
+  .leaderboardContainer {
+    width: calc(100% - 20px);
+    overflow-x: scroll;
   }
 }
 
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.loadingContainer > p {
+  margin: 2px 0 0 0;
+}
+
+.ring {
+  display: inline-block;
+  width: 20px;
+  aspect-ratio: 1;
+}
+.ring:after {
+  content: " ";
+  display: block;
+  width: 16px;
+  aspect-ratio: 1;
+  margin: 0;
+  border-radius: 50%;
+  animation: ring 0.5s linear infinite;
+  border: 6px solid hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 100%) hsl(0, 0%, 100%) transparent transparent;
+}
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

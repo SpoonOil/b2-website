@@ -43,6 +43,25 @@ main {
   justify-content: flex-start;
 }
 
+.notificationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.notification {
+  background-color: #ffcc66;
+  border-radius: 5px;
+  border: 3px solid #ffaa00;
+  padding: 15px;
+  margin: 0 10px;
+}
+
+.notification > p {
+  margin: 0;
+  color: black;
+  text-align: center;
+}
 
 .leftAside {
   min-width: 0;
@@ -420,6 +439,14 @@ footer {
 
   :root {
     font-size: 15px;
+  }
+
+  .notificationSection {
+    margin: 0 0 10px 0;
+  }
+
+  .notification {
+    margin: 0;
   }
 
   body .leaderboardDisplay {
