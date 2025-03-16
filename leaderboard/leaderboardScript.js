@@ -12,8 +12,21 @@ function mobileMenu() {
 }
 
 let selectedSeasonIndex = 0;
+try {
+  updateSeasonInfo();
+} catch (error) {
+  console.error(error);
+  const selectSeasonContainer = document.querySelector('.selectSeasonWrapper')
+  const leaderboardContainer = document.querySelector('.leaderboardContainer')
+  selectSeasonContainer.innerHTML = '';
+  leaderboardContainer.style.display = 'none';
 
-updateSeasonInfo();
+  const errorTitle = document.createElement("h3");
+  errorTitle.innerHTML = 'Something went wrong';
+  const errorDescription = document.createElement("h5");
+  errorDescription.innerHTML = `An unhandled error occurred. If this error persists, please report the issue in <a href="https://discord.gg/HCWZ329Uda">Spoonoil's Discord server</a>.`;
+  selectSeasonContainer.append(errorTitle, errorDescription);
+}
 
 function updateSeasonInfo() {
   fetch("https://data.ninjakiwi.com/battles2/homs")
