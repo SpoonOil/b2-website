@@ -272,13 +272,13 @@ function generateMatchTable(matchHistory) {
 }
 
 function updatePlayerName(player, slot) {
-    let url = player.profileURL;
+    let token = player.profileURL.split('/').at(-1);
     async function nameFetch(url) {
         const response = await fetch(url);
         const json = await response.json();
         slot.textContent = json.body.displayName;
         slot.addEventListener("click", () => {
-            window.open('../playerInfo/playerInfo.html?' + url, '_self');
+            window.open('../playerInfo/playerInfo.html?' + token, '_self');
         })
     }
 

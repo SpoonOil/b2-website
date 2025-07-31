@@ -171,7 +171,7 @@ function processData(json, searchMode, searchValue) {
 
 function generatePlayerCard(player, rankIndex, portraitRetrieval = true) {
   const playerCard = document.createElement("div");
-  const profileToken = player.profile.split('/')[-1]
+  const profileToken = player.profile.split('/').at(-1)
   playerCard.classList.add("playerCard");
   
   playerCard.innerHTML = `
