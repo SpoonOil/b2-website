@@ -274,7 +274,7 @@ function generateMatchTable(matchHistory) {
 function updatePlayerName(player, slot) {
     let token = player.profileURL.split('/').at(-1);
     async function nameFetch(url) {
-        const response = await fetch(url);
+        const response = await fetch(player.profileURL);
         const json = await response.json();
         slot.textContent = json.body.displayName;
         slot.addEventListener("click", () => {

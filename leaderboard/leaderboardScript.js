@@ -168,7 +168,7 @@ function createLeaderboardPage(json, startingPlace, output) {
     playerRow.classList.add("playerRow");
     playerRow.addEventListener("click", () => {
       window.open(
-        "../playerInfo/playerInfo.html?" + playerRow.dataset.profileURL,
+        "../playerInfo/playerInfo.html?" + playerRow.dataset.profileURL.split('/').at(-1),
         "_self",
       );
     });

@@ -99,10 +99,7 @@ function searchAPI(searchValue, searchMode, url) {
     // oak_6d70312f0e6a3dacb41a23f8bbada10a Rosco OAK for testing
     console.log(searchValue);
     newUrl =
-      "../playerInfo/playerInfo.html?" +
-      "https://data.ninjakiwi.com/battles2/users/" +
-      searchValue +
-      "/";
+      "../playerInfo/playerInfo.html?" + searchValue
     console.log(newUrl);
     window.open(newUrl, "_self");
   }

@@ -75,7 +75,7 @@ function createLeaderboard(json) {
         playerRow.dataset.profileURL = player.profile;
         playerRow.classList.add('playerRow');
         playerRow.addEventListener('click', () => {
-            window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL;
+            window.location.href ='playerInfo/playerInfo.html?' + playerRow.dataset.profileURL.split('/').at(-1);
         });
         leaderboardBody.appendChild(playerRow);
     }

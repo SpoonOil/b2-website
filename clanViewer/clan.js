@@ -9,6 +9,9 @@ function mobileMenu() {
     navMenu.classList.toggle("active");
 }
 
+function getPlayerToken(url) {
+  return url.split('/').at(-1);
+}
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -69,7 +72,7 @@ function clanData(json) {
     .then((json) => console.log(document.getElementById("owner").innerText = json.body.displayName))
     .then(
       document.getElementById("ownerButton").addEventListener('click', () => {
-        window.location.href = '../playerInfo/playerInfo.html?' + clan.owner;
+        window.location.href = '../playerInfo/playerInfo.html?' + getPlayerToken(clan.owner);
       })
     )
     .catch((error) => console.error(`Error fetching data: ${error.message}`));
@@ -114,7 +117,7 @@ async function fetchWarData(json) {
         memberLeaderboardString += `
           <tr>
             <td>${Number(memberKey)+1}</td>
-            <td><a href="../playerInfo/playerInfo.html?${war.memberContributionsLeaderboard[memberKey].url}">${memberLeaderboardClanData.displayName}</a></td>
+            <td><a href="../playerInfo/playerInfo.html?${getPlayerToken(war.memberContributionsLeaderboard[memberKey].url)}">${memberLeaderboardClanData.displayName}</a></td>
             <td>${war.memberContributionsLeaderboard[memberKey].score}</td>
           </tr>
         `
