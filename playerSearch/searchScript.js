@@ -173,7 +173,7 @@ function generatePlayerCard(player, rankIndex, portraitRetrieval = true) {
   
   playerCard.innerHTML = `
     <div class="playerImageContainer">
-    <img src="https://cdn.discordapp.com/attachments/921447683846180976/1098996347065090240/sauda_avatar_large.png" class="playerCardImage" alt="${player.displayName} Avatar">
+    <img src="https://static-api.nkstatic.com/appdocs/4/assets/opendata/7c8d93552988993c6c4019ca6f04a356_default_avatar.png" class="playerCardImage" alt="${player.displayName} Avatar">
     </div>
     <div class="playerCardInfo">
     <h3 class="playerCardName" id = "rank${rankIndex.toString()}"></h3>
