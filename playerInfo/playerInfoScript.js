@@ -19,7 +19,7 @@ function mobileMenu() {
 function fetchResults() {
 
   // Assemble the full URL
-  let url = window.location.toString().replace(/^[^?]*/, '').replace(/^\?/, '');
+  let url = "https://data.ninjakiwi.com/battles2/users/"+window.location.toString().split("?")[1];
   // Use fetch() to make the request to the API
   fetch(url)
     .then((response) => response.json())
@@ -53,7 +53,7 @@ function generateBanner(player) {
   const playerBanner = document.createElement('img');
   playerBanner.classList.add('playerBanner');
   playerBanner.src = player.equippedBannerURL;
-  playerBanner.borderImageSource = "url(player.equippedBorderURL)";
+  playerBanner.borderImageSource = `url(${player.equippedBorderURL})`;
   playerName.textContent = `${player.displayName}`;
   playerIcon.src = player.equippedAvatarURL;
   playerBannerContainer.appendChild(playerBanner);

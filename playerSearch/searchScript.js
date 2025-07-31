@@ -171,8 +171,9 @@ function processData(json, searchMode, searchValue) {
 
 function generatePlayerCard(player, rankIndex, portraitRetrieval = true) {
   const playerCard = document.createElement("div");
+  const profileToken = player.profile.split('/')[-1]
   playerCard.classList.add("playerCard");
-  console.log(rankIndex);
+  
   playerCard.innerHTML = `
     <div class="playerImageContainer">
     <img src="https://cdn.discordapp.com/attachments/921447683846180976/1098996347065090240/sauda_avatar_large.png" class="playerCardImage" alt="${player.displayName} Avatar">
@@ -181,7 +182,7 @@ function generatePlayerCard(player, rankIndex, portraitRetrieval = true) {
     <h3 class="playerCardName" id = "rank${rankIndex.toString()}"></h3>
     <p class="playerCardScore"><span class="playerCardScoreLabel playerCardLabel">Score:</span> ${player.score}</p>
     <p class="playerCardPlace"><span class="playerCardPlaceLabel playerCardLabel">Place:</span> ${rankIndex}</p>
-    <a class="playerCardLink" href="../playerInfo/playerInfo.html?${player.profile}"><div class="playerCardProfileButton">Profile</div></a>
+    <a class="playerCardLink" href="../playerInfo/playerInfo.html?${profileToken}"><div class="playerCardProfileButton">Profile</div></a>
     </div>
     `;
   document.querySelector(".resultsOutput").appendChild(playerCard);
