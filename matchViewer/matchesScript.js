@@ -22,7 +22,12 @@ const displayTerms = {
         ["star", "Star"],
         ["pirate_cove", "Pirate Cove"],
         ["precious_space", "Precious Space"],
-        ["sun_palace", "Sun Palace"]
+        ["sun_palace", "Sun Palace"],
+        ["salmon_pool", "Salmon Ladder"]
+        ["bloonstone_quarry", "Bloonstone Quarry"],
+        ["times_up", "Times up"],
+        ["splashdown", "Splashdown"],
+        ["skull_party", "Street Party"]
     ],
     "towers": [
         ["DartMonkey", "Dart Monkey"],
@@ -100,14 +105,20 @@ function tableSwap(){
 }
 
 function getMatchInfo() {
-    let url = window.location.toString().replace(/^[^?]*/, '').replace(/^\?/, '');
+    let coreplid = window.location.toString().replace(/^[^?]*/, '').replace(/^\?/, '');
+    if (coreplid == "file" || coreplid == "") {
+        return;
+    }
+    let url = "https://data.ninjakiwi.com/battles2/users/"+coreplid+"/matches";
     fetch(url)
         .then(response => response.json())
         .then((json) => processMatchInfo(json))
         .catch((error) => console.error(`Error fetching data: ${error.message}`));
+    document.getElementById("fileUploadContainer").style.display = 'none';
 }
 
 function processMatchInfo(json) {
+    document.getElementById("matchTableContainer").innerHTML = "";
     matchHistory = json.body
     console.log(json)
     generateMatchTable(matchHistory);
@@ -272,7 +283,9 @@ function generateMatchTable(matchHistory) {
 }
 
 function updatePlayerName(player, slot) {
-    let token = player.profileURL.split('/').at(-1);
+    let coreplid = player.profileURL.split('/').at(-1);
+    let url = "https://data.ninjakiwi.com/battles2/users/"+coreplid+"/matches";
+
     async function nameFetch(url) {
         const response = await fetch(player.profileURL);
         const json = await response.json();
@@ -325,7 +338,6 @@ function expandTable(matchContainer, matchInfo) {
         matchContainer.removeChild(matchContainer.lastChild);
     }
 }
-getMatchInfo();
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -385,3 +397,26 @@ function replaceWithDisplayTerm(category, term) {
     }
     return term
 }
+
+function importFile(event) {
+	event.preventDefault();
+
+    document.getElementById("importFailedMessage").style.display = 'none';
+    let fileToImport = document.getElementById("importedFile");
+	let reader = new FileReader();
+	reader.onload = (loadevent) => {
+        try {
+            let json = JSON.parse(loadevent.target.result);
+            processMatchInfo(json);
+        } catch (error) {
+            document.getElementById("importFailedMessage").style.display = 'block';
+        }
+    };
+	reader.readAsText(fileToImport.files[0]);
+}
+
+
+let fileImportForm = document.getElementById("fileImportForm");
+fileImportForm.addEventListener('submit', importFile);
+
+getMatchInfo();

@@ -386,3 +386,10 @@ tr.playerDataRow {
     }
 }
 
+.fileUploadContainer {
+    width: 80%;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+}

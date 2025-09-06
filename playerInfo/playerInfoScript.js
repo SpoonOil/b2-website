@@ -1,5 +1,5 @@
 //note: 2 names exist for agent and highwayman jericho, the old ones shouldn't show up anywhere anymore but were left just in case
-const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman', 'Agent_Jericho', 'Highwayman_Jericho', 'Jericho', 'Jericho_Highwayman', 'Jericho_StarCaptain', 'Adora']
+const heroTowers = ['Quincy', 'Quincy_Cyber', 'Gwendolin', 'Gwendolin_Science', 'Churchill', 'Churchill_Sentai', 'StrikerJones', 'StrikerJones_Biker', 'Obyn', 'Obyn_Ocean', 'Benjamin', 'Benjamin_DJ', 'Ezili', 'Ezili_SmudgeCat', 'PatFusty', 'PatFusty_Snowman', 'Agent_Jericho', 'Highwayman_Jericho', 'Jericho', 'Jericho_Highwayman', 'Jericho_StarCaptain', 'Adora', 'Adora_Fateweaver', 'Etienne', 'Etienne_Bee', 'Bonnie']
 
 
 const submit = document.querySelector('.submit');
@@ -39,7 +39,7 @@ async function displayResults(json, playerURL) {
   updateLastMatch(player);
   updateClans(player);
   matchHistoryButton.addEventListener('click', () => {
-    window.location.href = '../matchViewer/matches.html?' + player.matches;
+    window.location.href = '../matchViewer/matches.html?' + window.location.toString().split("?")[1];
   })
   // await updateSeasonalWinrate(player, playerURL);
 };
