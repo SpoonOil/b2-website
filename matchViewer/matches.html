@@ -49,11 +49,20 @@
     </nav>
   </header>
   <main>
-    <div class="playerToggleContainer">
+    <div id="playerToggleContainer" class="playerToggleContainer">
       <input type="checkbox" name="mainPlayerSide" id="playerSideToggle">
       <label for="playerSideToggle">Show Current Player on Left Side Always</label>
     </div>
-    <div class="matchTableContainer">
+    <div id="fileUploadContainer" class="fileUploadContainer">
+      <form id="fileImportForm">
+	      <label for="file">File to import (has to be JSON format with key structure like NK api)</label>
+	      <input id="importedFile" type="file" id="file" accept=".txt, .json">
+	      <button>Import matches from file</button>
+        <p>Note that the accuracy of the matches and their order can't be guaranteed and depends on the data source</p>
+        <p id="importFailedMessage" style="display: none;">File import failed</p>
+      </form>
+    </div>
+    <div id="matchTableContainer" class="matchTableContainer">
     </div>
   </main>
 </body>
