@@ -5,9 +5,12 @@ const secondaryMatchData = ["gametype", "duration", "map", "endRound"]
 const displayTerms = {
     "maps": [
         ["banana_depot_scene", "Banana Depot"],
+        ["banana_depot", "Banana Depot"],
         ["basalt_columns", "Basalt Columns"],
         ["building_site_scene", "Building Site"],
+        ["building_site", "Building Site"],
         ["bloon_bot_factory", "Bloon Bot Factory"],
+        ["bot_factory", "Bloon Bot Factory"],
         ["basalt_columns", "Basalt Columns"],
         ["castle_ruins", "Castle Ruins"],
         ["cobra_command", "Cobra Command"],
@@ -23,11 +26,25 @@ const displayTerms = {
         ["pirate_cove", "Pirate Cove"],
         ["precious_space", "Precious Space"],
         ["sun_palace", "Sun Palace"],
-        ["salmon_pool", "Salmon Ladder"]
+        ["salmon_pool", "Salmon Ladder"],
+        ["salmon_ladder", "Salmon Ladder"],
         ["bloonstone_quarry", "Bloonstone Quarry"],
         ["times_up", "Times up"],
         ["splashdown", "Splashdown"],
-        ["skull_party", "Street Party"]
+        ["skull_party", "Street Party"],
+        ["off_tide", "Off-Tide"],
+        ["offtide", "Off-Tide"],
+        ["neo_highway", "Neo Highway"],
+        ["lava_canyon", "Magma Mixup"],
+
+        ["thin_ice", "Thin Ice"],
+        ["mayan_map_01", "Mayan"],
+        ["mayan", "Mayan"],
+        ["in_the_wall", "In The Wall"],
+        ["docks", "Docks"],
+        ["bloontonium_mines", "Bloontonium Mines"],
+        ["island_base", "Island Base"],
+        ["up_on_the_roof", "Up On The Roof"]
     ],
     "towers": [
         ["DartMonkey", "Dart Monkey"],
@@ -51,7 +68,7 @@ const displayTerms = {
         ["MonkeyVillage", "Monkey Village"],
         ["BananaFarm", "Banana Farm"],
         ["SpikeFactory", "Spike Factory"],
-        ["EngineerMonkey", "Engineer Monkey"],
+        ["EngineerMonkey", "Engineer Monkey"]
     ],
     "heroes": [
         ["Quincy", "Quincy"],
@@ -73,8 +90,13 @@ const displayTerms = {
         ["Jericho", "Agent Jericho"],
         ["Agent_Jericho", "Agent Jericho"],
         ["Jericho_Highwayman", "Highwayman Jericho"],
+        ["Highwayman_Jericho", "Highwayman Jericho"],
         ["Jericho_StarCaptain", "Star Captain Jericho"],
-        ["Adora", "Adora"]
+        ["Adora", "Adora"],
+        ["Adora_Fateweaver", "Adora Fateweaver"],
+        ["Bonnie", "Bonnie"],
+        ["Etienne", "Etienne"],
+        ["Etienne_Bee", "Beetienne"]
     ]
 }
 
